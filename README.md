@@ -21,7 +21,7 @@ An **educational storytelling and children's games app** designed to provide int
 - Laravel (PHP)
 - MySQL
 - RESTful API
-  (repo link) https://github.com/cheramilak/edutainment_admin
+- (repo link) https://github.com/cheramilak/edutainment_admin
 
 ## 🚀 Installation  
 
