@@ -1,21 +1,6 @@
 
 # edutainment_app
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 # Edutainment App 🎮📖  
 An **educational storytelling and children's games app** designed to provide interactive and culturally rich learning experiences. This project is developed as a **final year university project** using **Flutter** for the mobile app and **Laravel** for the backend.  
 
@@ -32,7 +17,10 @@ An **educational storytelling and children's games app** designed to provide int
 - Flutter (Dart)  version 3.29.2
 - Provider/Bloc for state management  
 - Responsive UI  
-
+### ** Backend**
+Laravel (PHP)
+MySQL
+RESTful API
 
 ## 🚀 Installation  
 
