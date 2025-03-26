@@ -18,9 +18,10 @@ An **educational storytelling and children's games app** designed to provide int
 - Provider/Bloc for state management  
 - Responsive UI  
 ### ** Backend**
-Laravel (PHP)
-MySQL
-RESTful API
+- Laravel (PHP)
+- MySQL
+- RESTful API
+  (repo link) https://github.com/cheramilak/edutainment_admin
 
 ## 🚀 Installation  
 
