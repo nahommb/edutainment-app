@@ -29,14 +29,10 @@ An **educational storytelling and children's games app** designed to provide int
 
 ## 🏗️ Tech Stack  
 ### **Frontend (Mobile App)**  
-- Flutter (Dart)  
+- Flutter (Dart)  version 3.29.2
 - Provider/Bloc for state management  
 - Responsive UI  
 
-### **Backend**  
-- Laravel (PHP)  
-- MySQL
-- RESTful API  
 
 ## 🚀 Installation  
 
