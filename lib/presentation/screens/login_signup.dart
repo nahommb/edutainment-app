@@ -10,12 +10,12 @@ class loginSignup extends StatelessWidget {
 
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height:screenHeight*0.55,
+            height:screenHeight*0.52,
             width: double.infinity,
-            color: Colors.lightBlue,
+            // color: Colors.lightBlue,
             child: Image.asset('assets/images/login_signup.png'),
           ),
           login(),

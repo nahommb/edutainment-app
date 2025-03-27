@@ -9,17 +9,17 @@ class AppTheme {
       brightness: Brightness.light,
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
-                color: Colors.black,
-                width: 0.5
+                color: AppColors.primary,
+                width: 0.9
             )
         ),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
                 color: Colors.black,
-                width: 0.5
+                width: 0.9
             )
         ),
       ),
