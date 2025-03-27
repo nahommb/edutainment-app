@@ -10,7 +10,7 @@ class loginSignup extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 600,
+            height: 400,
             width: double.infinity,
             color: Colors.lightBlue,
           )
