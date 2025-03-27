@@ -1,4 +1,6 @@
-import 'package:edutainment_app/presentation/home_screen.dart';
+import 'package:edutainment_app/presentation/screens/home_screen.dart';
+import 'package:edutainment_app/presentation/screens/login_signup.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,8 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
-      home: homeScreen(),
+      home: loginSignup(),
     );
   }
 }

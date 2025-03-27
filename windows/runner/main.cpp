@@ -17,7 +17,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   // plugins.
   ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
+<<<<<<< HEAD
   flutter::DartProject project(L"domain");
+=======
+  flutter::DartProject project(L"data");
+>>>>>>> 692fd4b (login and signup screen added)
 
   std::vector<std::string> command_line_arguments =
       GetCommandLineArguments();
