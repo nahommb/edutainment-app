@@ -1,8 +1,9 @@
-import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:flutter/material.dart';
 
-class login extends StatelessWidget {
-  const login({super.key});
+import '../../core/theme/colors_data.dart';
+
+class signup extends StatelessWidget {
+  const signup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class login extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Login',style: TextStyle(fontSize: 20),),
+          Text('Signup',style: TextStyle(fontSize: 20),),
           SizedBox(height: 25,),
           Container(
             height: screenHeight*0.3,
@@ -27,9 +28,9 @@ class login extends StatelessWidget {
                   TextFormField(
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: AppColors.primary,),
-                      border: OutlineInputBorder()
+                        hintText: 'Email',
+                        hintStyle: TextStyle(color: AppColors.primary,),
+                        border: OutlineInputBorder()
 
                     ),
                   ),
@@ -43,7 +44,7 @@ class login extends StatelessWidget {
 
                     ),
                   ),
-                Spacer(),
+                  Spacer(),
 
                 ],
               ),
