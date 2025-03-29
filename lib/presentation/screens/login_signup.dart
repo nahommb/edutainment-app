@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
 
-class loginSignup extends StatefulWidget {
-  const loginSignup({super.key});
+class LoginSignup extends StatefulWidget {
+  const LoginSignup({super.key});
 
+  static final routName = 'login_signup';
   @override
-  State<loginSignup> createState() => _loginSignupState();
+  State<LoginSignup> createState() => _loginSignupState();
 }
 
-class _loginSignupState extends State<loginSignup> {
+class _loginSignupState extends State<LoginSignup> {
 
   bool isLogin = true;
 

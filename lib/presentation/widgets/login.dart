@@ -1,4 +1,6 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/presentation/screens/home_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class login extends StatelessWidget {
@@ -48,7 +50,10 @@ class login extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(300, 50), // Width: 200, Height: 50
                     ),
-                    onPressed: (){}, child: Text('Login',style: TextStyle(color: AppColors.lightBackground),)),
+                    onPressed: (){
+                      Navigator.pushNamed(context, HomeScreen.routeName);
+
+                    }, child: Text('Login',style: TextStyle(color: AppColors.lightBackground),)),
                 Spacer(),
 
                 ],

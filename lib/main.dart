@@ -1,5 +1,7 @@
 import 'package:edutainment_app/core/theme/theme_data.dart';
 import 'package:edutainment_app/presentation/screens/home_screen.dart';
+
+
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
 
 import 'package:flutter/material.dart';
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.lightTheme,
-      home: loginSignup(),
+      home: LoginSignup(),
+      routes: {
+       HomeScreen.routeName:(context)=>HomeScreen(),
+      },
+
     );
   }
 }
