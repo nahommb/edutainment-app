@@ -25,10 +25,11 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+
               backgroundColor: AppColors.primary,
-              textStyle: TextStyle(fontSize: 20,fontWeight:FontWeight.bold ),
+              textStyle: TextStyle(fontWeight:FontWeight.bold ),
               shape: RoundedRectangleBorder(
-                  borderRadius:BorderRadius.circular(30)
+                  borderRadius:BorderRadius.circular(10)
               )
           )
       )

@@ -34,13 +34,15 @@ class _loginSignupState extends State<loginSignup> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("If you don't have an account"),
+              isLogin?Text("If you don't have an account"):
+              Text("If already have an account"),
               TextButton(onPressed: (){
                 setState(() {
                   isLogin = !isLogin;
                   print(isLogin);
                 });
-              }, child: Text('Sign up',style: TextStyle(color: AppColors.primary),))
+              }, child: isLogin?Text('Sign up',style: TextStyle(color: AppColors.primary),):
+              Text('Login',style: TextStyle(color: AppColors.primary),))
             ],
           )
         ],

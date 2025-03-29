@@ -27,7 +27,7 @@ class login extends StatelessWidget {
                   TextFormField(
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: 'Email or Phone number',
                       hintStyle: TextStyle(color: AppColors.primary,),
                       border: OutlineInputBorder()
 
@@ -43,6 +43,12 @@ class login extends StatelessWidget {
 
                     ),
                   ),
+                  SizedBox(height: 15,),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(300, 50), // Width: 200, Height: 50
+                    ),
+                    onPressed: (){}, child: Text('Login',style: TextStyle(color: AppColors.lightBackground),)),
                 Spacer(),
 
                 ],
