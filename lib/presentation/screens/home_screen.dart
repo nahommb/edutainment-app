@@ -1,5 +1,8 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/presentation/screens/game_screen.dart';
 import 'package:edutainment_app/presentation/screens/main_screen.dart';
+import 'package:edutainment_app/presentation/screens/profile_screen.dart';
+import 'package:edutainment_app/presentation/screens/story_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,21 +26,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> pages =[
     MainScreen(),
+    StoryScreen(),
+    GameScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('lee'),
-        centerTitle: true,
-        backgroundColor: Colors.lightBlue,
-      ),
+      // appBar: AppBar(
+      //   title: Text('lee'),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.lightBlue,
+      // ),
       body: pages[_selectedIndex],
       // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.green,
+        selectedItemColor: Colors.red,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: [
@@ -46,11 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.menu_book_sharp),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.games_outlined),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(

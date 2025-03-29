@@ -33,12 +33,6 @@ class AppTheme {
               )
           )
       ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      
-      backgroundColor: Colors.transparent,
-      selectedItemColor: Colors.red,
-      unselectedItemColor: AppColors.lightBackground,
-    ),
   );
   static final darkTheme = ThemeData(
       primaryColor: AppColors.primary,
