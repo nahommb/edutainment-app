@@ -1,9 +1,10 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:flutter/material.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:edutainment_app/presentation/screens/game_screen.dart';
 import 'package:edutainment_app/presentation/screens/main_screen.dart';
 import 'package:edutainment_app/presentation/screens/profile_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_screen.dart';
-import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,16 +16,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // Default selected index for the bottom navigation
+  int _selectedIndex = 0; // Default selected index
 
-  // Handle the index change
+  // Handle navigation tap
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  List<Widget> pages =[
+  List<Widget> pages = [
     MainScreen(),
     StoryScreen(),
     GameScreen(),
@@ -33,39 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('lee'),
-      //   centerTitle: true,
-      //   backgroundColor: Colors.lightBlue,
-      // ),
       body: pages[_selectedIndex],
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        unselectedItemColor: Colors.green,
-        selectedItemColor: Colors.red,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+
+      // Curved Bottom Navigation Bar
+      bottomNavigationBar: ConvexAppBar(
+        style: TabStyle.react, // Other styles: fixed, flip, textIn, etc.
+        backgroundColor: AppColors.primary, // Background color
+        activeColor: Colors.white, // Active item color
+        color: Colors.white, // Unselected item color
+        curveSize: 100, // Adjusts the curve size
+        elevation: 10,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_sharp),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.games_outlined),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
+          TabItem(icon: Icons.home, title: "Home"),
+          TabItem(icon: Icons.menu_book_sharp, title: "Story"),
+          TabItem(icon: Icons.games_outlined, title: "Games"),
+          TabItem(icon: Icons.account_circle, title: "Profile"),
         ],
+        initialActiveIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../core/theme/colors_data.dart';
 
 class MainScreen extends StatelessWidget {
@@ -10,69 +9,96 @@ class MainScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    // Dynamic positions
-    double imageTop = screenWidth * 0.08;
-    double containerTop = screenWidth * 0.75;
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
-            child: Text(
-              'Hi lee',
-              style: TextStyle(fontSize: 25),
+    double imageHeight = screenHeight * 0.4;
+    double containerHeight = screenHeight * 0.8;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: Text(
+            'Hi lee',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
             ),
           ),
-          Container(
-            height: screenHeight * 1, // Ensure enough height for scrolling
-            child: Stack(
-              children: [
-                // Background Container
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
+        ),
+        // Wrap Stack in a Container with a defined height
+        Container(
+          height: screenHeight*0.85,
+          // color: Colors.red,// Ensure it has a height
+          child: Stack(
+            children: [
+              // Image with some space above
+              Positioned(
+                top:25,
+                left: 0,
+                right: 0,
+                child: Image.asset(
+                  'assets/images/home_screen.png',
+                  // height: imageHeight,
+                  fit: BoxFit.cover,
                 ),
-                // Positioned Image
-                Positioned(
-                  top: imageTop,
-                  left: 0,
-                  right: 0,
-                  child: Image.asset(
-                    'assets/images/home_screen.png',
-                    fit: BoxFit.cover,
-                    width: screenWidth * 0.9,
+              ),
+              // Container stacked below the image
+              Positioned(
+                top: screenWidth*0.72,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 450,
+                  decoration: BoxDecoration(
+                    // border: Border.all(),
+                    color: AppColors.lightBackground,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                    ),
                   ),
-                ),
-                // Positioned Bottom Container
-                Positioned(
-                  top: containerTop,
-                  left: 0,
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.lightBackground,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(screenWidth > 600 ? 20 : 10),
-                        topRight: Radius.circular(screenWidth > 600 ? 20 : 10),
-                      ),
-                      border: Border(
-                        top: BorderSide(color: AppColors.primary),  // Keep top border
-                        left: BorderSide(color: AppColors.primary), // Keep left border
-                        right: BorderSide(color: AppColors.primary), // Keep right border
-                        bottom: BorderSide.none, // Remove bottom border
-                      ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 200,
+                          width: double.infinity,
+                          margin: EdgeInsets.all(20),
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              color: AppColors.darkGray,
+                              borderRadius: BorderRadius.all(Radius.circular(20))
+                          ),
+                          child: Text('leee'),
+                        ),
+                        Text('Top From Each Categor',style: TextStyle(fontSize: 20,color: AppColors.lightBackground),),
+                        Container(
+                          height: 120,
+                          width: double.infinity,
+                          // color: Colors.black,
+                          child: ListView.builder(
+                            scrollDirection:Axis.horizontal ,
+                            itemBuilder: (context, index) => Container(
+                              width: 120,
+                              margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.lightBlue,
+                              borderRadius: BorderRadius.circular(15)
+                            ),
+                            // child: Text('lee'),
+                          ),itemCount: 15,),
+                        )
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
