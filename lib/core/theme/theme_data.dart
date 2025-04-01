@@ -25,9 +25,9 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-
               backgroundColor: AppColors.primary,
-              textStyle: TextStyle(fontWeight:FontWeight.bold ),
+
+              textStyle: TextStyle(fontWeight:FontWeight.bold ,color:AppColors.lightBackground),
               shape: RoundedRectangleBorder(
                   borderRadius:BorderRadius.circular(10)
               )

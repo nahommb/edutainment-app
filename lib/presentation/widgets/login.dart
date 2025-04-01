@@ -16,7 +16,10 @@ class login extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Login',style: TextStyle(fontSize: 20),),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text('Login',style: TextStyle(fontSize: 20,color: AppColors.primary),),
+          ),
           SizedBox(height: 25,),
           Container(
             height: screenHeight*0.3,
@@ -26,29 +29,37 @@ class login extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: 'Email or Phone number',
-                      hintStyle: TextStyle(color: AppColors.primary,),
-                      border: OutlineInputBorder()
+                  SizedBox(
+                    height: 40,
+                    width: 250,
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                          hintText: 'Email or Phone Number',
+                          hintStyle: TextStyle(color: AppColors.primary,fontSize: 13),
+                          border: OutlineInputBorder()
 
+                      ),
                     ),
                   ),
                   SizedBox(height: 20,),
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: TextStyle(color: AppColors.primary,),
-                        border: OutlineInputBorder()
+                  SizedBox(
+                    height: 40,
+                    width: 250,
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                          hintText: 'Password',
+                          hintStyle: TextStyle(color: AppColors.primary,fontSize: 13,),
+                          border: OutlineInputBorder()
 
+                      ),
                     ),
                   ),
                   SizedBox(height: 15,),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(300, 50), // Width: 200, Height: 50
+                      minimumSize: Size(250, 40), // Width: 200, Height: 50
                     ),
                     onPressed: (){
                       Navigator.pushNamed(context, HomeScreen.routeName);

@@ -12,93 +12,103 @@ class MainScreen extends StatelessWidget {
     double imageHeight = screenHeight * 0.4;
     double containerHeight = screenHeight * 0.8;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 40),
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: Text(
-            'Hi lee',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 40),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text(
+              'Hi lee',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
             ),
           ),
-        ),
-        // Wrap Stack in a Container with a defined height
-        Container(
-          height: screenHeight*0.85,
-          // color: Colors.red,// Ensure it has a height
-          child: Stack(
-            children: [
-              // Image with some space above
-              Positioned(
-                top:25,
-                left: 0,
-                right: 0,
-                child: Image.asset(
-                  'assets/images/home_screen.png',
-                  // height: imageHeight,
-                  fit: BoxFit.cover,
+          // Wrap Stack in a Container with a defined height
+          Container(
+            height: screenHeight,
+            color: Colors.red,// Ensure it has a height
+            child: Stack(
+              children: [
+                // Image with some space above
+                Container(
+
                 ),
-              ),
-              // Container stacked below the image
-              Positioned(
-                top: screenWidth*0.72,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 450,
-                  decoration: BoxDecoration(
-                    // border: Border.all(),
-                    color: AppColors.lightBackground,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25),
-                    ),
+                Positioned(
+                  top:75,
+                  left: 0,
+                  right: 0,
+                  child: Image.asset(
+                    'assets/images/home_screen.png',
+                    // height: imageHeight,
+                    fit: BoxFit.cover,
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 200,
-                          width: double.infinity,
-                          margin: EdgeInsets.all(20),
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: AppColors.darkGray,
-                              borderRadius: BorderRadius.all(Radius.circular(20))
-                          ),
-                          child: Text('leee'),
-                        ),
-                        Text('Top From Each Categor',style: TextStyle(fontSize: 20,color: AppColors.lightBackground),),
-                        Container(
-                          height: 120,
-                          width: double.infinity,
-                          // color: Colors.black,
-                          child: ListView.builder(
-                            scrollDirection:Axis.horizontal ,
-                            itemBuilder: (context, index) => Container(
-                              width: 120,
-                              margin: EdgeInsets.all(10),
+                ),
+                // Container stacked below the image
+                Positioned(
+                  top: screenWidth*0.85,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+
+                    height: 450,
+                    decoration: BoxDecoration(
+                      // border: Border.all(),
+                      color: AppColors.lightBackground,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 150,
+                            width: double.infinity,
+                            margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: Colors.lightBlue,
-                              borderRadius: BorderRadius.circular(15)
+                                color: AppColors.darkGray,
+                                borderRadius: BorderRadius.all(Radius.circular(20))
                             ),
-                            // child: Text('lee'),
-                          ),itemCount: 15,),
-                        )
-                      ],
+                            child: Text('leee'),
+                          ),
+                          Text('Top From Each Categor',style: TextStyle(fontSize: 20,color: AppColors.primary),),
+                          Container(
+                            height: 120,
+                            width: double.infinity,
+                            // color: Colors.black,
+                            child: ListView.builder(
+                              scrollDirection:Axis.horizontal ,
+                              itemBuilder: (context, index) => Container(
+                                width: 120,
+                                margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.lightBackground,
+                                border: Border.all(
+                                  color: AppColors.primary
+                                ),
+                                borderRadius: BorderRadius.circular(15)
+                              ),
+                              // child: Text('lee'),
+                            ),itemCount: 15,),
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
