@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
           ),
           // Wrap Stack in a Container with a defined height
           Container(
-            height: screenWidth > 600 ? screenWidth * 1.2 : screenWidth * 1.7,
+            height: screenWidth > 600 ? screenWidth * 1.3 : screenWidth * 1.7,
             // color: Colors.red,// Ensure it has a height
             child: Stack(
               children: [
@@ -39,7 +39,7 @@ class MainScreen extends StatelessWidget {
                   // height: screenHeight,
                 ),
                 Positioned(
-                  top:65,
+                  top:screenWidth > 600 ?65:40,
                   left: 0,
                   right: 0,
                   child: Image.asset(
@@ -50,7 +50,7 @@ class MainScreen extends StatelessWidget {
                 ),
                 // Container stacked below the image
                 Positioned(
-                  top: screenWidth*0.85,
+                  top: screenWidth > 600 ?screenWidth*0.85:screenWidth*0.75,
                   left: 0,
                   right: 0,
                   child: Container(

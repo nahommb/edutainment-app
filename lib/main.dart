@@ -3,6 +3,7 @@ import 'package:edutainment_app/presentation/screens/home_screen.dart';
 
 
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
+import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       home: LoginSignup(),
       routes: {
        HomeScreen.routeName:(context)=>HomeScreen(),
+        PuzzleScreen.routeName:(context)=>PuzzleScreen(),
       },
 
     );

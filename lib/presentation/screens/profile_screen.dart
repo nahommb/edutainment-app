@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
           ),
 
           Container(
-            padding: EdgeInsets.only(top: 20,left: 10,right: 20),
+            padding: EdgeInsets.only(top: 20,left: 20,right: 20),
             height: screenHeight*0.5,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -42,53 +42,66 @@ class ProfileScreen extends StatelessWidget {
                 Column(
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(
-                      children: [
-                        TextButton(onPressed: (){}, child: Text('Your Score',style: TextStyle(fontSize: 20),)),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_outlined)
-                      ],
+                    GestureDetector(
+                      onTap: (){
+                        print('tapped');
+                      },
+                      child: Row(
+                        children: [
+                          Text('Your Score',style: TextStyle(fontSize: 20,color: AppColors.primary),),
+                          Spacer(),
+                          Icon(Icons.arrow_forward_ios_outlined)
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8,),
-                    Row(
-                      children: [
-                        TextButton(onPressed: (){}, child: Text('Parent Control',style: TextStyle(fontSize: 20))),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_outlined)
-                      ],
-                    )
+                     GestureDetector(
+                       child:Row(
+                        children: [
+                          Text('Parent Control',style: TextStyle(fontSize: 20,color: AppColors.primary)),
+                          Spacer(),
+                          Icon(Icons.arrow_forward_ios_outlined)
+                        ],
+                                           ),
+                     )
                   ],
                 ),
                 SizedBox(height: 10,),
-                Text("Setting",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                Text("Setting",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.primary),),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        TextButton(onPressed: (){}, child: Text('Dark Mood',style: TextStyle(fontSize: 20))),
-                        Spacer(),
-                        Switch(value: true, onChanged: (val){})
-                      ],
+                    GestureDetector(
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Dark Mood',style: TextStyle(fontSize: 20,color: AppColors.primary)),
+                          Spacer(),
+                          Switch(value: true, onChanged: (val){})
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8,),
 
-                    Row(
-                      children: [
-                        TextButton(onPressed: (){}, child: Text('Username',style: TextStyle(fontSize: 20))),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_outlined)
-                      ],
-                    ),
+                     GestureDetector(
+                       child: Row(
+                        children: [
+                          Text('Username',style: TextStyle(fontSize: 20,color: AppColors.primary)),
+                          Spacer(),
+                          Icon(Icons.arrow_forward_ios_outlined)
+                        ],
+                                           ),
+                     ),
                     SizedBox(height: 8,),
-                    Row(
-                      children: [
-                        TextButton(onPressed: (){}, child: Text('Password',style: TextStyle(fontSize: 20))),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_outlined)
-                      ],
-                    ),
+                     GestureDetector(
+                       child: Row(
+                        children: [
+                          Text('Password',style: TextStyle(fontSize: 20,color: AppColors.primary)),
+                          Spacer(),
+                          Icon(Icons.arrow_forward_ios_outlined)
+                        ],
+                                           ),
+                     ),
                   ],
                 )
               ],

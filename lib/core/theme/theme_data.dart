@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
       primaryColor: AppColors.primary,
+      switchTheme: SwitchThemeData(
+        trackColor: MaterialStateProperty.all(AppColors.lightBackground), // Background of the switch
+        thumbColor: MaterialStateProperty.all(AppColors.primary),
+        trackOutlineColor: MaterialStateProperty.all(AppColors.primary),
+      ),
       scaffoldBackgroundColor: AppColors.lightBackground,
       brightness: Brightness.light,
       inputDecorationTheme: InputDecorationTheme(
