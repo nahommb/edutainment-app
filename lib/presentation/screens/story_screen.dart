@@ -1,3 +1,4 @@
+import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +85,9 @@ class StoryScreen extends StatelessWidget {
                           SizedBox(
                             height: 30,
 
-                            child: ElevatedButton(onPressed: (){}, child: Text(
+                            child: ElevatedButton(onPressed: (){
+                              Navigator.pushNamed(context, QuizScreen.routeName);
+                            }, child: Text(
                               'Quiz',style: TextStyle(color: AppColors.lightBackground,fontWeight: FontWeight.normal),
                             )),
                           )
