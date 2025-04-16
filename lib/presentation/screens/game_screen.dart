@@ -1,3 +1,4 @@
+import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
@@ -45,14 +46,19 @@ class GameScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Container(
-                          height: 120,
-                          width: 120,
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, PuzzleScreen.routeName);
+                          },
+                          child: Container(
+                            height: 120,
+                            width: 120,
 
-                          margin: EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.red,
+                            margin: EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.red,
+                            ),
                           ),
                         ),
                         Container(

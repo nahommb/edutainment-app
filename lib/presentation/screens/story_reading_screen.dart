@@ -2,16 +2,16 @@ import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class PuzzleScreen extends StatefulWidget {
+class StoryReadingScreen extends StatefulWidget {
 
   static final routeName = 'story_reading_screen';
   @override
-  _PuzzleScreen createState() =>
-      _PuzzleScreen();
+  _StoryReadingScreen createState() =>
+      _StoryReadingScreen();
 }
 
-class _PuzzleScreen
-    extends State<PuzzleScreen> {
+class _StoryReadingScreen
+    extends State<StoryReadingScreen> {
   final PageController _controller = PageController();
   final List<Color> colors = [Colors.white, Colors.white, Colors.white,Colors.white,Colors.black];
 

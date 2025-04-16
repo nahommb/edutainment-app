@@ -1,5 +1,5 @@
+import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
-import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
