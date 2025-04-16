@@ -46,30 +46,12 @@ class GameScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        GestureDetector(
-                          onTap: (){
+                        gameChoose(context:context, imagepath:'assets/images/puzzle_image.png',gameName: 'Puzzle', onTap: (){
                             Navigator.pushNamed(context, PuzzleScreen.routeName);
-                          },
-                          child: Container(
-                            height: 120,
-                            width: 120,
-
-                            margin: EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 120,
-                          width: 120,
-                          margin: EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.blue,
-                          ),
-                        ),
+                        }),
+                        gameChoose(context:context, imagepath:'assets/images/pic_answer_image.png',gameName: 'Pic Answer', onTap: (){
+                          Navigator.pushNamed(context, PuzzleScreen.routeName);
+                        }),
                       ],
                     ),
                   itemCount: 10,),
@@ -81,4 +63,26 @@ class GameScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget gameChoose({context,imagepath,gameName,onTap}){
+
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      height: 120,
+      width: 120,
+      margin: EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        // color: Colors.red,
+      ),
+      child: Column(
+        children: [
+          Image.asset(imagepath,fit: BoxFit.fitWidth,),
+          Text(gameName,style: TextStyle(fontSize: 15,color: AppColors.primary),),
+        ],
+      ),
+    ),
+  );
 }
