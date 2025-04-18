@@ -1,4 +1,5 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
-              color: AppColors.lightBackground,
+              color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
 
             ),
             child: Column(

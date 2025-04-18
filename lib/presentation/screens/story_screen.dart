@@ -1,3 +1,4 @@
+import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
@@ -34,7 +35,13 @@ class StoryScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
+                  colors: context.isDarkMode?
+                  [
+                    Colors.transparent,
+                    Colors.black, // Lighter shade at the top
+                    AppColors.darkBackground, // Darker shade at the bottom
+                  ]:
+                  [
                     Colors.transparent,
                     Colors.white, // Lighter shade at the top
                     AppColors.lightBackground, // Darker shade at the bottom
