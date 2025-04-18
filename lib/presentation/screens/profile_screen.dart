@@ -1,8 +1,12 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../domain/bloc/them_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+
+ var toggleOn = true;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +81,11 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Text('Dark Mood',style: TextStyle(fontSize: 20,color: AppColors.primary)),
                           Spacer(),
-                          Switch(value: true, onChanged: (val){})
+                          Switch(value: toggleOn, onChanged: (val){
+                            print(val);
+                            !toggleOn;
+                            context.read<ThemeCubit>().updateTheme(val?ThemeMode.dark:ThemeMode.light);
+                          })
                         ],
                       ),
                     ),

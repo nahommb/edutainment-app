@@ -1,5 +1,6 @@
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
+import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
@@ -53,7 +54,7 @@ class StoryScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: (){
                               print('test');
-                              Navigator.pushNamed(context, PuzzleScreen.routeName);
+                              Navigator.pushNamed(context, StoryReadingScreen.routeName);
                             },
                             child: Container(
                               margin: EdgeInsets.only(bottom: 5,top: 5),
