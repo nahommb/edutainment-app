@@ -4,12 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/bloc/them_cubit.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
 
- var toggleOn = true;
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
+
     double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       height: screenHeight,
@@ -81,11 +87,14 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Text('Dark Mood',style: TextStyle(fontSize: 20,color: AppColors.primary)),
                           Spacer(),
-                          Switch(value: toggleOn, onChanged: (val){
-                            print(val);
-                            !toggleOn;
-                            context.read<ThemeCubit>().updateTheme(val?ThemeMode.dark:ThemeMode.light);
-                          })
+                          Switch(
+                            value: isDark,
+                            onChanged: (val) {
+                              context.read<ThemeCubit>().updateTheme(
+                                val ? ThemeMode.dark : ThemeMode.light,
+                              );
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -114,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
                 )
               ],
             ),
-  
+
           )
         ],
       ),

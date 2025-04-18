@@ -6,6 +6,7 @@ class ThemeCubit extends HydratedCubit<ThemeMode> {
 
   void updateTheme(ThemeMode theme) {
     emit(theme);
+    print(theme);
   }
 
   // Implement fromJson

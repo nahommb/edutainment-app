@@ -1,3 +1,4 @@
+import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:flutter/material.dart';
 import '../../core/theme/colors_data.dart';
 
@@ -6,6 +7,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -57,7 +59,7 @@ class MainScreen extends StatelessWidget {
                     height: 600,
                     decoration: BoxDecoration(
                       // border: Border.all(),
-                      color: AppColors.lightBackground,
+                      color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25),

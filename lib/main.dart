@@ -38,17 +38,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: LoginSignup(),
-      routes: {
-       HomeScreen.routeName:(context)=>HomeScreen(),
-        StoryReadingScreen.routeName:(context)=>StoryReadingScreen(),
-        QuizScreen.routeName:(context)=>QuizScreen(),
-        PuzzleScreen.routeName:(context)=>PuzzleScreen(),
-      },
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (_)=>ThemeCubit())
+    ],
 
-    );
+        child: BlocBuilder<ThemeCubit,ThemeMode>(builder: (context,mode)=>
+            MaterialApp(
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: mode,
+              home: LoginSignup(),
+              routes: {
+                HomeScreen.routeName:(context)=>HomeScreen(),
+                StoryReadingScreen.routeName:(context)=>StoryReadingScreen(),
+                QuizScreen.routeName:(context)=>QuizScreen(),
+                PuzzleScreen.routeName:(context)=>PuzzleScreen(),
+              },
+
+            )
+        )
+
+    )    ;
   }
 }
