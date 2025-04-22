@@ -7,6 +7,7 @@ import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
+import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
                 QuizScreen.routeName:(context)=>QuizScreen(),
                 PuzzleScreen.routeName:(context)=>PuzzleScreen(),
                 PicAnswerScreen.routeName:(context)=>PicAnswerScreen(),
+                YourScoreScreen.routeName:(context)=>YourScoreScreen(),
               },
 
             )

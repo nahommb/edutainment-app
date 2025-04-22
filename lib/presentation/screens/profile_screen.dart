@@ -1,5 +1,6 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
+import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,12 +58,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: (){
                         print('tapped');
                       },
-                      child: Row(
-                        children: [
-                          Text('Your Score',style: TextStyle(fontSize: 20,color: AppColors.primary),),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios_outlined)
-                        ],
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, YourScoreScreen.routeName);
+                        },
+                        child: Row(
+                          children: [
+                            Text('Your Score',style: TextStyle(fontSize: 20,color: AppColors.primary),),
+                            Spacer(),
+                            Icon(Icons.arrow_forward_ios_outlined)
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 8,),

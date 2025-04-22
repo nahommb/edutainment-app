@@ -1,4 +1,5 @@
 import "package:edutainment_app/core/theme/colors_data.dart";
+import "package:edutainment_app/presentation/widgets/custom_app_bar.dart";
 import "package:flutter/material.dart";
 
 
@@ -26,15 +27,7 @@ class _PicAnswerScreenState extends State<PicAnswerScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: Container(
         width: double.infinity,
         child: Padding(
@@ -59,6 +52,10 @@ class _PicAnswerScreenState extends State<PicAnswerScreen> {
                     Container(
                       height:screenHeight*0.4,
                       width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
                       child: Image.network('https://picsum.photos/200/300',fit: BoxFit.fill,),
                     ),
                     SizedBox(height: 30),

@@ -1,4 +1,5 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleScreen extends StatefulWidget {
@@ -15,9 +16,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent,leading: IconButton(onPressed: (){
-        Navigator.pop(context);
-      }, icon: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.primary,)),) ,
+      appBar: CustomAppBar(),
       body: Column(
         children: [
           SizedBox(height: screenHeight*0.35,),
