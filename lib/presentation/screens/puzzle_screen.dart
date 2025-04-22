@@ -36,7 +36,17 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             ),
           ),
           SizedBox(height: 25,),
-          Text('Ethiopian Cultural Food',style: TextStyle(fontSize: 20,color: AppColors.primary),)
+          Text('Ethiopian Cultural Food',style: TextStyle(fontSize: 20,color: AppColors.primary),),
+          Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextButton(onPressed: (){}, child: Text('Next')),
+              ),
+            ],
+          )
         ],
       ),
     );

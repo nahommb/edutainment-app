@@ -1,4 +1,5 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:edutainment_app/presentation/screens/game_screen.dart';
@@ -40,8 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
       // Curved Bottom Navigation Bar
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.react, // Other styles: fixed, flip, textIn, etc.
-        backgroundColor: AppColors.primary, // Background color
-        activeColor: Colors.white, // Active item color
+        backgroundColor: context.isDarkMode?AppColors.darkBackground:AppColors.primary, // Background color
+        activeColor: context.isDarkMode?AppColors.primary:AppColors.lightBackground, // Active item color
         color: Colors.white, // Unselected item color
         curveSize: 100, // Adjusts the curve size
         elevation: 10,

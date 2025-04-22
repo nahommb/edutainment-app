@@ -3,6 +3,7 @@ import 'package:edutainment_app/presentation/screens/home_screen.dart';
 
 
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
+import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
@@ -32,6 +33,20 @@ void main() async {
   );
 }
 
+// MultiProvider(
+// providers: [
+// ChangeNotifierProvider(create: (_) => ThemeProvider()), // Flutter Provider
+// // Add other ChangeNotifierProviders here
+// ],
+// child: MultiBlocProvider(
+// providers: [
+// BlocProvider(create: (_) => ThemeCubit()), // Bloc
+// // Add other BlocProviders here
+// ],
+// child: const MyApp(),
+// ),
+// ),
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -53,6 +68,7 @@ class MyApp extends StatelessWidget {
                 StoryReadingScreen.routeName:(context)=>StoryReadingScreen(),
                 QuizScreen.routeName:(context)=>QuizScreen(),
                 PuzzleScreen.routeName:(context)=>PuzzleScreen(),
+                PicAnswerScreen.routeName:(context)=>PicAnswerScreen(),
               },
 
             )

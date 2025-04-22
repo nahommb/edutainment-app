@@ -1,3 +1,5 @@
+import 'package:edutainment_app/helper/is_darkmode.dart';
+import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -34,9 +36,14 @@ class GameScreen extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
+                      colors: context.isDarkMode?
+                      [
                         Colors.transparent,
-                        Colors.white,
+                        Colors.black, // Lighter shade at the top
+                        AppColors.darkBackground, // Darker shade at the bottom
+                      ]:
+                      [
+                        Colors.transparent,
                         Colors.white, // Lighter shade at the top
                         AppColors.lightBackground, // Darker shade at the bottom
                       ],
@@ -50,7 +57,7 @@ class GameScreen extends StatelessWidget {
                             Navigator.pushNamed(context, PuzzleScreen.routeName);
                         }),
                         gameChoose(context:context, imagepath:'assets/images/pic_answer_image.png',gameName: 'Pic Answer', onTap: (){
-                          Navigator.pushNamed(context, PuzzleScreen.routeName);
+                          Navigator.pushNamed(context, PicAnswerScreen.routeName);
                         }),
                       ],
                     ),
