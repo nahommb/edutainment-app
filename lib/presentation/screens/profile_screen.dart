@@ -1,5 +1,6 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
+import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
 import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,6 +74,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     SizedBox(height: 8,),
                      GestureDetector(
+                       onTap: (){
+                         Navigator.pushNamed(context, ParentControlScreen.routeName);
+                       },
                        child:Row(
                         children: [
                           Text('Parent Control',style: TextStyle(fontSize: 20,color: AppColors.primary)),
@@ -126,6 +130,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                                            ),
                      ),
+                    SizedBox(height: 100,),
+                    TextButton(onPressed: (){}, child: Text('Log out',style: TextStyle(color: AppColors.primary),))
                   ],
                 )
               ],

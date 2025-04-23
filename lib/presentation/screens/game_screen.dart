@@ -1,4 +1,5 @@
 import 'package:edutainment_app/helper/is_darkmode.dart';
+import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,24 @@ import 'package:flutter/material.dart';
 import '../../core/theme/colors_data.dart';
 
 class GameScreen extends StatelessWidget {
-  const GameScreen({super.key});
+
+  //
+  // List<dynamic>gameList = [
+  //   {
+  //     'name':'puzzle',
+  //     'imagePath':'assets/images/puzzle_image.png',
+  //     'onTap':(context){
+  //       Navigator.pushNamed(context, PuzzleScreen.routeName);
+  //     }
+  //   },
+  //   {
+  //     'name':'Pic Answer',
+  //     'imagePath':'assets/images/pic_answer_image.png',
+  //     'onTap':(context){
+  //       Navigator.pushNamed(context, PicAnswerScreen.routeName);
+  //     }
+  //   },
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +39,7 @@ class GameScreen extends StatelessWidget {
           Stack(
             children: [
               Container(
-                   height: screenHeight,
+                  height: screenHeight,
                   width: double.infinity,
                   child: Image.asset('assets/images/games_screen_image.png',fit: BoxFit.cover,)),
               Positioned(
@@ -49,21 +67,23 @@ class GameScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  child: ListView.builder(itemBuilder: (context, index) =>
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        gameChoose(context:context, imagepath:'assets/images/puzzle_image.png',gameName: 'Puzzle', onTap: (){
-                            Navigator.pushNamed(context, PuzzleScreen.routeName);
-                        }),
-                        gameChoose(context:context, imagepath:'assets/images/pic_answer_image.png',gameName: 'Pic Answer', onTap: (){
-                          Navigator.pushNamed(context, PicAnswerScreen.routeName);
-                        }),
-                      ],
-                    ),
-                  itemCount: 10,),
+                  child: Container(
+                    child: ListView.builder(itemBuilder: (context, index) =>
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          gameChoose(context:context, imagepath:'assets/images/puzzle_image.png',gameName: 'Puzzle', onTap: (){
+                              Navigator.pushNamed(context, PuzzleScreen.routeName);
+                          }),
+                          gameChoose(context:context, imagepath:'assets/images/pic_answer_image.png',gameName: 'Pic Answer', onTap: (){
+                            Navigator.pushNamed(context, ColorMatchGameScreen.routeName);
+                          }),
+                        ],
+                      ),
+                    itemCount: 5,),
+                  ),
                 ),
-              )
+              ),
             ],
           )
         ],

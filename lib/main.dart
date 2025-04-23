@@ -1,8 +1,10 @@
 import 'package:edutainment_app/core/theme/theme_data.dart';
+import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/home_screen.dart';
 
 
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
+import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
@@ -71,6 +73,8 @@ class MyApp extends StatelessWidget {
                 PuzzleScreen.routeName:(context)=>PuzzleScreen(),
                 PicAnswerScreen.routeName:(context)=>PicAnswerScreen(),
                 YourScoreScreen.routeName:(context)=>YourScoreScreen(),
+                ParentControlScreen.routeName:(context)=>ParentControlScreen(),
+                ColorMatchGameScreen.routeName:(context)=>ColorMatchGameScreen(),
               },
 
             )
