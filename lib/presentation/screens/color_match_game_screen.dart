@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:edutainment_app/data/game_data.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,8 @@ class ColorMatchGameScreen extends StatefulWidget {
 }
 
 class _ColorMatchGameState extends State<ColorMatchGameScreen> {
-  final List<Map<String, dynamic>> colorOptions = [
-    {'name': 'Red', 'color': Colors.red},
-    {'name': 'Green', 'color': Colors.green},
-    {'name': 'Blue', 'color': Colors.blue},
-    {'name': 'Yellow', 'color': Colors.yellow},
-    {'name': 'Purple', 'color': Colors.purple},
-    {'name': 'Orange', 'color': Colors.orange},
-  ];
+
+  List<dynamic> colorOptions = gameData().colorOptions;
 
   late Map<String, dynamic> correctColor;
   late List<Map<String, dynamic>> currentChoices;
@@ -54,11 +49,13 @@ class _ColorMatchGameState extends State<ColorMatchGameScreen> {
         feedback = '🎉 Correct!';
         score+=1;
       } else {
-        feedback = '❌ Try Again!';
+        print(correctColor);
+        score=0;
+        feedback = '❌ Try Again! it is ${selectedColor["name"]}';
       }
     });
 
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: selectedColor == correctColor?1:4), () {
       generateNewQuestion();
     });
   }

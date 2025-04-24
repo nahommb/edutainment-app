@@ -1,6 +1,7 @@
 import 'package:edutainment_app/core/theme/theme_data.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/home_screen.dart';
+import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 
 
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
                 YourScoreScreen.routeName:(context)=>YourScoreScreen(),
                 ParentControlScreen.routeName:(context)=>ParentControlScreen(),
                 ColorMatchGameScreen.routeName:(context)=>ColorMatchGameScreen(),
+                KeberoGame.routeName:(context)=>KeberoGame(),
               },
 
             )

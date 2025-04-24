@@ -1,99 +1,159 @@
+import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
-import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
 
 class GameScreen extends StatelessWidget {
+  GameScreen({super.key});
 
-  //
-  // List<dynamic>gameList = [
-  //   {
-  //     'name':'puzzle',
-  //     'imagePath':'assets/images/puzzle_image.png',
-  //     'onTap':(context){
-  //       Navigator.pushNamed(context, PuzzleScreen.routeName);
-  //     }
-  //   },
-  //   {
-  //     'name':'Pic Answer',
-  //     'imagePath':'assets/images/pic_answer_image.png',
-  //     'onTap':(context){
-  //       Navigator.pushNamed(context, PicAnswerScreen.routeName);
-  //     }
-  //   },
-  // ];
+  final List<dynamic> gameList = [
+    {
+      'name': 'Puzzle',
+      'imagePath': 'assets/images/puzzle_image.png',
+      'onTap': (context) {
+        Navigator.pushNamed(context, PuzzleScreen.routeName);
+      }
+    },
+    {
+      'name': 'Pic Answer',
+      'imagePath': 'assets/images/pic_answer_image.png',
+      'onTap': (context) {
+        Navigator.pushNamed(context, PicAnswerScreen.routeName);
+      }
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
-
     double screenHeight = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Image.asset('assets/images/games_screen_image.png',fit: BoxFit.cover,),
           Stack(
             children: [
               Container(
-                  height: screenHeight,
-                  width: double.infinity,
-                  child: Image.asset('assets/images/games_screen_image.png',fit: BoxFit.cover,)),
+                height: screenHeight,
+                width: double.infinity,
+                child: Image.asset(
+                  'assets/images/games_screen_image.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
               Positioned(
                 top: 300,
                 bottom: 0,
                 left: 0,
                 right: 0,
                 child: Container(
-                  // height: 800,
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: context.isDarkMode?
-                      [
+                      colors: context.isDarkMode
+                          ? [
                         Colors.transparent,
-                        Colors.black, // Lighter shade at the top
-                        AppColors.darkBackground, // Darker shade at the bottom
-                      ]:
-                      [
+                        Colors.black,
+                        AppColors.darkBackground,
+                      ]
+                          : [
                         Colors.transparent,
-                        Colors.white, // Lighter shade at the top
-                        AppColors.lightBackground, // Darker shade at the bottom
+                        Colors.white,
+                        AppColors.lightBackground,
                       ],
                     ),
                   ),
-                  child: Container(
-                    child: ListView.builder(itemBuilder: (context, index) =>
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          gameChoose(context:context, imagepath:'assets/images/puzzle_image.png',gameName: 'Puzzle', onTap: (){
-                              Navigator.pushNamed(context, PuzzleScreen.routeName);
-                          }),
-                          gameChoose(context:context, imagepath:'assets/images/pic_answer_image.png',gameName: 'Pic Answer', onTap: (){
-                            Navigator.pushNamed(context, ColorMatchGameScreen.routeName);
-                          }),
-                        ],
-                      ),
-                    itemCount: 5,),
+                  child: SizedBox(
+                    height: screenHeight - 300,
+                    child: Column(
+                      children: [
+                        // NEW Container above the game list
+                        Container(
+                          padding: EdgeInsets.all(12),
+                          margin: EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  gameChoose(
+                                    context: context,
+                                    imagepath: 'assets/images/puzzle_image.png',
+                                    gameName: 'Kebero',
+                                    onTap: () {
+                                      Navigator.pushNamed(context, KeberoGame.routeName);
+                                    },
+                                  ),
+                                  gameChoose(
+                                    context: context,
+                                    imagepath: 'assets/images/color_match_image.png',
+                                    gameName: 'Color Match',
+                                    onTap: () {
+                                      Navigator.pushNamed(context, ColorMatchGameScreen.routeName);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // ListView inside Expanded
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: 4,
+                            itemBuilder: (context, index) => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                gameChoose(
+                                  context: context,
+                                  imagepath: 'assets/images/puzzle_image.png',
+                                  gameName: 'Puzzle 4',
+                                  onTap: () {
+                                    Navigator.pushNamed(context, PuzzleScreen.routeName);
+                                  },
+                                ),
+                                gameChoose(
+                                  context: context,
+                                  imagepath: 'assets/images/pic_answer_image.png',
+                                  gameName: 'Pic Answer 9',
+                                  onTap: () {
+                                    Navigator.pushNamed(context, ColorMatchGameScreen.routeName);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 }
 
-Widget gameChoose({context,imagepath,gameName,onTap}){
-
+Widget gameChoose({
+  required BuildContext context,
+  required String imagepath,
+  required String gameName,
+  required VoidCallback onTap,
+}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
@@ -101,13 +161,16 @@ Widget gameChoose({context,imagepath,gameName,onTap}){
       width: 120,
       margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
+
         borderRadius: BorderRadius.circular(10),
-        // color: Colors.red,
       ),
       child: Column(
         children: [
-          Image.asset(imagepath,fit: BoxFit.fitWidth,),
-          Text(gameName,style: TextStyle(fontSize: 15,color: AppColors.primary),),
+          Image.asset(imagepath, fit: BoxFit.fitWidth,height:70,),
+          Text(
+            gameName,
+            style: TextStyle(fontSize: 15, color: AppColors.primary,fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     ),
