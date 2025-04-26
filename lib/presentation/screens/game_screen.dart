@@ -128,7 +128,7 @@ class GameScreen extends StatelessWidget {
                                   imagepath: 'assets/images/pic_answer_image.png',
                                   gameName: 'Pic Answer 9',
                                   onTap: () {
-                                    Navigator.pushNamed(context, ColorMatchGameScreen.routeName);
+                                    Navigator.pushNamed(context, PicAnswerScreen.routeName);
                                   },
                                 ),
                               ],

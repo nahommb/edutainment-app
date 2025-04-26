@@ -74,10 +74,31 @@ class MainScreen extends StatelessWidget {
                             margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                                color: AppColors.darkGray,
+                                color: context.isDarkMode?AppColors.primary:AppColors.lightBackground,
                                 borderRadius: BorderRadius.all(Radius.circular(20))
                             ),
-                            child: Text('leee'),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Top Players",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10,),
+                                    infoText(title:"Neymar", isDarkMode:context.isDarkMode),
+                                    infoText(title:"Messi", isDarkMode:context.isDarkMode),
+                                    infoText(title:"Ronaldo", isDarkMode:context.isDarkMode),
+
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text('Your Rank',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                    infoText(title:"17", isDarkMode:context.isDarkMode),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                           Text('Top From Each Categor',style: TextStyle(fontSize: 20,color: AppColors.primary),),
                           Container(
@@ -112,4 +133,8 @@ class MainScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget infoText({title,isDarkMode}){
+  return Text(title,style: TextStyle(color: isDarkMode?AppColors.lightBackground:AppColors.primary),);
 }
