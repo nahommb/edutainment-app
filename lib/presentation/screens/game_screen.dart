@@ -1,3 +1,4 @@
+import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
@@ -104,6 +105,19 @@ class GameScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  gameChoose(
+                                    context: context,
+                                    imagepath: 'assets/images/geez_image.png',
+                                    gameName: 'Geez',
+                                    onTap: () {
+                                      Navigator.pushNamed(context, GeezToArabicGameScreen.routeName);
+                                    },
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
