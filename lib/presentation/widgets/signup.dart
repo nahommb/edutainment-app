@@ -1,9 +1,18 @@
+import 'package:edutainment_app/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
 
-class signup extends StatelessWidget {
-  const signup({super.key});
+class signup extends StatefulWidget {
+
+
+
+  @override
+  State<signup> createState() => _signupState();
+}
+
+class _signupState extends State<signup> {
+  int selectedVal = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +93,35 @@ class signup extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 15,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Child'),
+                      Radio<int>(value: 1, groupValue: selectedVal, onChanged: (val){
+                        setState(() {
+                          selectedVal= val!;
+                        });
+                      },activeColor: AppColors.primary,),
+                      SizedBox(width: 80,),
+                      Text('Parent'),
+                      Radio<int>(value: 2, groupValue:selectedVal, onChanged: (val){
+                        setState(() {
+                          selectedVal= val!;
+                          print("role:parent");
+                        });
+                      },activeColor: AppColors.primary,),
+                    ],
+                  ),
+                  SizedBox(height: 15,),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(250, 40), // Width: 200, Height: 50
                       ),
-                      onPressed: (){},
+                      onPressed: (){
+                        // AuthRepository().login(email: 'kajkjk@gmail.com', password: '989898') ;
+                        // // AuthRepository().signup(name: 'nahom', email: 'leeopia11@gmail.com', password: '123456');
+                        // print('sign up');
+                      },
                       child: Text('Continue',style: TextStyle(color: AppColors.lightBackground),)
                   ),
                   Spacer(),

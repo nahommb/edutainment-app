@@ -2,6 +2,7 @@ import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:geez/geez.dart';
 
 class GeezToArabicGameScreen extends StatefulWidget {
 
@@ -47,9 +48,13 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
 
   void _loadNewNumber() {
     final random = Random();
-    final item = _numbers[random.nextInt(_numbers.length)];
-    _currentGeez = item['geez'];
-    _currentArabic = item['arabic'];
+    final gussedNum = random.nextInt(1000)+1;
+    // gussedNum.toGeez();
+    // final item = _numbers[random.nextInt(_numbers.length)];
+    _currentGeez = gussedNum.toGeez();
+    _currentArabic = gussedNum;
+    // _currentGeez = item['geez'];
+    // _currentArabic = item['arabic'];
     _controller.clear();
     setState(() {});
   }

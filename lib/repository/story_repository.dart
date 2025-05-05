@@ -13,6 +13,7 @@ class StoryRepository {
         List<dynamic> data = res.data['data']['story'];
         List<StoryModel> storys =
             data.map((e) => StoryModel.fromJson(e)).toList();
+        // print(storys);
         return Right(storys);
       }
       return const Left('Failed to load data');

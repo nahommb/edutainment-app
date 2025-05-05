@@ -2,6 +2,7 @@ import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
+import 'package:edutainment_app/repository/story_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/theme/colors_data.dart';
@@ -61,6 +62,7 @@ class StoryScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: (){
                               print('test');
+                              StoryRepository().getStory();
                               Navigator.pushNamed(context, StoryReadingScreen.routeName);
                             },
                             child: Container(

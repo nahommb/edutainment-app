@@ -118,7 +118,7 @@ class MainScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15)
                               ),
                               // child: Text('lee'),
-                            ),itemCount: 15,),
+                            ),itemCount: 4,),
                           ),
 
                         ],

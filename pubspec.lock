@@ -192,6 +192,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  geez:
+    dependency: "direct main"
+    description:
+      name: geez
+      sha256: "487af0b57ffe7b5b73348b6849f04f665f6c010d883920c12989fb37499e17eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   hive:
     dependency: transitive
     description:
