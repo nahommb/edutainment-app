@@ -1,5 +1,6 @@
 import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/theme/theme_data.dart';
+import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
@@ -7,11 +8,12 @@ import 'package:edutainment_app/presentation/screens/home_screen.dart';
 import 'package:edutainment_app/presentation/screens/init_screen.dart';
 import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 
-
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
 import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
+import 'package:edutainment_app/presentation/screens/quiz_list_screen.dart';
+import 'package:edutainment_app/presentation/screens/quiz_question_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
@@ -29,24 +31,30 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
+    storageDirectory:
+        kIsWeb
+            ? HydratedStorage.webStorageDirectory
+            : await getApplicationDocumentsDirectory(),
   );
 
   runApp(
     MultiProvider(
       providers: [
-         ChangeNotifierProvider(create: (_) => UserData()), // Flutter Provider
-         // Add other ChangeNotifierProviders here
-    ],
-    child: MultiBlocProvider(
+        ChangeNotifierProvider(create: (_) => UserData()), // Flutter Provider
+        // Add other ChangeNotifierProviders here
+      ],
+      child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => ThemeCubit()), // Bloc
+          ChangeNotifierProvider(
+            create: (_) {
+              return QuizProvider();
+            },
+          ),
           // Add other BlocProviders here
-           ],
-    child: const MyApp(),
-         ),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -56,33 +64,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (_)=>ThemeCubit())
-    ],
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (_) => ThemeCubit())],
 
-        child: BlocBuilder<ThemeCubit,ThemeMode>(builder: (context,mode)=>
-            MaterialApp(
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder:
+            (context, mode) => MaterialApp(
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: mode,
-              home:InitScreen(),
+              home: InitScreen(),
               routes: {
-                HomeScreen.routeName:(context)=>HomeScreen(),
-                LoginSignup.routName:(context)=>LoginSignup(),
-                StoryReadingScreen.routeName:(context)=>StoryReadingScreen(),
-                QuizScreen.routeName:(context)=>QuizScreen(),
-                PuzzleScreen.routeName:(context)=>PuzzleScreen(),
-                PicAnswerScreen.routeName:(context)=>PicAnswerScreen(),
-                YourScoreScreen.routeName:(context)=>YourScoreScreen(),
-                ParentControlScreen.routeName:(context)=>ParentControlScreen(),
-                ColorMatchGameScreen.routeName:(context)=>ColorMatchGameScreen(),
-                KeberoGame.routeName:(context)=>KeberoGame(),
-                GeezToArabicGameScreen.routeName:(context)=>GeezToArabicGameScreen(),
+                HomeScreen.routeName: (context) => HomeScreen(),
+                LoginSignup.routName: (context) => LoginSignup(),
+                StoryReadingScreen.routeName: (context) => StoryReadingScreen(),
+                QuizScreen.routeName: (context) => QuizScreen(),
+                PuzzleScreen.routeName: (context) => PuzzleScreen(),
+                PicAnswerScreen.routeName: (context) => PicAnswerScreen(),
+                YourScoreScreen.routeName: (context) => YourScoreScreen(),
+                ParentControlScreen.routeName:
+                    (context) => ParentControlScreen(),
+                ColorMatchGameScreen.routeName:
+                    (context) => ColorMatchGameScreen(),
+                KeberoGame.routeName: (context) => KeberoGame(),
+                GeezToArabicGameScreen.routeName:
+                    (context) => GeezToArabicGameScreen(),
               },
-
-            )
-        )
-
-    )    ;
+            ),
+      ),
+    );
   }
 }
