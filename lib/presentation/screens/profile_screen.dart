@@ -1,9 +1,11 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
 import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../domain/bloc/them_cubit.dart';
 
@@ -15,9 +17,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
+
+
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
+    final userData = Provider.of<UserData>(context);
 
     double screenHeight = MediaQuery.of(context).size.height;
     return Container(
@@ -35,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Icon(Icons.person_2_outlined,size: 80,color: AppColors.primary,),
                 ),
                 SizedBox(height: 15,),
-                Text("Tamagn Z.",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),)
+                Text(userData.user!.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),)
               ],
             ),
           ),
