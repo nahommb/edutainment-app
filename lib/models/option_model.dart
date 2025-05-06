@@ -6,6 +6,8 @@ class OptionModel {
 
   factory OptionModel.fromJson(Map<String, dynamic> json) {
     return OptionModel(
-        option: json['option'], isCorrect: json['option'] == 1 ? true : false);
+      option: json['option'],
+      isCorrect: json['isCorrect'] == 1 ? true : false,
+    );
   }
 }

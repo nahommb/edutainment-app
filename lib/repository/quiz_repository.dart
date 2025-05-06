@@ -21,12 +21,14 @@ class QuizRepository {
     }
   }
 
-  Future<Either<String, List<QuestionModel>>> getQuizQuestions(
-      {required String slug}) async {
+  Future<Either<String, List<QuestionModel>>> getQuizQuestions({
+    required String slug,
+  }) async {
     try {
       var res = await _dioClient.get('${apiEndPoint}getQuizQuestions/$slug');
       if (res.statusCode == 200) {
         List<dynamic> data = res.data['data']['questions'];
+        print(res.data);
         List<QuestionModel> questions =
             data.map((e) => QuestionModel.fromJson(e)).toList();
         return Right(questions);
