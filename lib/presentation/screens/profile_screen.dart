@@ -1,6 +1,8 @@
+import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
+import 'package:edutainment_app/presentation/screens/login_signup.dart';
 import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
 import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Icon(Icons.person_2_outlined,size: 80,color: AppColors.primary,),
                 ),
                 SizedBox(height: 15,),
-                Text(userData.user!.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),)
+                // Text(userData.user!.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),) //username
               ],
             ),
           ),
@@ -136,7 +138,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                            ),
                      ),
                     SizedBox(height: 100,),
-                    TextButton(onPressed: (){}, child: Text('Log out',style: TextStyle(color: AppColors.primary),))
+                    TextButton(onPressed: (){
+                      print('test');
+                      DioClient().deltetAuthToken();
+                      Navigator.pushReplacementNamed(context, LoginSignup.routName);
+                    }, child: Text('Log out',style: TextStyle(color: AppColors.primary),))
                   ],
                 )
               ],

@@ -35,4 +35,13 @@ class UserData with ChangeNotifier{
    return _isLoggedIn;
   }
 
+  Future<bool> signUp({name,email,password}) async{
+    final result = await AuthRepository().signup(name: name, email: email, password: password);
+    result.fold(
+            (errorMessage){},
+            (user){}
+    );
+    notifyListeners();
+    return _isLoggedIn;
+  }
 }

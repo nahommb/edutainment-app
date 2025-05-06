@@ -92,11 +92,11 @@ class _SignupState extends State<signup> {
                           return;
                         }
 
-                        await AuthRepository().signup(
-                          name: nameController.text,
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
+                        // await AuthRepository().signup(
+                        //   name: nameController.text,
+                        //   email: emailController.text,
+                        //   password: passwordController.text,
+                        // );
                       }
                     },
                     child: const Text('Continue', style: TextStyle(color: AppColors.lightBackground)),
