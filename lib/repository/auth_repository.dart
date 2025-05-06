@@ -1,33 +1,70 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/endpoint.dart';
+import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/models/user_model.dart';
+import 'package:provider/provider.dart';
 
 class AuthRepository {
   final DioClient _dioClient = DioClient();
 
-  Future<Either<String, UserModel>> login(
-      {required String email, required String password}) async {
+  Future<Either<String, UserModel>> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       Map<String, dynamic> data = {
         'email': email,
         'password': password,
       };
+
+      print('📤 Logging in with: $data');
+
       var res = await _dioClient.post('${apiEndPoint}auth/login', data: data);
+
       if (res.statusCode == 200) {
-        var data = res.data['data']['user'];
+        var userData = res.data['data']['user'];
         String token = res.data['data']['token'];
+
         _dioClient.setAuthToken(token);
-        UserModel user = UserModel.fromJson(data);
+        UserModel user = UserModel.fromJson(userData);
+
+        print(user.name);
         return Right(user);
       }
-      return const Left('Someting went wrong');
+
+      return const Left('Something went wrong');
+    } on DioException catch (e) {
+      print('❌ Dio error: ${e.message}');
+      print('❌ Status code: ${e.response?.statusCode}');
+      print('❌ Response data: ${e.response?.data}');
+
+      if (e.response != null) {
+        final errorData = e.response!.data;
+
+        // Laravel-style error messages
+        if (errorData is Map<String, dynamic>) {
+          if (errorData.containsKey('message')) {
+            return Left(errorData['message']);
+          } else if (errorData.containsKey('errors')) {
+            final errors = errorData['errors'] as Map<String, dynamic>;
+            final firstField = errors.keys.first;
+            final firstError = (errors[firstField] as List).first;
+            return Left('$firstField: $firstError');
+          }
+        }
+      }
+
+      return Left('Login failed: ${e.message}');
     } catch (e) {
-      return Left(e.toString());
+      print('❗ Other error: $e');
+      return Left('An unexpected error occurred');
     }
   }
+
 
   Future<Either<String, UserModel>> signup(
       {required String name,

@@ -1,9 +1,11 @@
+import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
+import 'package:edutainment_app/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../core/theme/colors_data.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class MainScreen extends StatelessWidget {
 
     double imageHeight = screenHeight * 0.4;
     double containerHeight = screenHeight * 0.8;
+    final userData = Provider.of<UserData>(context);
 
     return SingleChildScrollView(
       child: Column(
@@ -22,7 +25,7 @@ class MainScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              'Hi lee',
+              'Hi ${userData.user?.name}',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
