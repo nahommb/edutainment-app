@@ -74,4 +74,17 @@ class UserData with ChangeNotifier{
     notifyListeners();
     return _isLoggedIn;
   }
+
+  Future<void> changePassword({oldPassword,newPassword}) async {
+    final result = await AuthRepository().changePassword(oldPassword: oldPassword, newPassword: newPassword);
+
+    result.fold(
+            (l){
+              print(l);
+            },
+            (r){
+         print(r);
+    });
+    notifyListeners();
+  }
 }

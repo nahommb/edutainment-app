@@ -129,6 +129,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                      ),
                     SizedBox(height: 8,),
                      GestureDetector(
+                       onTap: (){
+                         showDialog(context: context, builder: (context) => Container(
+                           child: AlertDialog(
+                             title: Text('Change Password',style: TextStyle(color: AppColors.primary),),
+                             content: Column(
+                               mainAxisSize: MainAxisSize.min,
+                               children: [
+                                 SizedBox(
+                                   height:50,
+                                   child: TextField(
+                                     decoration: InputDecoration(
+                                       hintText: 'Old Password',
+                                       hintStyle: TextStyle(color: AppColors.primary)
+                                     ),
+                                   ),
+                                 ),
+                                 SizedBox(height: 20,),
+                                 SizedBox(
+                                   height: 50,
+                                   child: TextField(
+                                     decoration: InputDecoration(
+                                       hintText: 'New Password',
+                                         hintStyle: TextStyle(color: AppColors.primary)
+                                     ),
+                                   ),
+                                 ),
+                               ],
+                             ),
+                             actions: [
+                               TextButton(onPressed: (){
+                                 userData.changePassword(oldPassword: '123456',newPassword: '654321');
+                               }, child: Text('Ok',style: TextStyle(color: AppColors.primary),)),
+                               TextButton(onPressed: (){
+                                 Navigator.pop(context);
+                               }, child: Text("Cancel",style: TextStyle(color: AppColors.primary),))
+                             ],
+                           ),
+                         ),);
+                       },
                        child: Row(
                         children: [
                           Text('Password',style: TextStyle(fontSize: 20,color: AppColors.primary)),

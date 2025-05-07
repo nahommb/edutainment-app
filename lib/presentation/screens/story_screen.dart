@@ -5,6 +5,7 @@ import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:edutainment_app/repository/story_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/theme/colors_data.dart';
@@ -78,9 +79,11 @@ class _StoryScreenState extends State<StoryScreen> {
                         children: [
                           GestureDetector(
                             onTap: (){
-                              print('test');
-                              StoryRepository().getStory();
-                              Navigator.pushNamed(context, StoryReadingScreen.routeName);
+                              // StoryRepository().getStory();
+                              StoryReadingScreen(
+                                storyModel:storyData.story[index]
+                              ).launch(context);
+                              // Navigator.pushNamed(context, StoryReadingScreen.routeName,);
                             },
                             child: Container(
                               margin: EdgeInsets.only(bottom: 5,top: 5),

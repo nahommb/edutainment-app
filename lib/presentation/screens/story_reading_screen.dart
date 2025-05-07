@@ -1,4 +1,5 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/models/story_model.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -6,6 +7,11 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class StoryReadingScreen extends StatefulWidget {
 
   static final routeName = 'story_reading_screen';
+
+  final StoryModel storyModel ;
+
+  StoryReadingScreen({required this.storyModel});
+
   @override
   _StoryReadingScreen createState() =>
       _StoryReadingScreen();
@@ -24,7 +30,7 @@ class _StoryReadingScreen
         children: [
           PageView.builder(
             controller: _controller,
-            itemCount: colors.length,
+            itemCount: widget.storyModel.contents.length,
             itemBuilder: (context, index) {
               return Container(
                 margin: EdgeInsets.only(top: 70),
@@ -32,11 +38,7 @@ class _StoryReadingScreen
                 color: colors[index],
                 child: Column(
                   children: [
-                    Text('dawiodjpioawd awdoaiwhdioawdio daodhawiodhiowad wdohdioa doaudhoawhduadawdia aiuwdhuiahwudawbdaiuwd aiwuhdad'
-                        'dwhduahwdha dpaowjdpoajwda'
-                        'daijwdioajdioaidja ad'
-                        'adnioajwdiojaiowdioawdoaa a awduiahwdiuadui iauwydiohadhiw'
-                        'adwhdiohawoudpawdpoa owudawiodawd'),
+                    Text(widget.storyModel.contents[index]!.story),
                   ],
                 ),
               );
@@ -49,7 +51,7 @@ class _StoryReadingScreen
             child: Center(
               child: SmoothPageIndicator(
                 controller: _controller,
-                count: colors.length,
+                count: widget.storyModel.contents.length,
                 effect: WormEffect(
                   spacing: 10,
                   radius: 0.0,

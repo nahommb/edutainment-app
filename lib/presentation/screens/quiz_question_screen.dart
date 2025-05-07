@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class QuizQuestionScreen extends StatefulWidget {
-  static final routeName = 'quiz_screen';
+  // static final routeName = 'quiz_screen';
+
   final QuizModel quizModel;
   const QuizQuestionScreen({super.key, required this.quizModel});
 

@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
               routes: {
                 HomeScreen.routeName: (context) => HomeScreen(),
                 LoginSignup.routName: (context) => LoginSignup(),
-                StoryReadingScreen.routeName: (context) => StoryReadingScreen(),
+                // StoryReadingScreen.routeName: (context) => StoryReadingScreen(),
                 QuizScreen.routeName: (context) => QuizScreen(),
                 PuzzleScreen.routeName: (context) => PuzzleScreen(),
                 PicAnswerScreen.routeName: (context) => PicAnswerScreen(),

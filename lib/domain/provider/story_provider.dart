@@ -14,7 +14,7 @@ class StoryProvider with ChangeNotifier {
       print(l);
     }, (r){
       _story = r;
-      print(_story[0].title);
+      print(_story[0].contents);
     });
     notifyListeners();
   }
