@@ -1,5 +1,6 @@
 import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/theme/theme_data.dart';
+import 'package:edutainment_app/data/game_data.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/story_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
@@ -27,9 +28,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'domain/bloc/them_cubit.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  // Open the box where your game data will be stored
+  await Hive.openBox('gamesData');
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory:
@@ -44,6 +50,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => UserData()),
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => QuizProvider()),
+        ChangeNotifierProvider(create: (_)=>gameData()),
         // Flutter Provider
         // Add other ChangeNotifierProviders here
       ],

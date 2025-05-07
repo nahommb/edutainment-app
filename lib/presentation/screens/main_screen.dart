@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:edutainment_app/core/endpoint.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
@@ -45,8 +47,13 @@ class _MainScreenState extends State<MainScreen> {
      print(quizData.getQuiz);
 
     List<dynamic> topCategory = [];
+    final random = Random();
+    int randomNumber1 = random.nextInt(quizData.getQuiz.length);
+    int randomNumber2 = random.nextInt(quizData.getQuiz.length);
+    int randomNumber3 = random.nextInt(quizData.getQuiz.length);
+
     if (quizData.getQuiz.length >= 2) {
-      topCategory = [quizData.getQuiz[0], quizData.getQuiz[1],];
+      topCategory = [quizData.getQuiz[randomNumber1], quizData.getQuiz[randomNumber2],];
     }
 
     return SingleChildScrollView(

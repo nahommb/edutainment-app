@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
-class gameData {
+class gameData with ChangeNotifier{
   final List<Map<String, dynamic>> colorOptions = [
     {'name': 'Red', 'color': Color(0xFFFF0000)},
     {'name': 'Green', 'color': Color(0xFF00FF00)},
@@ -157,4 +158,41 @@ class gameData {
     {'name': 'Lightseagreen', 'color': Color(0xFF20B2AA)},
     {'name': 'Lightcoral', 'color': Color(0xFFF08080)},
   ];
+
+  List<dynamic> _gameList = [];
+  List<dynamic> get gameList =>_gameList;
+
+  void saveGameData(String gameName, int score, int level) async {
+    var box = Hive.box('gamesData');
+
+    box.put(gameName, {
+      'score': score,
+      'level': level,
+    });
+  }
+
+  Map<String, dynamic> loadGameData(String gameName) {
+    var box = Hive.box('gamesData');
+    return Map<String, dynamic>.from(box.get(gameName, defaultValue: {
+      'score': 0,
+      'level': 1,
+    }));
+  }
+
+  Future<void> loadAllGameDataAsList() async {
+    final box = await Hive.openBox('gamesData');
+    // await box.delete('color_match');
+
+    _gameList = box.keys.map((key) {
+      return {
+        'game': key,
+        'data': box.get(key),
+      };
+    }).toList();
+
+    print(gameList);
+    notifyListeners();
+
+  }
+
 }

@@ -90,4 +90,11 @@ class UserData with ChangeNotifier{
     notifyListeners();
     return success;
   }
+  Future<bool>changeProfile({email,name,image})async{
+    final result = await AuthRepository().updateProfile(email: email, name: name, image: image);
+    result.fold((l){}, (r){});
+
+    notifyListeners();
+    return true;
+  }
 }

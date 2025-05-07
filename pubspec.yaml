@@ -45,6 +45,8 @@ dependencies:
   dartz: ^0.10.1
   geez: ^0.0.1
   nb_utils: ^7.1.4
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -151,16 +151,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 SizedBox(height: 8),
-                GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, ParentControlScreen.routeName),
-                  child: Row(
-                    children: [
-                      Text('Parent Control', style: TextStyle(fontSize: 20, color: AppColors.primary)),
-                      Spacer(),
-                      Icon(Icons.arrow_forward_ios_outlined)
-                    ],
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () => Navigator.pushNamed(context, ParentControlScreen.routeName),
+                //   child: Row(
+                //     children: [
+                //       Text('Parent Control', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                //       Spacer(),
+                //       Icon(Icons.arrow_forward_ios_outlined)
+                //     ],
+                //   ),
+                // ),
                 SizedBox(height: 20),
                 Text("Setting", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary)),
                 SizedBox(height: 10),
@@ -179,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 8),
                 Row(
                   children: [
-                    Text('Username', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                    Text('Change Profile', style: TextStyle(fontSize: 20, color: AppColors.primary)),
                     Spacer(),
                     Icon(Icons.arrow_forward_ios_outlined)
                   ],

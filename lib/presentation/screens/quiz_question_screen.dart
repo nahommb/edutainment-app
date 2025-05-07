@@ -44,6 +44,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   }
   int questionIndex = 0;
   int selectedOptionIndex = 0;
+  int score = 0;
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<QuizProvider>(context);
@@ -129,17 +130,42 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              print(questionIndex);
-                              print(selectedOptionIndex);
                               final isCorrect = quizProvider.getQuestion[questionIndex].options[selectedOptionIndex].isCorrect;
-                              isCorrect?
                               setState(() {
+                                isCorrect?(score =score+1):print('wrong choice');print(score);
                                 if(questionIndex<quizProvider.getQuestion.length-1){
                                   questionIndex = questionIndex+1;
                                 }
-                                print(questionIndex);
-                              }):print('wrong choice');
+                                else{
 
+                                  showDialog(context: context,
+                                      barrierDismissible: false,
+                                      builder: (_)=>AlertDialog(
+                                    title: Text('Completed',style: TextStyle(color: AppColors.primary),),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text('Completed All The Question',style: TextStyle(color: AppColors.primary)),
+                                        SizedBox(height: 20,),
+                                        Text('Your Score:$score',style: TextStyle(color: AppColors.primary)),
+                                      ],
+                                    ),
+                                    actions: [
+                                      TextButton(onPressed: (){
+                                        Navigator.pop(context);
+                                        setState(() {
+                                          questionIndex = 0;
+                                          score = 0;
+                                          selectedOption = -1;
+                                        });
+                                        }, child: Text('Ok',style: TextStyle(color: AppColors.primary)))
+                                    ],
+                                  ));
+
+                                }
+                              });
+                              // questionIndex=0;
+                              // score = 0;
                             },
                             child: Text(
                               'Next',

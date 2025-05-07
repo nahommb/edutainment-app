@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:geez/geez.dart';
 
+import '../../data/game_data.dart';
+
 class GeezToArabicGameScreen extends StatefulWidget {
 
   static final routeName = 'geez_to_arabic_game_screen';
@@ -48,7 +50,7 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
 
   void _loadNewNumber() {
     final random = Random();
-    final gussedNum = random.nextInt(1000)+1;
+    final gussedNum = random.nextInt(10)+1;
     // gussedNum.toGeez();
     // final item = _numbers[random.nextInt(_numbers.length)];
     _currentGeez = gussedNum.toGeez();
@@ -66,6 +68,11 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
         SnackBar(content: Text('Correct! 🎯',style: TextStyle(color: AppColors.lightBackground),),backgroundColor: AppColors.primary,),
       );
     } else {
+      final result = gameData().loadGameData('Geez To Arabic');
+      print(result['score']);
+      if(result['score'] < _score ||result['score']==null){
+        gameData().saveGameData('Geez To Arabic', _score, 1);
+      }
       _score=0;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Wrong! ❌ The answer was $_currentArabic',style: TextStyle(color: AppColors.lightBackground)),backgroundColor: AppColors.primary,),

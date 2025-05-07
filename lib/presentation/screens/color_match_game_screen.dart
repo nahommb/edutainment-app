@@ -49,15 +49,21 @@ class _ColorMatchGameState extends State<ColorMatchGameScreen> {
     setState(() {
       if (selectedColor == correctColor) {
         feedback = '🎉 Correct!';
-        score+=1;
+        score += 1;
       } else {
         print(correctColor);
-        score=0;
+        final result = gameData().loadGameData('Color Match');
+        print(result['score']);
+        if (result['score'] < score || result['score'] == null) {
+          gameData().saveGameData('Color Match', score, 1);
+        }
+        score = 0;
         feedback = '❌ Try Again! it is ${selectedColor["name"]}';
       }
     });
 
-    Future.delayed(Duration(seconds: selectedColor == correctColor?1:4), () {
+    Future.delayed(Duration(seconds: selectedColor == correctColor ? 1 : 4), () {
+      if (!mounted) return;
       generateNewQuestion();
     });
   }

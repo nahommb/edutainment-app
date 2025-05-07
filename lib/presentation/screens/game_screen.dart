@@ -130,7 +130,7 @@ class GameScreen extends StatelessWidget {
                         // ListView inside Expanded
                         Expanded(
                           child: ListView.builder(
-                            itemCount: 4,
+                            itemCount: 2,
                             itemBuilder: (context, index) => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
