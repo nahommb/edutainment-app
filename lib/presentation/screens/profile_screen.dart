@@ -12,21 +12,101 @@ import 'package:provider/provider.dart';
 import '../../domain/bloc/them_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
 
+  void _showChangePasswordDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: Text('Change Password', style: TextStyle(color: AppColors.primary)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 50,
+                child: TextField(
+                  controller: oldPasswordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Old Password',
+                    hintStyle: TextStyle(color: AppColors.primary),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 50,
+                child: TextField(
+                  controller: newPasswordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'New Password',
+                    hintStyle: TextStyle(color: AppColors.primary),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(ctx).pop(); // Close the dialog
+                await Future.delayed(Duration(milliseconds: 200)); // Wait to ensure pop completes
 
+                final userData = Provider.of<UserData>(context, listen: false);
+                final success = await userData.changePassword(
+                  oldPassword: oldPasswordController.text,
+                  newPassword: newPasswordController.text,
+                );
+
+                if (!mounted) return;
+
+                showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: Text(success ? 'Success' : 'Error'),
+                    content: Text(success
+                        ? 'Password Successfully Changed'
+                        : 'Failed to change password'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+
+                oldPasswordController.clear();
+                newPasswordController.clear();
+              },
+              child: Text('OK', style: TextStyle(color: AppColors.primary)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text('Cancel', style: TextStyle(color: AppColors.primary)),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<ThemeCubit>().state == ThemeMode.dark;
     final userData = Provider.of<UserData>(context);
-
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
       height: screenHeight,
       color: AppColors.primary,
@@ -39,154 +119,105 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: 80,
-                  child: Icon(Icons.person_2_outlined,size: 80,color: AppColors.primary,),
+                  child: Icon(Icons.person_2_outlined, size: 80, color: AppColors.primary),
                 ),
-                SizedBox(height: 15,),
-                Text(userData.user!.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),) //username
+                SizedBox(height: 15),
+                Text(
+                  userData.user?.name ?? '',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.lightBackground),
+                )
               ],
             ),
           ),
-
           Container(
-            padding: EdgeInsets.only(top: 20,left: 20,right: 20),
-            height: screenHeight*0.5,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            height: screenHeight * 0.5,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
-              color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
-
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+              color: context.isDarkMode ? AppColors.darkBackground : AppColors.lightBackground,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, YourScoreScreen.routeName),
+                  child: Row(
+                    children: [
+                      Text('Your Score', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios_outlined)
+                    ],
+                  ),
+                ),
+                SizedBox(height: 8),
+                GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, ParentControlScreen.routeName),
+                  child: Row(
+                    children: [
+                      Text('Parent Control', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios_outlined)
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text("Setting", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                SizedBox(height: 10),
+                Row(
                   children: [
-                    GestureDetector(
-                      onTap: (){
-                        print('tapped');
+                    Text('Dark Mode', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                    Spacer(),
+                    Switch(
+                      value: isDark,
+                      onChanged: (val) {
+                        context.read<ThemeCubit>().updateTheme(val ? ThemeMode.dark : ThemeMode.light);
                       },
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, YourScoreScreen.routeName);
-                        },
-                        child: Row(
-                          children: [
-                            Text('Your Score',style: TextStyle(fontSize: 20,color: AppColors.primary),),
-                            Spacer(),
-                            Icon(Icons.arrow_forward_ios_outlined)
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 8,),
-                     GestureDetector(
-                       onTap: (){
-                         Navigator.pushNamed(context, ParentControlScreen.routeName);
-                       },
-                       child:Row(
-                        children: [
-                          Text('Parent Control',style: TextStyle(fontSize: 20,color: AppColors.primary)),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios_outlined)
-                        ],
-                                           ),
-                     )
+                    )
                   ],
                 ),
-                SizedBox(height: 10,),
-                Text("Setting",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.primary),),
-                Column(
+                SizedBox(height: 8),
+                Row(
                   children: [
-                    SizedBox(height: 10,),
-                    GestureDetector(
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Dark Mood',style: TextStyle(fontSize: 20,color: AppColors.primary)),
-                          Spacer(),
-                          Switch(
-                            value: isDark,
-                            onChanged: (val) {
-                              context.read<ThemeCubit>().updateTheme(
-                                val ? ThemeMode.dark : ThemeMode.light,
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 8,),
-
-                     GestureDetector(
-                       child: Row(
-                        children: [
-                          Text('Username',style: TextStyle(fontSize: 20,color: AppColors.primary)),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios_outlined)
-                        ],
-                                           ),
-                     ),
-                    SizedBox(height: 8,),
-                     GestureDetector(
-                       onTap: (){
-                         showDialog(context: context, builder: (context) => Container(
-                           child: AlertDialog(
-                             title: Text('Change Password',style: TextStyle(color: AppColors.primary),),
-                             content: Column(
-                               mainAxisSize: MainAxisSize.min,
-                               children: [
-                                 SizedBox(
-                                   height:50,
-                                   child: TextField(
-                                     decoration: InputDecoration(
-                                       hintText: 'Old Password',
-                                       hintStyle: TextStyle(color: AppColors.primary)
-                                     ),
-                                   ),
-                                 ),
-                                 SizedBox(height: 20,),
-                                 SizedBox(
-                                   height: 50,
-                                   child: TextField(
-                                     decoration: InputDecoration(
-                                       hintText: 'New Password',
-                                         hintStyle: TextStyle(color: AppColors.primary)
-                                     ),
-                                   ),
-                                 ),
-                               ],
-                             ),
-                             actions: [
-                               TextButton(onPressed: (){
-                                 userData.changePassword(oldPassword: '123456',newPassword: '654321');
-                               }, child: Text('Ok',style: TextStyle(color: AppColors.primary),)),
-                               TextButton(onPressed: (){
-                                 Navigator.pop(context);
-                               }, child: Text("Cancel",style: TextStyle(color: AppColors.primary),))
-                             ],
-                           ),
-                         ),);
-                       },
-                       child: Row(
-                        children: [
-                          Text('Password',style: TextStyle(fontSize: 20,color: AppColors.primary)),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios_outlined)
-                        ],
-                                           ),
-                     ),
-                    SizedBox(height: 100,),
-                    TextButton(onPressed: (){
-                      print('test');
-                      DioClient().deltetAuthToken();
-                      Navigator.pushReplacementNamed(context, LoginSignup.routName);
-                    }, child: Text('Log out',style: TextStyle(color: AppColors.primary),))
+                    Text('Username', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                    Spacer(),
+                    Icon(Icons.arrow_forward_ios_outlined)
                   ],
+                ),
+                SizedBox(height: 8),
+                GestureDetector(
+                  onTap: () => _showChangePasswordDialog(context),
+                  child: Row(
+                    children: [
+                      Text('Password', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios_outlined)
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30,),
+                // Spacer(),
+                TextButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: (_)=>AlertDialog(
+                      title: Text('Logout Request'),
+                      content: Text('Are You Sure Want Logout'),
+                      actions: [
+                        TextButton(onPressed: (){
+                          DioClient().deltetAuthToken();
+                          Navigator.pushReplacementNamed(context, LoginSignup.routName);
+                        }, child: Text('Ok')),
+                        TextButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, child: Text('Cancel'))
+
+                      ],
+                    ));
+                  },
+                  child: Text('Log out', style: TextStyle(color: AppColors.primary)),
                 )
               ],
             ),
-
           )
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
+import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/models/story_model.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _StoryReadingScreen
               return Container(
                 margin: EdgeInsets.only(top: 70),
                 padding: EdgeInsets.all(20),
-                color: colors[index],
+                color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
                 child: Column(
                   children: [
                     Text(widget.storyModel.contents[index]!.story),
@@ -59,7 +60,7 @@ class _StoryReadingScreen
                   dotHeight: 5,
                   paintStyle: PaintingStyle.fill,
                   activeDotColor: AppColors.primary,
-                  dotColor: Colors.black12,
+                  dotColor: context.isDarkMode?AppColors.lightBackground:Colors.black12,
                 ),
               ),
             ),
