@@ -42,8 +42,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserData()),
-        ChangeNotifierProvider(create: (_)=>StoryProvider()),
-        ChangeNotifierProvider(create: (_)=>QuizProvider())
+        ChangeNotifierProvider(create: (_) => StoryProvider()),
+        ChangeNotifierProvider(create: (_) => QuizProvider()),
         // Flutter Provider
         // Add other ChangeNotifierProviders here
       ],
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
                 KeberoGame.routeName: (context) => KeberoGame(),
                 GeezToArabicGameScreen.routeName:
                     (context) => GeezToArabicGameScreen(),
-                QuizListScreen.routeName:(context)=>QuizListScreen()
+                QuizListScreen.routeName: (context) => QuizListScreen(),
               },
             ),
       ),
