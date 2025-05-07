@@ -2,6 +2,8 @@ import 'package:edutainment_app/repository/auth_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class UserData with ChangeNotifier{
 
@@ -12,6 +14,33 @@ class UserData with ChangeNotifier{
 
   UserModel? get user =>_user;
   bool get isLoggedIn => _isLoggedIn;
+
+
+
+  Future<void> saveUserData(String name, String email) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', name);
+    await prefs.setString('email', email);
+  }
+
+  Future<void> getUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+
+    final name = prefs.getString('name');
+    final email = prefs.getString('email');
+
+    if (name != null && email != null) {
+      _user = UserModel(name: name, email: email); // ✅ proper conversion
+      _isLoggedIn = true;
+      print(name);
+    }
+ //  print('leeee${_user?.email}');
+
+  }
+
+
+
 
   Future <bool> login({email,password}) async{
     isLoading = true;
@@ -28,6 +57,7 @@ class UserData with ChangeNotifier{
             _user = user;
             _isLoggedIn = true;
              isLoading = true;
+             saveUserData(user.name, user.email);
       },
     );
 

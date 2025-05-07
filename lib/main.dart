@@ -1,6 +1,7 @@
 import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/theme/theme_data.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
+import 'package:edutainment_app/domain/provider/story_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
@@ -40,17 +41,15 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserData()), // Flutter Provider
+        ChangeNotifierProvider(create: (_) => UserData()),
+        ChangeNotifierProvider(create: (_)=>StoryProvider()),
+        ChangeNotifierProvider(create: (_)=>QuizProvider())
+        // Flutter Provider
         // Add other ChangeNotifierProviders here
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => ThemeCubit()), // Bloc
-          ChangeNotifierProvider(
-            create: (_) {
-              return QuizProvider();
-            },
-          ),
           // Add other BlocProviders here
         ],
         child: const MyApp(),
@@ -89,6 +88,7 @@ class MyApp extends StatelessWidget {
                 KeberoGame.routeName: (context) => KeberoGame(),
                 GeezToArabicGameScreen.routeName:
                     (context) => GeezToArabicGameScreen(),
+                QuizListScreen.routeName:(context)=>QuizListScreen()
               },
             ),
       ),

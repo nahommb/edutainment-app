@@ -1,19 +1,36 @@
+import 'package:edutainment_app/domain/provider/story_provider.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:edutainment_app/repository/story_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/theme/colors_data.dart';
 
-class StoryScreen extends StatelessWidget {
+class StoryScreen extends StatefulWidget {
   const StoryScreen({super.key});
 
+  @override
+  State<StoryScreen> createState() => _StoryScreenState();
+}
+
+class _StoryScreenState extends State<StoryScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<StoryProvider>(context,listen: false).getStory();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
+    StoryProvider storyData = Provider.of<StoryProvider>(context);
 
     return Container(
       margin: EdgeInsets.all(0),
@@ -67,8 +84,8 @@ class StoryScreen extends StatelessWidget {
                             },
                             child: Container(
                               margin: EdgeInsets.only(bottom: 5,top: 5),
-                              width: screenWidth*0.6,
-
+                              //width: screenWidth*0.6,
+                              padding: EdgeInsets.only(right: 10),
                               height: 55,
                               decoration: BoxDecoration(
                                   border: Border.all(color: AppColors.primary),
@@ -79,12 +96,14 @@ class StoryScreen extends StatelessWidget {
                                 children: [
                                   SizedBox(width: 10,),
                                   Icon(Icons.menu_book_rounded,color:AppColors.primary,),
-                                  SizedBox(width: 20,),
+                                  SizedBox(width: 10,),
                                   Column(
                                     children: [
                                       SizedBox(height: 5,),
-                                      Text("Ethiopia",style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary),),
-                                      Text('Ethiopian Culture',style: TextStyle(fontSize: 10,color: AppColors.primary),)
+                                      Text('${storyData.story[index].title}', softWrap: true,
+                                          overflow: TextOverflow.visible,
+                                          maxLines: null,style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary),),
+                                      Text('${storyData.story[index].description}',style: TextStyle(fontSize: 10,color: AppColors.primary),)
                                     ],
                                   )
                                 ],
@@ -94,7 +113,6 @@ class StoryScreen extends StatelessWidget {
                           ),
                           SizedBox(
                             height: 30,
-
                             child: ElevatedButton(onPressed: (){
                               Navigator.pushNamed(context, QuizScreen.routeName);
                             }, child: Text(
@@ -103,7 +121,7 @@ class StoryScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      itemCount: 27,
+                      itemCount: storyData.story.length,
                     ),
                   )
                 ],

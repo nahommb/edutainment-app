@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Icon(Icons.person_2_outlined,size: 80,color: AppColors.primary,),
                 ),
                 SizedBox(height: 15,),
-                // Text(userData.user!.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),) //username
+                Text(userData.user!.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.lightBackground),) //username
               ],
             ),
           ),

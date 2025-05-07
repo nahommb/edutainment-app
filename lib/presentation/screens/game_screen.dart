@@ -1,10 +1,12 @@
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
+import 'package:edutainment_app/presentation/screens/quiz_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../core/theme/colors_data.dart';
 
@@ -116,6 +118,9 @@ class GameScreen extends StatelessWidget {
                                       Navigator.pushNamed(context, GeezToArabicGameScreen.routeName);
                                     },
                                   ),
+                                  gameChoose(context: context, imagepath: 'assets/images/quizzer_image.png', gameName: 'Answer me', onTap: (){
+                                    QuizListScreen().launch(context);
+                                  })
                                 ],
                               )
                             ],

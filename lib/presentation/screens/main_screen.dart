@@ -1,3 +1,5 @@
+import 'package:edutainment_app/core/endpoint.dart';
+import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/models/user_model.dart';
@@ -5,7 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/colors_data.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+
+
+
+
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+
+  void initState() {
+    super.initState();
+
+    // Delay execution until after build context is ready
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<QuizProvider>(context, listen: false).fatchQuiz();
+      Provider.of<UserData>(context,listen: false).getUserData();
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +40,14 @@ class MainScreen extends StatelessWidget {
     double imageHeight = screenHeight * 0.4;
     double containerHeight = screenHeight * 0.8;
     final userData = Provider.of<UserData>(context);
+
+    QuizProvider quizData = Provider.of<QuizProvider>(context);
+     print(quizData.getQuiz);
+
+    List<dynamic> topCategory = [];
+    if (quizData.getQuiz.length >= 2) {
+      topCategory = [quizData.getQuiz[0], quizData.getQuiz[1],];
+    }
 
     return SingleChildScrollView(
       child: Column(
@@ -105,23 +137,37 @@ class MainScreen extends StatelessWidget {
                           ),
                           Text('Top From Each Categor',style: TextStyle(fontSize: 20,color: AppColors.primary),),
                           Container(
-                            height: 120,
+                            height: 140,
                             width: double.infinity,
                             // color: Colors.black,
-                            child: ListView.builder(
-                              scrollDirection:Axis.horizontal ,
-                              itemBuilder: (context, index) => Container(
-                                width: 120,
-                                margin: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: AppColors.lightBackground,
-                                border: Border.all(
-                                  color: AppColors.primary
-                                ),
-                                borderRadius: BorderRadius.circular(15)
+                            child: quizData.isLoading || quizData.getQuiz.length<2 ?Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primary,
                               ),
-                              // child: Text('lee'),
-                            ),itemCount: 4,),
+                            ): ListView.builder(
+                              scrollDirection:Axis.horizontal ,
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 120,
+                                      height: 100,
+                                      margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.lightBackground,
+                                      border: Border.all(
+                                        color: AppColors.primary
+                                      ),
+                                      borderRadius: BorderRadius.circular(15)
+                                    ),
+                                      child: Image.network('${assetUrl}${topCategory[index].image}'),
+                                                                ),
+                                    Text(topCategory[index].title)
+                                  ],
+                                ),
+                              ),itemCount: 2,),
                           ),
 
                         ],

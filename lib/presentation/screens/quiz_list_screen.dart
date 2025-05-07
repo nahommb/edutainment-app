@@ -1,12 +1,16 @@
 import 'package:edutainment_app/core/endpoint.dart';
+import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/presentation/screens/quiz_question_screen.dart';
+import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class QuizListScreen extends StatefulWidget {
   const QuizListScreen({super.key});
+
+  static String routeName = 'quiz_list_screen';
 
   @override
   State<QuizListScreen> createState() => _QuizListScreenState();
@@ -27,7 +31,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
   Widget build(BuildContext context) {
     QuizProvider quizProvider = Provider.of<QuizProvider>(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: CustomAppBar(),
       body:
           quizProvider.getQuiz.isEmpty
               ? Center(child: CircularProgressIndicator())
@@ -43,14 +47,14 @@ class _QuizListScreenState extends State<QuizListScreen> {
                       vertical: 2.5,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          radius: 60,
+                          radius: 30,
                           backgroundImage: NetworkImage(
                             assetUrl + quizProvider.getQuiz[index].image,
                           ),
@@ -60,7 +64,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                           quizProvider.getQuiz[index].title,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                            fontSize: 15,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
