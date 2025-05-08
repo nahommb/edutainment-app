@@ -9,6 +9,7 @@ class UserData with ChangeNotifier{
 
   bool isLoading = true;
   bool _isLoggedIn = false;
+  bool isSignedUp = false;
 
   UserModel? _user ;
 
@@ -66,13 +67,21 @@ class UserData with ChangeNotifier{
   }
 
   Future<bool> signUp({name,email,password}) async{
+    isLoading = true;
     final result = await AuthRepository().signup(name: name, email: email, password: password);
     result.fold(
-            (errorMessage){},
-            (user){}
+            (errorMessage){
+              isLoading = false;
+            },
+            (user){
+              isLoading = false;
+              isSignedUp = true;
+              _user = user;
+              saveUserData(user.name, user.email);
+            }
     );
     notifyListeners();
-    return _isLoggedIn;
+    return isSignedUp;
   }
 
   Future<bool> changePassword({oldPassword,newPassword}) async {
@@ -96,5 +105,15 @@ class UserData with ChangeNotifier{
 
     notifyListeners();
     return true;
+  }
+
+  Future<void> logoutUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('name');
+    await prefs.remove('email');
+
+    _user = null;
+    _isLoggedIn = false;
+    notifyListeners(); // if using Provider or similar state management
   }
 }

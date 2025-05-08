@@ -205,6 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       actions: [
                         TextButton(onPressed: (){
                           DioClient().deltetAuthToken();
+                          userData.logoutUser();
                           Navigator.pushReplacementNamed(context, LoginSignup.routName);
                         }, child: Text('Ok')),
                         TextButton(onPressed: (){

@@ -82,7 +82,7 @@ class AuthRepository {
       if (res.statusCode == 200) {
         var data = res.data['data']['user'];
         String token = res.data['data']['token'];
-        await _dioClient.setAuthToken(token);
+        // await _dioClient.setAuthToken(token); // do not save token when sign up
         UserModel user = UserModel.fromJson(data);
 
         return Right(user);

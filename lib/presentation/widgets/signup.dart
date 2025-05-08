@@ -1,5 +1,7 @@
+import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/theme/colors_data.dart';
 
@@ -32,7 +34,7 @@ class _SignupState extends State<signup> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-
+    UserData userData = Provider.of<UserData>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -79,6 +81,7 @@ class _SignupState extends State<signup> {
                           return;
                         }
                         if (passwordController.text != confirmPasswordController.text) {
+
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
@@ -92,6 +95,38 @@ class _SignupState extends State<signup> {
                           return;
                         }
 
+                         userData.isLoading?showDialog(context: context,
+                             barrierDismissible: false,
+                             builder: (_)=>Center(
+                          child: CircularProgressIndicator(),
+                        )):null;
+                         final success = await userData.signUp(name: nameController.text,email: emailController.text,password: passwordController.text);
+
+                        Navigator.pop(context);
+
+                        nameController.clear();
+                        passwordController.clear();
+                        emailController.clear();
+                        confirmPasswordController.clear();
+                        selectedVal = -1;
+
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text(success ? 'Succeeded' : 'Error'),
+                            content: Text(success
+                                ? 'Successfully signed up. Go to login.'
+                                : 'Some error occurred. Please try again.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Dismiss success/error dialog
+                                },
+                                child: Text('Ok'),
+                              )
+                            ],
+                          ),
+                        );
                         // await AuthRepository().signup(
                         //   name: nameController.text,
                         //   email: emailController.text,
