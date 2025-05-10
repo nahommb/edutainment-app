@@ -13,6 +13,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.lightBackground,
       brightness: Brightness.light,
       inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.symmetric(vertical: 15),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
@@ -44,6 +45,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.darkBackground,
       brightness: Brightness.dark,
       inputDecorationTheme: InputDecorationTheme(
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               borderSide: BorderSide(
@@ -58,7 +60,7 @@ class AppTheme {
                   width: 0.5
               )
           ),
-          contentPadding:EdgeInsets.all(25)
+          // contentPadding:EdgeInsets.all(25)
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

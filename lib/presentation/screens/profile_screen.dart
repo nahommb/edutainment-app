@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:edutainment_app/core/dio_config.dart';
+import 'package:edutainment_app/core/endpoint.dart';
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
+import 'package:edutainment_app/helper/image_picker.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
 import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
@@ -100,6 +104,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
     );
   }
+  File? _pickedImage;
+
+  void _pickImage() async {
+    print('lee');
+    final picker = MyImagePicker();
+    final image = await picker.pickImageFromGallery();
+    if (image != null) {
+      setState(() {
+        _pickedImage = image;
+      });
+    }
+  }
+
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: 80,
-                  child: Icon(Icons.person_2_outlined, size: 80, color: AppColors.primary),
+                  child: userData.user?.image !=null?Image.network('$assetUrl${userData.user?.image}'):Icon(Icons.person_2_outlined, size: 80, color: AppColors.primary),
                 ),
                 SizedBox(height: 15),
                 Text(
@@ -177,12 +196,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 SizedBox(height: 8),
-                Row(
-                  children: [
-                    Text('Change Profile', style: TextStyle(fontSize: 20, color: AppColors.primary)),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios_outlined)
-                  ],
+                GestureDetector(
+                  onTap: (){
+                    showDialog(context: context, builder: (_)=>AlertDialog(
+                      title: Text('Change Profile'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child: TextField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                hintText: 'Username'
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 50,
+                            child: TextField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                  hintText: 'Email'
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          Container(
+                            height: 100,
+                            child:_pickedImage != null
+                                ? Image.file(_pickedImage!)
+                                : Text('No image selected'),
+                          ),
+                          SizedBox(height: 10,),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Row(
+                              children: [
+                                Text('Upload Profile Picture'),
+                                IconButton(onPressed:  _pickImage, icon: Icon(Icons.upload)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(onPressed: (){
+                          userData.changeProfile(name: userNameController.text,email: emailController.text,image: _pickedImage);
+
+                        }, child: Text('Ok')),
+                        TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Cancel'))
+                      ],
+                    ));
+                  },
+                  child: Row(
+                    children: [
+                      Text('Change Profile', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Spacer(),
+                      Icon(Icons.arrow_forward_ios_outlined)
+                    ],
+                  ),
                 ),
                 SizedBox(height: 8),
                 GestureDetector(

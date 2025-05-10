@@ -18,7 +18,7 @@ class UserData with ChangeNotifier{
 
 
 
-  Future<void> saveUserData(String name, String email) async {
+  Future<void> saveUserData(String name, String email,String? image) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('email', email);
@@ -30,9 +30,10 @@ class UserData with ChangeNotifier{
 
     final name = prefs.getString('name');
     final email = prefs.getString('email');
+    final image = prefs.getString('image');
 
     if (name != null && email != null) {
-      _user = UserModel(name: name, email: email); // ✅ proper conversion
+      _user = UserModel(name: name, email: email,image: image); // ✅ proper conversion
       _isLoggedIn = true;
       print(name);
     }
@@ -58,7 +59,8 @@ class UserData with ChangeNotifier{
             _user = user;
             _isLoggedIn = true;
              isLoading = true;
-             saveUserData(user.name, user.email);
+
+             saveUserData(user.name, user.email,user.image);
       },
     );
 
@@ -77,7 +79,7 @@ class UserData with ChangeNotifier{
               isLoading = false;
               isSignedUp = true;
               _user = user;
-              saveUserData(user.name, user.email);
+              saveUserData(user.name, user.email,user.image);
             }
     );
     notifyListeners();

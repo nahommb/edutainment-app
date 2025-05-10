@@ -149,7 +149,7 @@ class _SignupState extends State<signup> {
   Widget buildTextField(TextEditingController controller, String hint,
       {bool obscureText = false, TextInputType keyboardType = TextInputType.text}) {
     return SizedBox(
-      height: 40,
+      height: 35,
       width: 250,
       child: TextFormField(
         controller: controller,

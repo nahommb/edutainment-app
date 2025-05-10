@@ -22,31 +22,34 @@ class _loginSignupState extends State<LoginSignup> {
 
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height:isLogin?screenHeight*0.52:screenHeight*0.32,
-            width: double.infinity,
-            // color: Colors.lightBlue,
-            child: Image.asset('assets/images/login_signup.png'),
-          ),
-          isLogin?login():signup(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              isLogin?Text("If you don't have an account"):
-              Text("If already have an account"),
-              TextButton(onPressed: (){
-                setState(() {
-                  isLogin = !isLogin;
-                  print(isLogin);
-                });
-              }, child: isLogin?Text('Sign up',style: TextStyle(color: AppColors.primary),):
-              Text('Login',style: TextStyle(color: AppColors.primary),))
-            ],
-          )
-        ],
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height:isLogin?screenHeight*0.32:screenHeight*0.32,
+              width: double.infinity,
+              // color: Colors.lightBlue,
+              child: Image.asset('assets/images/login_signup.png'),
+            ),
+            isLogin?login():signup(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                isLogin?Text("If you don't have an account"):
+                Text("If already have an account"),
+                TextButton(onPressed: (){
+                  setState(() {
+                    isLogin = !isLogin;
+                    print(isLogin);
+                  });
+                }, child: isLogin?Text('Sign up',style: TextStyle(color: AppColors.primary),):
+                Text('Login',style: TextStyle(color: AppColors.primary),))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -5,7 +5,9 @@ import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/models/user_model.dart';
+import 'package:edutainment_app/presentation/screens/quiz_question_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/colors_data.dart';
 
@@ -43,18 +45,27 @@ class _MainScreenState extends State<MainScreen> {
     double containerHeight = screenHeight * 0.8;
     final userData = Provider.of<UserData>(context);
 
-    QuizProvider quizData = Provider.of<QuizProvider>(context);
-     print(quizData.getQuiz);
+    QuizProvider quizData = Provider.of<QuizProvider>(context,listen: false);
+     // print(quizData.getQuiz);
 
     List<dynamic> topCategory = [];
     final random = Random();
-    int randomNumber1 = random.nextInt(quizData.getQuiz.length);
-    int randomNumber2 = random.nextInt(quizData.getQuiz.length);
-    int randomNumber3 = random.nextInt(quizData.getQuiz.length);
 
     if (quizData.getQuiz.length >= 2) {
-      topCategory = [quizData.getQuiz[randomNumber1], quizData.getQuiz[randomNumber2],];
+      int randomNumber1 = random.nextInt(quizData.getQuiz.length);
+      int randomNumber2 = random.nextInt(quizData.getQuiz.length);
+      topCategory = [
+        quizData.getQuiz[randomNumber1],
+        quizData.getQuiz[randomNumber2],
+      ];
+    } else {
+      // Handle the case where there are fewer than 2 quizzes
+      // For example, if 1 item exists, just use it:
+      if (quizData.getQuiz.isNotEmpty) {
+        topCategory = [quizData.getQuiz.first];
+      }
     }
+
 
     return SingleChildScrollView(
       child: Column(
@@ -158,19 +169,24 @@ class _MainScreenState extends State<MainScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: 120,
-                                      height: 100,
-                                      margin: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.lightBackground,
-                                      border: Border.all(
-                                        color: AppColors.primary
+                                    GestureDetector(
+                                      onTap: (){
+                                        QuizQuestionScreen(quizModel: topCategory[index],).launch(context);
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 100,
+                                        margin: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.lightBackground,
+                                        border: Border.all(
+                                          color: AppColors.primary
+                                        ),
+                                        borderRadius: BorderRadius.circular(15)
                                       ),
-                                      borderRadius: BorderRadius.circular(15)
+                                        child: Image.network('${assetUrl}${topCategory[index].image}'),
+                                                                  ),
                                     ),
-                                      child: Image.network('${assetUrl}${topCategory[index].image}'),
-                                                                ),
                                     Text(topCategory[index].title)
                                   ],
                                 ),

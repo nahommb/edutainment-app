@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import '../../repository/auth_repository.dart';
 
 class login extends StatelessWidget {
- 
+
 
   late String email = '';
   late String password = '';
@@ -41,9 +41,10 @@ class login extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 40,
+                    height: 35,
                     width: 250,
                     child: TextFormField(
+
                       onChanged: (val){
                         email = val;
                       },
@@ -58,7 +59,7 @@ class login extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   SizedBox(
-                    height: 40,
+                    height: 35,
                     width: 250,
                     child: TextFormField(
                       onChanged: (val){
@@ -69,9 +70,10 @@ class login extends StatelessWidget {
                       decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: TextStyle(color: AppColors.primary,fontSize: 13,),
-                          border: OutlineInputBorder()
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(vertical: 15),
+                    ),
 
-                      ),
                     ),
                   ),
                   SizedBox(height: 15,),
