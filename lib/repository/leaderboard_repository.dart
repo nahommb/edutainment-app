@@ -1,17 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/endpoint.dart';
-import 'package:edutainment_app/models/leardeboard_model.dart';
+import 'package:edutainment_app/models/leaderboard_model.dart';
 
 class LeaderboardRepository {
   final DioClient _dioClient = DioClient();
 
-  Future<Either<String, LeardeboardModel>> getLaderbaord() async {
+  Future<Either<String, LeaderboardModel>> getLaderbaord() async {
     try {
       var res = await _dioClient.get('${apiEndPoint}getLaderbaord');
       if (res.statusCode == 200) {
         var data = res.data['data'];
-        LeardeboardModel model = LeardeboardModel.fromJson(data);
+        LeaderboardModel model = LeaderboardModel.fromJson(data);
         return Right(model);
       }
       return const Left('Failed to load data');

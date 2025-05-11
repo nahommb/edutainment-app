@@ -32,6 +32,7 @@ class QuizProvider extends ChangeNotifier {
         },
         (r) {
           setQuizList = r;
+
           isLoading = false;
         },
       );
@@ -49,6 +50,7 @@ class QuizProvider extends ChangeNotifier {
         },
         (r) {
           setQuestion = r;
+
           print(getQuestion);
         },
       );

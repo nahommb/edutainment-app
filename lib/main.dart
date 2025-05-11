@@ -1,6 +1,7 @@
 import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/theme/theme_data.dart';
 import 'package:edutainment_app/data/game_data.dart';
+import 'package:edutainment_app/domain/provider/leader_board_provider.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/story_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
@@ -51,6 +52,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => QuizProvider()),
         ChangeNotifierProvider(create: (_)=>gameData()),
+        ChangeNotifierProvider(create: (_)=>LeaderBoardProvider()),
         // Flutter Provider
         // Add other ChangeNotifierProviders here
       ],

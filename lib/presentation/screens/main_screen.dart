@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:edutainment_app/core/endpoint.dart';
+import 'package:edutainment_app/domain/provider/leader_board_provider.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
@@ -30,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<QuizProvider>(context, listen: false).fatchQuiz();
       Provider.of<UserData>(context,listen: false).getUserData();
+      Provider.of<LeaderBoardProvider>(context,listen: false).setLeadrBoard();
     });
   }
 
@@ -44,6 +46,7 @@ class _MainScreenState extends State<MainScreen> {
     double imageHeight = screenHeight * 0.4;
     double containerHeight = screenHeight * 0.8;
     final userData = Provider.of<UserData>(context);
+    final leaderBoard = Provider.of<LeaderBoardProvider>(context);
 
     QuizProvider quizData = Provider.of<QuizProvider>(context,listen: false);
      // print(quizData.getQuiz);
@@ -122,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Column(
                         children: [
                           Container(
-                            height: 150,
+                            height: 180,
                             width: double.infinity,
                             margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(20),
@@ -138,9 +141,24 @@ class _MainScreenState extends State<MainScreen> {
                                   children: [
                                     Text("Top Players",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
                                     SizedBox(height: 10,),
-                                    infoText(title:"Neymar", isDarkMode:context.isDarkMode),
-                                    infoText(title:"Messi", isDarkMode:context.isDarkMode),
-                                    infoText(title:"Ronaldo", isDarkMode:context.isDarkMode),
+                                    Container(
+                                      height: 100,
+                                      width: 100,
+                                      child: ListView.builder(itemBuilder: (context,index)=>
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              infoText(title:leaderBoard.globalLeader[index].name, isDarkMode:context.isDarkMode),
+                                              // SizedBox(width: 20,),
+                                              Text(leaderBoard.globalLeader[index].totalCorrect)
+                                            ],
+                                          ),
+                                      itemCount: leaderBoard.globalLeader.length >3?3:leaderBoard.globalLeader.length,
+                                      ),
+                                    ),
+
+                                    // infoText(title:leaderBoard.globalLeader[1].name, isDarkMode:context.isDarkMode),
+                                    // infoText(title:leaderBoard.globalLeader[0].name, isDarkMode:context.isDarkMode),
 
                                   ],
                                 ),

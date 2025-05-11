@@ -20,12 +20,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   // Group value to keep track of selected answer
   int selectedOption = -1;
 
-  final List<String> options = [
-    'Tigray',
-    'Addis Ababa',
-    'Afar',
-    'Amhara', // ✅ Correct one
-  ];
+
   final question = '';
   @override
   void initState() {
@@ -39,6 +34,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         context,
         listen: false,
       ).fatchQuestion(widget.quizModel.slug);
+
     });
 
   }
@@ -48,10 +44,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final quizProvider = Provider.of<QuizProvider>(context);
-
+    print(widget.quizModel.id);
     // print(quizProvider.getQuestion[0].options[1].isCorrect);
-
-
 
     return Scaffold(
       appBar: CustomAppBar(),
