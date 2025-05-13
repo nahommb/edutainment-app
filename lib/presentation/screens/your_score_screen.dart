@@ -1,6 +1,7 @@
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/data/game_data.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
+import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,13 +59,18 @@ class _YourScoreScreenState extends State<YourScoreScreen> {
           Expanded(child: Container(
             padding: EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
-                color: AppColors.primary,
+                  gradient: LinearGradient(
+                    colors:context.isDarkMode? [Colors.black, Colors.green.shade100]:[Colors.white, Colors.green.shade100],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+
               borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))
             ),
 
             child: ListView.builder(itemBuilder: (context,index)=>ListTile(
-                title: Text('${scoreData.gameList[index]['game']}',style: TextStyle(color: AppColors.lightBackground,fontSize: 17),),
-              trailing: Text('${scoreData.gameList[index]['data']['score']}',style: TextStyle(color: AppColors.lightBackground,fontSize: 17)),
+                title: Text('${scoreData.gameList[index]['game']}',style: TextStyle(color: AppColors.primary,fontSize: 13),),
+              trailing: Text('${scoreData.gameList[index]['data']['score']}',style: TextStyle(color: AppColors.primary,fontSize: 13)),
             ),itemCount: scoreData.gameList.length,),
           ))
         ],

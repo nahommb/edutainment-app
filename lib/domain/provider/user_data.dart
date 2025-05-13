@@ -22,6 +22,7 @@ class UserData with ChangeNotifier{
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('email', email);
+    await prefs.setString('image', image!);
   }
 
   Future<void> getUserData() async {

@@ -163,9 +163,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () => Navigator.pushNamed(context, YourScoreScreen.routeName),
                   child: Row(
                     children: [
-                      Text('Your Score', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Text('Your Score', style: TextStyle(fontSize: 15, color: AppColors.primary)),
                       Spacer(),
-                      Icon(Icons.arrow_forward_ios_outlined)
+                      Icon(Icons.arrow_forward_ios_outlined,size: 15,)
                     ],
                   ),
                 ),
@@ -181,80 +181,126 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //   ),
                 // ),
                 SizedBox(height: 20),
-                Text("Setting", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                Text("Setting", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: AppColors.primary)),
                 SizedBox(height: 10),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Dark Mode', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                    Text('Dark Mode', style: TextStyle(fontSize: 15, color: AppColors.primary)),
                     Spacer(),
-                    Switch(
-                      value: isDark,
-                      onChanged: (val) {
-                        context.read<ThemeCubit>().updateTheme(val ? ThemeMode.dark : ThemeMode.light);
-                      },
+                    SizedBox(
+                      width: 30,
+                      child: Transform.scale(
+                        scale: 0.5,
+                        child: Switch(
+                          value: isDark,
+                          onChanged: (val) {
+                            context.read<ThemeCubit>().updateTheme(val ? ThemeMode.dark : ThemeMode.light);
+                          },
+                        ),
+                      ),
                     )
                   ],
                 ),
-                SizedBox(height: 8),
                 GestureDetector(
                   onTap: (){
-                    showDialog(context: context, builder: (_)=>AlertDialog(
-                      title: Text('Change Profile'),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            height:50,
-                            child: TextField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                hintText: 'Username'
+                    showDialog(
+                      context: context,
+                      builder: (_) => StatefulBuilder(
+                        builder: (context, setState) {
+                          return AlertDialog(
+                            title: Text('Change Profile',style: TextStyle(fontSize: 16,color: AppColors.primary),),
+                            content: Form(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 35,
+                                    child: TextFormField(
+                                      controller: userNameController,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 13),
+                                      decoration: InputDecoration(
+                                        hintText: 'Username',
+                                        hintStyle: TextStyle(fontSize: 12,color: AppColors.primary),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 8), // Reduce height
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  SizedBox(
+                                    height: 35,
+                                    child: TextFormField(
+                                      controller: emailController,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 13),
+                                      decoration: InputDecoration(
+                                        hintText: 'Email',
+                                        hintStyle: TextStyle(fontSize: 12,color: AppColors.primary),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 8),
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    height: 100,
+                                    child: _pickedImage != null
+                                        ? Image.file(_pickedImage!)
+                                        : Text('No image selected',style: TextStyle(color: AppColors.primary),),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Row(
+                                      children: [
+                                        Text('Upload Profile Picture',style: TextStyle(color: AppColors.primary)),
+                                        IconButton(
+                                          onPressed: () async {
+                                            final picker = MyImagePicker();
+                                            final image = await picker.pickImageFromGallery();
+                                            if (image != null) {
+                                              setState(() {
+                                                _pickedImage = image;
+                                              });
+                                            }
+                                          },
+                                          icon: Icon(Icons.upload,color: AppColors.primary,),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          SizedBox(height: 10,),
-                          SizedBox(
-                            height: 50,
-                            child: TextField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                  hintText: 'Email'
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  userData.changeProfile(
+                                    name: userNameController.text,
+                                    email: emailController.text,
+                                    image: _pickedImage,
+                                  );
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Ok'),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          Container(
-                            height: 100,
-                            child:_pickedImage != null
-                                ? Image.file(_pickedImage!)
-                                : Text('No image selected'),
-                          ),
-                          SizedBox(height: 10,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Row(
-                              children: [
-                                Text('Upload Profile Picture'),
-                                IconButton(onPressed:  _pickImage, icon: Icon(Icons.upload)),
-                              ],
-                            ),
-                          ),
-                        ],
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text('Cancel'),
+                              ),
+                            ],
+                          );
+                        },
                       ),
-                      actions: [
-                        TextButton(onPressed: (){
-                          userData.changeProfile(name: userNameController.text,email: emailController.text,image: _pickedImage);
-
-                        }, child: Text('Ok')),
-                        TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Cancel'))
-                      ],
-                    ));
+                    );
                   },
                   child: Row(
                     children: [
-                      Text('Change Profile', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Text('Change Profile', style: TextStyle(fontSize: 15, color: AppColors.primary)),
                       Spacer(),
-                      Icon(Icons.arrow_forward_ios_outlined)
+                      Icon(Icons.arrow_forward_ios_outlined,size: 15,)
                     ],
                   ),
                 ),
@@ -263,9 +309,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () => _showChangePasswordDialog(context),
                   child: Row(
                     children: [
-                      Text('Password', style: TextStyle(fontSize: 20, color: AppColors.primary)),
+                      Text('Password', style: TextStyle(fontSize: 15, color: AppColors.primary)),
                       Spacer(),
-                      Icon(Icons.arrow_forward_ios_outlined)
+                      Icon(Icons.arrow_forward_ios_outlined,size: 15,)
                     ],
                   ),
                 ),

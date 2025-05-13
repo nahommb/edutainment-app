@@ -11,10 +11,12 @@ class StoryProvider with ChangeNotifier {
   Future<void> getStory()async {
     final result = await StoryRepository().getStory();
     result.fold((l){
+      print('errorrrrrrr 1');
       print(l);
     }, (r){
       _story = r;
-      print(_story[0].contents);
+      print('leeeeeeeee eeeeeeeeeetrrrrrrrrrrro');
+      print(r);
     });
     notifyListeners();
   }

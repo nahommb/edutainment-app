@@ -85,8 +85,9 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.blue[50],
+      resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
           child: Column(
@@ -108,6 +109,7 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
               ),
               SizedBox(height: 30),
               TextField(
+                textAlign: TextAlign.center,
                 controller: _controller,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -136,7 +138,7 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
                 ),
               ),
               SizedBox(height: 30),
-
+        
             ],
           ),
         ),

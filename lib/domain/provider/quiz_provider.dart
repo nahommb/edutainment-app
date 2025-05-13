@@ -37,7 +37,7 @@ class QuizProvider extends ChangeNotifier {
         },
       );
     } catch (e) {
-      print(e.toString());
+      print('leee errrorrrr ${e.toString()}');
     }
   }
 

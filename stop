@@ -1,0 +1,298 @@
+[33mcommit 9e3f442b6180e748ceec3a4032ffed301671c53f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Sun May 11 10:44:11 2025 -0700
+
+    complete score screen
+
+[33mcommit 3d20c1fde20025360e079659761acf89ca0381ad[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Fri May 9 22:24:47 2025 -0700
+
+    complete change profile
+
+[33mcommit 220f25292edbb0685220a1ec89ff257ccf2072ab[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed May 7 21:36:03 2025 -0700
+
+    complete sign up
+
+[33mcommit 4af77400d83716b07ed5cfb79206ae3ad99808d7[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed May 7 12:10:58 2025 -0700
+
+    finish score screen
+
+[33mcommit 4fdedf8f0fd56ece0621de2cd42bc521bf6b3470[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue May 6 22:00:09 2025 -0700
+
+    integrat to back end
+
+[33mcommit 77f8e20adfc602fa103c843914cad399d8c0090a[m
+Merge: cecbf84 1b40d59
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue May 6 21:12:33 2025 -0700
+
+    Merge branch 'main' of https://github.com/nahommb/edutainment-app
+
+[33mcommit cecbf841ad3184f0d0612d710f479be807f636c3[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue May 6 21:12:01 2025 -0700
+
+    integrat to back end
+
+[33mcommit 9c6b6a8a1f54e621ec3c42695b2b8e2917179da4[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue May 6 19:21:15 2025 -0700
+
+    integrat to back end
+
+[33mcommit 1b40d5926e060a808c35c9603f74ab871e9a3f3e[m
+Author: Cher amilak <saremsoftware@gmail.com>
+Date:   Tue May 6 21:13:15 2025 +0300
+
+    fix question option answer
+
+[33mcommit 52797eaa955f6b44192968a8bca36f60f43252b5[m
+Author: Cher amilak <saremsoftware@gmail.com>
+Date:   Mon May 5 23:16:31 2025 +0300
+
+    add quiz page
+
+[33mcommit 26841662088d418ee1258ceaa29040f2fd509cdb[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Mon May 5 22:54:38 2025 -0700
+
+    update profile Screen
+
+[33mcommit 3a75428d564b2f198ab612eb5e7c248db04da717[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Mon May 5 21:51:38 2025 -0700
+
+    update profile Screen
+
+[33mcommit b62161798b0a8398d090d4807fe24bf2f55aed10[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Mon May 5 18:16:48 2025 -0700
+
+    api integration
+
+[33mcommit eeba7abcd1bc267c9ab7e129794dfa26411c6845[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Mon May 5 09:34:05 2025 -0700
+
+    api
+
+[33mcommit 9f1554c5e84f98bf42bce6d19f85e9384674d3b9[m
+Merge: 689693b c49f3a2
+Author: Nahom <107072748+nahommb@users.noreply.github.com>
+Date:   Fri May 2 10:53:32 2025 -0700
+
+    Merge pull request #1 from nahommb/api
+    
+    add models, repository,and dio configration
+
+[33mcommit c49f3a2d14d7de225dd1dd08d54b77d1226a4f3d[m
+Author: Cher amilak <saremsoftware@gmail.com>
+Date:   Fri May 2 20:33:06 2025 +0300
+
+    add models, repository,and dio configration
+
+[33mcommit 689693b0f06587b78c9108bb3a813c9e6e81aa59[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Mon Apr 28 09:48:14 2025 -0700
+
+    edit screen
+
+[33mcommit 7fa94da05b5d6e72d4784618e95d7b1a872636a3[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Sat Apr 26 11:02:44 2025 -0700
+
+    edit screen
+
+[33mcommit 1ca3020115b28eb9a5cf4790f33271fb4b7e256c[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Apr 23 21:26:46 2025 -0700
+
+    create game
+
+[33mcommit 06119252014c7bf0177f5aece79f57c7c556d191[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Apr 23 10:21:51 2025 -0700
+
+    create game
+
+[33mcommit ce34c2000a90266e64be30eda1ed2bd03b69360b[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue Apr 22 10:35:39 2025 -0700
+
+    update
+
+[33mcommit d968b48736dc9ff187566c4763fe5e468eb2769c[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue Apr 22 09:38:18 2025 -0700
+
+    create pic answer screen
+
+[33mcommit c212a4d492594399162dd8c48b36d24d583b6d1d[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Fri Apr 18 10:24:24 2025 -0700
+
+    update theme mode
+
+[33mcommit 8d8635255d74d116564c2e9b387c7652b2352c6f[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Fri Apr 18 10:17:09 2025 -0700
+
+    update theme mode
+
+[33mcommit a45463bcb2912276f1e498c384daedc22484fee4[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Thu Apr 17 21:12:16 2025 -0700
+
+    them mode
+
+[33mcommit d541bcfd765db4065f3b3b4a715f5b493f518541[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Apr 16 10:23:14 2025 -0700
+
+    update game screen
+
+[33mcommit d7412d0c7518e1e8989ba431ab1e3a9fd9e54868[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Apr 16 09:34:52 2025 -0700
+
+    finish puzzle screen
+
+[33mcommit f15b01912aa04d319eeeeee537ebfc791cc601d9[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Thu Apr 10 14:52:51 2025 -0700
+
+    finish quiz screen
+
+[33mcommit 4f52eaab36e33dc14825983dd3b6b343b2e5e271[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Thu Apr 10 09:53:43 2025 -0700
+
+    create story reading screen
+
+[33mcommit 71578da5ed395620f6b25cede202a9218f5a4f4f[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Apr 2 11:36:28 2025 -0700
+
+    finish profile screen
+
+[33mcommit b0691c832da8aec89a4d1d4860e43c348077ebd0[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue Apr 1 10:38:00 2025 -0700
+
+    finish story screen
+
+[33mcommit 3ea79dfb3f8c76344fa1860909e5dc05f5360c3d[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Mon Mar 31 10:42:48 2025 -0700
+
+    create main screen widgets
+
+[33mcommit 41a90794280fe1454da185ee5962d2ddc3cc4ab8[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Sat Mar 29 14:09:52 2025 -0700
+
+    create story,game and profile screen
+
+[33mcommit d8d5ab7972488ba73ee75e1b837c5b698815e920[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Sat Mar 29 11:01:40 2025 -0700
+
+    create bottom navbar
+
+[33mcommit 275940f8c1d2e5b09e5ddc907c13f4978b4cc5b2[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Fri Mar 28 20:31:44 2025 -0700
+
+    finish login signup screen
+
+[33mcommit 58bc340c8ac39ed07b43de6dafa55df32779f01a[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Fri Mar 28 11:19:59 2025 -0700
+
+    create signup
+
+[33mcommit b21c7371532ac288d6d7636a62fd2b9836407759[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Thu Mar 27 11:27:47 2025 -0700
+
+    create login screen
+
+[33mcommit c9cec605826fe0db3831e217a0f94536fd7cc03d[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Thu Mar 27 10:37:10 2025 -0700
+
+    assets image added
+
+[33mcommit a0bfb9ac24b011c55cbb67e95be4741db25e66f9[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Mar 26 21:27:15 2025 -0700
+
+    updated
+
+[33mcommit aac60da6251f395449074e16115ee5e47f42a505[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Mar 26 21:22:50 2025 -0700
+
+    updated
+
+[33mcommit d263878f464013a318f9cb87e8fe721607c45255[m
+Author: Nahom <107072748+nahommb@users.noreply.github.com>
+Date:   Wed Mar 26 01:03:40 2025 -0700
+
+    Update README.md
+
+[33mcommit ac14a4494778bfeca4ca1836bef94d7e5c43f36d[m
+Author: Nahom <107072748+nahommb@users.noreply.github.com>
+Date:   Wed Mar 26 01:03:09 2025 -0700
+
+    Update README.md
+
+[33mcommit cda52912a85903287ff4cef1556d1ef7fdb84d29[m
+Author: Nahom <107072748+nahommb@users.noreply.github.com>
+Date:   Wed Mar 26 01:00:06 2025 -0700
+
+    Update README.md
+
+[33mcommit 58813c812114f802c99ec5aa2517bf37b8cab1d1[m
+Author: Nahom <107072748+nahommb@users.noreply.github.com>
+Date:   Wed Mar 26 00:52:00 2025 -0700
+
+    Update README.md
+
+[33mcommit e3d595f9d4e6f3757a4f3a864f8f93bf429625a2[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Wed Mar 26 10:45:36 2025 -0700
+
+    updated
+
+[33mcommit 91d43afe65c6ae8dd5f976619763a3e99d5d5e01[m
+Merge: 6efbea5 57d1cdc
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue Mar 25 20:34:43 2025 -0700
+
+    updated
+
+[33mcommit 6efbea5961e1dc420ea364af289c0cd46e806a1e[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Tue Mar 25 20:34:43 2025 -0700
+
+    updated
+
+[33mcommit 8c5a40c5eb9c789acce67dca246d1fc3be6aac42[m
+Author: Nahom Melese <nahomjr17@gmail.com>
+Date:   Fri Mar 14 09:39:54 2025 -0700
+
+    first commit
+
+[33mcommit 57d1cdcda01e72ef5c6a138994f13fc9d8fd861d[m
+Author: Nahom <107072748+nahommb@users.noreply.github.com>
+Date:   Thu Mar 13 23:46:31 2025 -0700
+
+    Create README.md

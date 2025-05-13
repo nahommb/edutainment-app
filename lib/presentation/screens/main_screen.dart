@@ -108,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 // Container stacked below the image
                 Positioned(
-                  top: screenWidth > 600 ?screenWidth*0.85:screenWidth*0.75,
+                  top: screenWidth > 600 ?screenWidth*0.75:screenWidth*0.65,
                   left: 0,
                   right: 0,
                   child: Container(
@@ -125,12 +125,17 @@ class _MainScreenState extends State<MainScreen> {
                       child: Column(
                         children: [
                           Container(
-                            height: 180,
+                            // height: 180,
                             width: double.infinity,
                             margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                                color: context.isDarkMode?AppColors.primary:AppColors.lightBackground,
+                                  gradient:context.isDarkMode?LinearGradient(
+                                    colors: [Colors.green, Colors.black],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ):null,
+                                color: context.isDarkMode?null:AppColors.lightBackground,
                                 borderRadius: BorderRadius.all(Radius.circular(20))
                             ),
                             child: Row(
@@ -139,18 +144,17 @@ class _MainScreenState extends State<MainScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Top Players",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
-                                    SizedBox(height: 10,),
+                                    Text("Top Players",style: TextStyle(fontWeight: FontWeight.bold)),
                                     Container(
-                                      height: 100,
+                                      height: 80,
                                       width: 100,
                                       child: ListView.builder(itemBuilder: (context,index)=>
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              infoText(title:leaderBoard.globalLeader[index].name, isDarkMode:context.isDarkMode),
+                                              infoText(title:leaderBoard.globalLeader[index].name, isDarkMode:context.isDarkMode,),
                                               // SizedBox(width: 20,),
-                                              Text(leaderBoard.globalLeader[index].totalCorrect)
+                                              Text(leaderBoard.globalLeader[index].totalCorrect,style: TextStyle(),)
                                             ],
                                           ),
                                       itemCount: leaderBoard.globalLeader.length >3?3:leaderBoard.globalLeader.length,
@@ -164,14 +168,14 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                                 Column(
                                   children: [
-                                    Text('Your Rank',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                    Text('Your Rank',style: TextStyle(fontWeight: FontWeight.bold),),
                                     infoText(title:"17", isDarkMode:context.isDarkMode),
                                   ],
                                 )
                               ],
                             ),
                           ),
-                          Text('Top From Each Categor',style: TextStyle(fontSize: 20,color: AppColors.primary),),
+                          Text('Top From Each Category',style: TextStyle(fontSize: 18,color: AppColors.primary),),
                           Container(
                             height: 140,
                             width: double.infinity,
@@ -226,5 +230,5 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 Widget infoText({title,isDarkMode}){
-  return Text(title,style: TextStyle(color: isDarkMode?AppColors.lightBackground:AppColors.primary),);
+  return Text(title,style: TextStyle(color: isDarkMode?AppColors.lightBackground:AppColors.primary,),);
 }
