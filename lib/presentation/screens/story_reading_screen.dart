@@ -4,6 +4,9 @@ import 'package:edutainment_app/models/story_model.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class StoryReadingScreen extends StatefulWidget {
 
@@ -18,10 +21,23 @@ class StoryReadingScreen extends StatefulWidget {
       _StoryReadingScreen();
 }
 
-class _StoryReadingScreen
-    extends State<StoryReadingScreen> {
+class _StoryReadingScreen extends State<StoryReadingScreen> {
   final PageController _controller = PageController();
   final List<Color> colors = [Colors.white, Colors.white, Colors.white,Colors.white,Colors.black];
+
+  FlutterTts flutterTts = FlutterTts();
+
+  Future<void> speak(String text) async {
+    await flutterTts.setLanguage("am-ET");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
+ bool textToSpeech = false;
+
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +57,19 @@ class _StoryReadingScreen
                   child: Column(
                     children: [
                       Text(widget.storyModel.contents[index]!.story),
+                      // ElevatedButton(onPressed: (){speak(widget.storyModel.contents[index]!.story);}, child: Text("Speak"))
+                      IconButton(onPressed: (){
+                        setState(() {
+                          textToSpeech = !textToSpeech;
+                          if(textToSpeech == true){
+                            print(textToSpeech);
+                            speak(widget.storyModel.contents[index]!.story);
+                          }
+                          else{
+                            flutterTts.stop();
+                          }
+                        });
+                      }, icon: FaIcon(textToSpeech?FontAwesomeIcons.volumeXmark:FontAwesomeIcons.volumeHigh,color: AppColors.primary,))
                     ],
                   ),
                 ),
