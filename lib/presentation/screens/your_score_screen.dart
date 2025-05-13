@@ -51,8 +51,8 @@ class _YourScoreScreenState extends State<YourScoreScreen> {
             margin: EdgeInsets.only(top: 30),
             height: screenHeight*0.4,
             child:ListView.builder(itemBuilder: (context, index) => ListTile(
-              title: Text('${quizProvider.getQuiz[index].title}',style: TextStyle(color: AppColors.primary),),
-              trailing: Text('65',style: TextStyle(color: AppColors.primary),),
+              title: Text('${quizProvider.getQuiz[index].title}',style: TextStyle(color: AppColors.primary,fontSize: 12),),
+              trailing: Text('65',style: TextStyle(color: AppColors.primary,fontSize: 12),),
             ),
             itemCount: quizProvider.getQuiz.length,),
           ),

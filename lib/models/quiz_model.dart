@@ -16,11 +16,13 @@ class QuizModel {
 
   factory QuizModel.fromJson(Map<String, dynamic> json) {
     return QuizModel(
-        title: json['title'],
-        image: json['image'],
-        slug: json['slug'],
-        createdAt: DateTime.parse(json['created_at']),
-        id: json['id'],
-        status: json['status']);
+      title: json['title'],
+      image: json['image'],
+      slug: json['slug'],
+      createdAt: DateTime.parse(json['created_at']),
+      id: int.parse(json['id'].toString()),
+      status: int.parse(json['status'].toString()),
+    );
   }
+
 }

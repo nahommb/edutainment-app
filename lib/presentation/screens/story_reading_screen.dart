@@ -26,21 +26,23 @@ class _StoryReadingScreen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: CustomAppBar(),
+     // appBar: CustomAppBar(),
       body: Stack(
         children: [
           PageView.builder(
             controller: _controller,
             itemCount: widget.storyModel.contents.length,
             itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(top: 70),
-                padding: EdgeInsets.all(20),
-                color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
-                child: Column(
-                  children: [
-                    Text(widget.storyModel.contents[index]!.story),
-                  ],
+              return SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.only(top: 70),
+                  padding: EdgeInsets.all(20),
+                  color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
+                  child: Column(
+                    children: [
+                      Text(widget.storyModel.contents[index]!.story),
+                    ],
+                  ),
                 ),
               );
             },

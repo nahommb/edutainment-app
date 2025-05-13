@@ -20,16 +20,18 @@ class StoryModel {
   });
 
   factory StoryModel.fromJson(Map<String, dynamic> json) => StoryModel(
-        id: json['id'],
-        title: json['title'],
-        image: json['image'],
-        slug: json['slug'],
-        status: json['status'],
-        description: json['description'],
-        createdAt: DateTime.parse(json['created_at']),
-        contents: List<StoryContent>.from(
-            json['contents'].map((x) => StoryContent.fromJson(x))),
-      );
+    id: int.parse(json['id'].toString()),
+    title: json['title'],
+    image: json['image'],
+    slug: json['slug'],
+    status: int.parse(json['status'].toString()),
+    description: json['description'],
+    createdAt: DateTime.parse(json['created_at']),
+    contents: List<StoryContent>.from(
+      json['contents'].map((x) => StoryContent.fromJson(x)),
+    ),
+  );
+
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -59,12 +61,12 @@ class StoryContent {
   });
 
   factory StoryContent.fromJson(Map<String, dynamic> json) => StoryContent(
-        id: json['id'],
-        storyId: json['story_id'],
-        story: json['story'],
-        image: json['image'],
-        order: json['order'],
-      );
+    id: int.parse(json['id'].toString()),
+    storyId: int.parse(json['story_id'].toString()),
+    story: json['story'],
+    image: json['image'],
+    order: int.parse(json['order'].toString()),
+  );
 
   Map<String, dynamic> toJson() => {
         'id': id,

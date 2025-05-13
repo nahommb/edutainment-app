@@ -77,49 +77,50 @@ class _StoryScreenState extends State<StoryScreen> {
                       itemBuilder: (context, index) => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: (){
-                              // StoryRepository().getStory();
-                              StoryReadingScreen(
-                                storyModel:storyData.story[index]
-                              ).launch(context);
-                              // Navigator.pushNamed(context, StoryReadingScreen.routeName,);
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(bottom: 5,top: 5),
-                              //width: screenWidth*0.6,
-                              padding: EdgeInsets.only(right: 10),
-                              height: 55,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.primary),
-                                  borderRadius: BorderRadius.all(Radius.circular(10))
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: (){
+                                // StoryRepository().getStory();
+                                StoryReadingScreen(
+                                  storyModel:storyData.story[index]
+                                ).launch(context);
+                                // Navigator.pushNamed(context, StoryReadingScreen.routeName,);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(bottom: 5,top: 5),
+                                //width: screenWidth*0.6,
+                                padding: EdgeInsets.only(right: 10),
+                                height: 45,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: AppColors.primary),
+                                    borderRadius: BorderRadius.all(Radius.circular(10))
+                                ),
+                                child: Row(
+
+                                  children: [
+                                    SizedBox(width: 10,),
+                                    Icon(Icons.menu_book_rounded,color:AppColors.primary,),
+                                    SizedBox(width: 10,),
+                                    Column(
+                                      children: [
+                                        SizedBox(height: 5,),
+                                        Text('${storyData.story[index].title}',style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary,fontSize: 10),),
+                                        Text('${storyData.story[index].description}',style: TextStyle(fontSize: 10,color: AppColors.primary),)
+                                      ],
+                                    )
+                                  ],
+                                )
                               ),
-                              child: Row(
 
-                                children: [
-                                  SizedBox(width: 10,),
-                                  Icon(Icons.menu_book_rounded,color:AppColors.primary,),
-                                  SizedBox(width: 10,),
-                                  Column(
-                                    children: [
-                                      SizedBox(height: 5,),
-                                      Text('${storyData.story[index].title}', softWrap: true,
-                                          overflow: TextOverflow.visible,
-                                          maxLines: null,style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary),),
-                                      Text('${storyData.story[index].description}',style: TextStyle(fontSize: 10,color: AppColors.primary),)
-                                    ],
-                                  )
-                                ],
-                              )
                             ),
-
                           ),
+                          SizedBox(width: 10,),
                           SizedBox(
                             height: 30,
                             child: ElevatedButton(onPressed: (){
                               Navigator.pushNamed(context, QuizScreen.routeName);
                             }, child: Text(
-                              'Quiz',style: TextStyle(color: AppColors.lightBackground,fontWeight: FontWeight.normal),
+                              'Quiz',style: TextStyle(color: AppColors.lightBackground,fontWeight: FontWeight.normal,fontSize: 12),
                             )),
                           )
                         ],

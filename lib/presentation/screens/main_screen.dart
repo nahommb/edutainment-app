@@ -209,7 +209,7 @@ class _MainScreenState extends State<MainScreen> {
                                         child: Image.network('${assetUrl}${topCategory[index].image}'),
                                                                   ),
                                     ),
-                                    Text(topCategory[index].title)
+                                    Text(topCategory[index].title,style: TextStyle(fontSize: 12),)
                                   ],
                                 ),
                               ),itemCount: 2,),
