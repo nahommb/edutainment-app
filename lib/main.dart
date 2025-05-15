@@ -12,6 +12,7 @@ import 'package:edutainment_app/presentation/screens/init_screen.dart';
 import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
+import 'package:edutainment_app/presentation/screens/onboarding_screen.dart';
 import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: mode,
-              home: InitScreen(),
+              home: OnboardingScreen(),//InitScreen()
               routes: {
                 HomeScreen.routeName: (context) => HomeScreen(),
                 LoginSignup.routName: (context) => LoginSignup(),
