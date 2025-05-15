@@ -73,7 +73,16 @@ class _StoryScreenState extends State<StoryScreen> {
                   Container(
                     padding: EdgeInsets.only(left: 10,right: 10),
                     height: screenHeight*0.39,
-                    child: ListView.builder(
+                    child:storyData.story.length<1?Center(
+                      child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                    ):ListView.builder(
                       itemBuilder: (context, index) => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -78,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              'Hi ${userData.user?.name}',
+              "Hi👋 ${userData.user?.name}",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
