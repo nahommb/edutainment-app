@@ -23,7 +23,7 @@ class StoryReadingScreen extends StatefulWidget {
 
 class _StoryReadingScreen extends State<StoryReadingScreen> {
   final PageController _controller = PageController();
-  final List<Color> colors = [Colors.white, Colors.white, Colors.white,Colors.white,Colors.black];
+  // final List<Color> colors = [Colors.white, Colors.white, Colors.white,Colors.white,Colors.black];
 
   FlutterTts flutterTts = FlutterTts();
 
@@ -42,7 +42,7 @@ class _StoryReadingScreen extends State<StoryReadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // appBar: CustomAppBar(),
+     appBar: CustomAppBar(),
       body: Stack(
         children: [
           PageView.builder(
@@ -77,7 +77,7 @@ class _StoryReadingScreen extends State<StoryReadingScreen> {
             },
           ),
           Positioned(
-            top: 50,
+            top: 20,
             left: 0,
             right: 0,
             child: Center(
