@@ -61,7 +61,7 @@ class AuthRepository {
       return Left('Login failed: ${e.message}');
     } catch (e) {
       print('❗ Other error: $e');
-      return Left('An unexpected error occurred');
+      return Left('$e');
     }
   }
 
@@ -87,7 +87,7 @@ class AuthRepository {
 
         return Right(user);
       }
-      return Left('Someting went wrong');
+      return Left('Something went wrong');
     } catch (e) {
       return Left(e.toString());
     }
@@ -111,26 +111,39 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, UserModel>> updateProfile(
-      {required String email,
-      required String name,
-      required File? image}) async {
+  Future<Either<String, UserModel>> updateProfile({
+    required String email,
+    required String name,
+    required File? image,
+  }) async {
     try {
-      Map<String, dynamic> data = {
+      final formData = FormData.fromMap({
         'email': email,
         'name': name,
-        'image': image
-      };
-      var res =
-          await _dioClient.post('${apiEndPoint}auth/updateProfile', data: data);
+        if (image != null)
+          'image': await MultipartFile.fromFile(
+            image.path,
+            filename: image.path.split('/').last,
+          ),
+      });
+
+      final res = await _dioClient.post(
+        '${apiEndPoint}auth/updateProfile',
+        data: formData,
+      //  options: Options(contentType: 'multipart/form-data'),
+      );
+
       if (res.statusCode == 200) {
         var data = res.data['data']['user'];
         UserModel user = UserModel.fromJson(data);
         return Right(user);
       }
-      return const Left('Someting went wrong');
+
+      return const Left('Something went wrong');
     } catch (e) {
+      print('Dio Error: $e');
       return Left(e.toString());
     }
   }
+
 }

@@ -31,6 +31,7 @@ import 'package:provider/provider.dart';
 
 import 'domain/bloc/them_cubit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,9 @@ void main() async {
 
   // Open the box where your game data will be stored
   await Hive.openBox('gamesData');
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  bool? seenOnboard = prefs.getBool('seenOnboard') ?? false;
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory:
@@ -62,14 +66,16 @@ void main() async {
           BlocProvider(create: (_) => ThemeCubit()), // Bloc
           // Add other BlocProviders here
         ],
-        child: const MyApp(),
+        child: MyApp(seenOnboard:seenOnboard,),
       ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final seenOnboard;
+
+  const MyApp({super.key,this.seenOnboard});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +88,7 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: mode,
-              home: OnboardingScreen(),//InitScreen()
+              home: seenOnboard?InitScreen():OnboardingScreen(),//InitScreen()
               routes: {
                 HomeScreen.routeName: (context) => HomeScreen(),
                 LoginSignup.routName: (context) => LoginSignup(),

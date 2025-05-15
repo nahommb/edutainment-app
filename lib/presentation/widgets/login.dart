@@ -9,15 +9,23 @@ import 'package:provider/provider.dart';
 
 import '../../repository/auth_repository.dart';
 
-class login extends StatelessWidget {
+class login extends StatefulWidget {
 
 
-  late String email = '';
-  late String password = '';
+  @override
+  State<login> createState() => _loginState();
+}
+
+class _loginState extends State<login> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+
     double screenHeight = MediaQuery.of(context).size.height;
 
     final userData = Provider.of<UserData>(context);
@@ -44,10 +52,7 @@ class login extends StatelessWidget {
                     height: 35,
                     width: 250,
                     child: TextFormField(
-
-                      onChanged: (val){
-                        email = val;
-                      },
+                      controller: emailController,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           hintText: 'Email or Phone Number',
@@ -62,9 +67,7 @@ class login extends StatelessWidget {
                     height: 35,
                     width: 250,
                     child: TextFormField(
-                      onChanged: (val){
-                        password = val;
-                      },
+                      controller: passwordController,
                       textAlign: TextAlign.center,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -82,7 +85,7 @@ class login extends StatelessWidget {
                       minimumSize: Size(250, 40), // Width: 200, Height: 50
                     ),
                     onPressed: () async{
-                      if(password=='' || email==''){
+                      if(passwordController.text=='' || emailController.text==''){
                         showDialog(context: context, builder:(_)=>AlertDialog(
                           title:Text('Fill Fields') ,
                           content: Text('Please fill all required fields'),
@@ -95,11 +98,18 @@ class login extends StatelessWidget {
                         userData.isLoading?showDialog(context: context, builder: (context) => Center(
                           child: CircularProgressIndicator(),
                         ),):null;
-                        bool success = await userData.login(email: email, password: password) ;
+                        bool success = await userData.login(email: emailController.text, password: passwordController.text) ;
+                        Navigator.pop(context);
                         print(success);
                         if(success){
                           Navigator.pushNamed(context,HomeScreen.routeName);
-                        };
+                        } else{
+                          showDialog(context: context, builder: (context) => AlertDialog(
+                            title: Text('Failed',style: TextStyle(fontSize: 14,color: Colors.red),),
+                            content: Text(userData.loginErrorMessage),
+                            actions: [TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Ok'))],
+                          ),);
+                        }
                       }
 
 

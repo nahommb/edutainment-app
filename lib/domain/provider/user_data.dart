@@ -16,6 +16,7 @@ class UserData with ChangeNotifier{
   UserModel? get user =>_user;
   bool get isLoggedIn => _isLoggedIn;
 
+  String loginErrorMessage ='';
 
 
   Future<void> saveUserData(String name, String email,String? image) async {
@@ -36,13 +37,11 @@ class UserData with ChangeNotifier{
     if (name != null && email != null) {
       _user = UserModel(name: name, email: email,image: image); // ✅ proper conversion
       _isLoggedIn = true;
-      print(name);
+      print('leeeeeeeee $name');
     }
  //  print('leeee${_user?.email}');
 
   }
-
-
 
 
   Future <bool> login({email,password}) async{
@@ -53,6 +52,7 @@ class UserData with ChangeNotifier{
           (errorMessage) {
         // handle error
         print('Login failed: $errorMessage');
+        loginErrorMessage = errorMessage;
         _isLoggedIn = false;
         isLoading = true;
       },
@@ -60,7 +60,7 @@ class UserData with ChangeNotifier{
             _user = user;
             _isLoggedIn = true;
              isLoading = true;
-
+              print(user.image);
              saveUserData(user.name, user.email,user.image);
       },
     );
@@ -104,7 +104,12 @@ class UserData with ChangeNotifier{
   }
   Future<bool>changeProfile({email,name,image})async{
     final result = await AuthRepository().updateProfile(email: email, name: name, image: image);
-    result.fold((l){}, (r){});
+    result.fold((l){
+      print(l);
+    }, (user){
+      print('test image${user.image}');
+      saveUserData(user.name, user.email,user.image);
+    });
 
     notifyListeners();
     return true;

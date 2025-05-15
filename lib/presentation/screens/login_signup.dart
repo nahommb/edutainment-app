@@ -28,7 +28,7 @@ class _loginSignupState extends State<LoginSignup> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height:isLogin?screenHeight*0.32:screenHeight*0.32,
+              height:isLogin?screenHeight*0.52:screenHeight*0.32,
               width: double.infinity,
               // color: Colors.lightBlue,
               child: Image.asset('assets/images/login_signup.png'),

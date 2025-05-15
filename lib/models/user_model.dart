@@ -20,8 +20,8 @@ class UserModel {
         email: json['email'],
         image: json['image'],
         name: json['name'],
-        status: json['status'],
-        type: json['type']);
+        status: int.parse(json['status'].toString()),
+        type: int.parse(json['type'].toString()));
   }
 
 
