@@ -104,15 +104,17 @@ class UserData with ChangeNotifier{
   }
   Future<bool>changeProfile({email,name,image})async{
     final result = await AuthRepository().updateProfile(email: email, name: name, image: image);
+    bool isSuccess = false;
     result.fold((l){
       print(l);
     }, (user){
       print('test image${user.image}');
       saveUserData(user.name, user.email,user.image);
+      isSuccess = true;
     });
 
     notifyListeners();
-    return true;
+    return isSuccess;
   }
 
   Future<void> logoutUser() async {

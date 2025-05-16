@@ -36,7 +36,7 @@ class LeaderboardRepository {
       if (res.statusCode == 200) {
         return Right(true);
       }
-      return const Left('Someting went wrong');
+      return const Left('Something went wrong');
     } catch (e) {
       return Left(e.toString());
     }

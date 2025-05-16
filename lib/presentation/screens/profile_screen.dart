@@ -79,10 +79,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
-                    title: Text(success ? 'Success' : 'Error'),
+                    title: Text(success ? 'Success' : 'Error',style: TextStyle(fontSize: 14,color: success?AppColors.primary:Colors.red),),
                     content: Text(success
                         ? 'Password Successfully Changed'
-                        : 'Failed to change password'),
+                        : 'Failed to change password',style: TextStyle(fontSize: 12,color: success?AppColors.primary:Colors.red),),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(),
@@ -271,9 +271,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                         SizedBox(height: 10),
                                         Container(
-                                          height: 80,
+                                          height: 100,
+                                          width: 200,
                                           child: _pickedImage != null
-                                              ? Image.file(_pickedImage!)
+                                              ? Image.file(_pickedImage!,fit: BoxFit.fill,)
                                               : Text('No image selected',style: TextStyle(color: AppColors.primary),),
                                         ),
                                         SizedBox(height: 10),
@@ -303,19 +304,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 actions: [
                                   TextButton(
-                                    onPressed: () {
-                                      userData.changeProfile(
-                                        name: userNameController.text,
-                                        email: emailController.text,
-                                        image: _pickedImage,
-                                      );
-                                      Navigator.pop(context);
+                                    onPressed: () async {
+                                      if(userNameController.text!=null && emailController.text!=null && _pickedImage!=null){
+                                        final success = await userData.changeProfile(
+                                          name: userNameController.text,
+                                          email: emailController.text,
+                                          image: _pickedImage,
+                                        );
+                                        if (!context.mounted) return;
+                                        Navigator.pop(context);
+                                        showDialog(context: context, builder: (context)=>AlertDialog(
+                                          title: Text(success ? 'Success' : 'Error'),
+                                          content: Text(success? 'Successfully updated your profile':'Not Changed Please Try Again'),
+                                          actions: [
+                                            TextButton(onPressed: (){
+                                              Navigator.pop(context);
+                                            }, child: Text('Ok'))
+                                          ],
+                                        ));
+                                      }
+                                      else{
+                                        showDialog(context: context, builder: (context) => AlertDialog(
+                                          title: Text('Fill Fields',style: TextStyle(fontSize: 14,color: Colors.red),),
+                                          content: Text('Please Fill All Required Fields',style: TextStyle(fontSize: 12,color: Colors.red),),
+                                          actions: [
+                                            TextButton(onPressed: (){
+                                              Navigator.pop(context);
+                                            }, child: Text('Ok',style: TextStyle(color: AppColors.primary),))
+                                          ],
+                                        ),);
+                                      }
                                     },
-                                    child: Text('Ok'),
+                                    child: Text('Ok',style: TextStyle(color: AppColors.primary),),
                                   ),
                                   TextButton(
                                     onPressed: () => Navigator.pop(context),
-                                    child: Text('Cancel'),
+                                    child: Text('Cancel',style: TextStyle(color: AppColors.gray),),
                                   ),
                                 ],
                               );

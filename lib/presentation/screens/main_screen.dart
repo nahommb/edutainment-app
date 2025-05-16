@@ -30,8 +30,9 @@ class _MainScreenState extends State<MainScreen> {
     // Delay execution until after build context is ready
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<QuizProvider>(context, listen: false).fatchQuiz();
-      Provider.of<UserData>(context,listen: false).getUserData();
-      Provider.of<LeaderBoardProvider>(context,listen: false).setLeadrBoard();
+      UserData user = Provider.of<UserData>(context,listen: false);
+      user.getUserData();
+      Provider.of<LeaderBoardProvider>(context,listen: false).getLeadrBoard(email:user.user?.email);
     });
   }
 
