@@ -16,10 +16,7 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      Map<String, dynamic> data = {
-        'email': email,
-        'password': password,
-      };
+      Map<String, dynamic> data = {'email': email, 'password': password};
 
       print('📤 Logging in with: $data');
 
@@ -65,18 +62,18 @@ class AuthRepository {
     }
   }
 
-
-  Future<Either<String, UserModel>> signup(
-      {required String name,
-      required String email,
-      required String password,
-      File? image}) async {
+  Future<Either<String, UserModel>> signup({
+    required String name,
+    required String email,
+    required String password,
+    File? image,
+  }) async {
     try {
       Map<String, dynamic> data = {
         'name': name,
         'email': email,
         'password': password,
-        'image': image
+        'image': image,
       };
       var res = await _dioClient.post('${apiEndPoint}auth/signup', data: data);
       if (res.statusCode == 200) {
@@ -93,15 +90,19 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, bool>> changePassword(
-      {required String oldPassword, required String newPassword}) async {
+  Future<Either<String, bool>> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
     try {
       Map<String, dynamic> data = {
         'newPassword': newPassword,
         'oldPassword': oldPassword,
       };
-      var res = await _dioClient.post('${apiEndPoint}auth/changePassword',
-          data: data);
+      var res = await _dioClient.post(
+        '${apiEndPoint}auth/changePassword',
+        data: data,
+      );
       if (res.statusCode == 200) {
         return Right(true);
       }
@@ -130,7 +131,7 @@ class AuthRepository {
       final res = await _dioClient.post(
         '${apiEndPoint}auth/updateProfile',
         data: formData,
-      //  options: Options(contentType: 'multipart/form-data'),
+        //  options: Options(contentType: 'multipart/form-data'),
       );
 
       if (res.statusCode == 200) {
@@ -146,4 +147,62 @@ class AuthRepository {
     }
   }
 
+  Future<Either<String, UserModel>> addStudents({
+    required String name,
+    required String email,
+    required String password,
+    File? image,
+  }) async {
+    try {
+      Map<String, dynamic> data = {
+        'name': name,
+        'email': email,
+        'password': password,
+        'image': image,
+      };
+      var res = await _dioClient.post(
+        '${apiEndPoint}auth/addStudent',
+        data: data,
+      );
+      if (res.statusCode == 200) {
+        var data = res.data['data']['student'];
+        UserModel user = UserModel.fromJson(data);
+        return Right(user);
+      }
+      return Left('Something went wrong');
+    } catch (e) {
+      print(e.toString);
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, List<UserModel>>> getStudent() async {
+    try {
+      var res = await _dioClient.get('${apiEndPoint}auth/getStudent');
+      if (res.statusCode == 200) {
+        List<dynamic> data = res.data['data']['student'];
+        List<UserModel> students =
+            data.map((e) => UserModel.fromJson(e)).toList();
+        return Right(students);
+      }
+      return Left('SOmeting went wrong');
+    } catch (e) {
+      print(e.toString());
+      return Left(e.toString());
+    }
+  }
+
+  // pass student id to delete
+  Future<Either<String, bool>> removeStudent({required int id}) async {
+    try {
+      var res = await _dioClient.get('${apiEndPoint}auth/removeStudent/$id');
+      if (res.statusCode == 200) {
+        return Right(true);
+      }
+      return Left('Someting went wrong');
+    } catch (e) {
+      print(e.toString());
+      return left(e.toString());
+    }
+  }
 }
