@@ -2,7 +2,7 @@ class WordPuzzleModel {
   final String question;
   final String answer;
   final int startIndex;
-  final endIndex;
+  final int endIndex;
 
   WordPuzzleModel({
     required this.answer,
