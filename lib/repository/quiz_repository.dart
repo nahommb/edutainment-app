@@ -3,6 +3,7 @@ import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/endpoint.dart';
 import 'package:edutainment_app/models/question_model.dart';
 import 'package:edutainment_app/models/quiz_model.dart';
+import 'package:edutainment_app/models/word_puzzle_model.dart';
 
 class QuizRepository {
   final DioClient _dioClient = DioClient();
@@ -34,6 +35,21 @@ class QuizRepository {
         return Right(questions);
       }
       return const Left('Failed to load data');
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, List<WordPuzzleModel>>> getWordPuzzle() async {
+    try {
+      var res = await _dioClient.get('${apiEndPoint}getWordPuzzle');
+      if (res.statusCode == 200) {
+        List<dynamic> data = res.data['puzzles'];
+        List<WordPuzzleModel> puzzles =
+            data.map((e) => WordPuzzleModel.fromJson(e)).toList();
+        return Right(puzzles);
+      }
+      return Left('Someting went wrong');
     } catch (e) {
       return Left(e.toString());
     }
