@@ -70,71 +70,76 @@ class _StoryScreenState extends State<StoryScreen> {
               child: Column(
                 children: [
                   SizedBox(height: screenHeight*0.45,),
-                  Container(
-                    padding: EdgeInsets.only(left: 10,right: 10),
-                    height: screenHeight*0.39,
-                    child:storyData.story.length<1?Center(
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(
-                          color: AppColors.primary,
-                          strokeWidth: 3,
-                        ),
-                      ),
-                    ):ListView.builder(
-                      itemBuilder: (context, index) => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: (){
-                                // StoryRepository().getStory();
-                                StoryReadingScreen(
-                                  storyModel:storyData.story[index]
-                                ).launch(context);
-                                // Navigator.pushNamed(context, StoryReadingScreen.routeName,);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(bottom: 5,top: 5),
-                                //width: screenWidth*0.6,
-                                padding: EdgeInsets.only(right: 10),
-                                height: 45,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: AppColors.primary),
-                                    borderRadius: BorderRadius.all(Radius.circular(10))
-                                ),
-                                child: Row(
-
-                                  children: [
-                                    SizedBox(width: 10,),
-                                    Icon(Icons.menu_book_rounded,color:AppColors.primary,),
-                                    SizedBox(width: 10,),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: 5,),
-                                        Text('${storyData.story[index].title}',style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary,fontSize: 10),),
-                                        Text('${storyData.story[index].description}',style: TextStyle(fontSize: 10,color: AppColors.primary),)
-                                      ],
-                                    )
-                                  ],
-                                )
-                              ),
-
-                            ),
+                  RefreshIndicator(
+                    onRefresh: ()async{
+                      await storyData.getStory();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10,right: 10),
+                      height: screenHeight*0.39,
+                      child:storyData.story.length<1?Center(
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator(
+                            color: AppColors.primary,
+                            strokeWidth: 3,
                           ),
-                          SizedBox(width: 10,),
-                          SizedBox(
-                            height: 30,
-                            child: ElevatedButton(onPressed: (){
-                              Navigator.pushNamed(context, QuizScreen.routeName);
-                            }, child: Text(
-                              'Quiz',style: TextStyle(color: AppColors.lightBackground,fontWeight: FontWeight.normal,fontSize: 12),
-                            )),
-                          )
-                        ],
+                        ),
+                      ):ListView.builder(
+                        itemBuilder: (context, index) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: (){
+                                  // StoryRepository().getStory();
+                                  StoryReadingScreen(
+                                    storyModel:storyData.story[index]
+                                  ).launch(context);
+                                  // Navigator.pushNamed(context, StoryReadingScreen.routeName,);
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(bottom: 5,top: 5),
+                                  //width: screenWidth*0.6,
+                                  padding: EdgeInsets.only(right: 10),
+                                  height: 45,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: AppColors.primary),
+                                      borderRadius: BorderRadius.all(Radius.circular(10))
+                                  ),
+                                  child: Row(
+
+                                    children: [
+                                      SizedBox(width: 10,),
+                                      Icon(Icons.menu_book_rounded,color:AppColors.primary,),
+                                      SizedBox(width: 10,),
+                                      Column(
+                                        children: [
+                                          SizedBox(height: 5,),
+                                          Text('${storyData.story[index].title}',style: TextStyle(fontWeight: FontWeight.bold,color: AppColors.primary,fontSize: 10),),
+                                          Text('${storyData.story[index].description}',style: TextStyle(fontSize: 10,color: AppColors.primary),)
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ),
+
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            // SizedBox(
+                            //   height: 30,
+                            //   child: ElevatedButton(onPressed: (){
+                            //     Navigator.pushNamed(context, QuizScreen.routeName);
+                            //   }, child: Text(
+                            //     'Quiz',style: TextStyle(color: AppColors.lightBackground,fontWeight: FontWeight.normal,fontSize: 12),
+                            //   )),
+                            // )
+                          ],
+                        ),
+                        itemCount: storyData.story.length,
                       ),
-                      itemCount: storyData.story.length,
                     ),
                   )
                 ],

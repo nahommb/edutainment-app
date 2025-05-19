@@ -121,6 +121,7 @@ class UserData with ChangeNotifier{
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('name');
     await prefs.remove('email');
+    await prefs.remove('image');
 
     _user = null;
     _isLoggedIn = false;

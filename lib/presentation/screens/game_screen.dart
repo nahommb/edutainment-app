@@ -88,14 +88,14 @@ class GameScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                gameChoose(
-                                  context: context,
-                                  imagepath: 'assets/images/puzzle_image.png',
-                                  gameName: 'Kebero',
-                                  onTap: () {
-                                    Navigator.pushNamed(context, KeberoGame.routeName);
-                                  },
-                                ),
+                                // gameChoose(
+                                //   context: context,
+                                //   imagepath: 'assets/images/puzzle_image.png',
+                                //   gameName: 'Kebero',
+                                //   onTap: () {
+                                //     Navigator.pushNamed(context, KeberoGame.routeName);
+                                //   },
+                                // ),
                                 gameChoose(
                                   context: context,
                                   imagepath: 'assets/images/color_match_image.png',
