@@ -3,6 +3,7 @@ import 'package:edutainment_app/core/theme/theme_data.dart';
 import 'package:edutainment_app/data/game_data.dart';
 import 'package:edutainment_app/domain/provider/leader_board_provider.dart';
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
+import 'package:edutainment_app/domain/provider/spelling_provider.dart';
 import 'package:edutainment_app/domain/provider/story_provider.dart';
 import 'package:edutainment_app/domain/provider/user_data.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
@@ -19,6 +20,7 @@ import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_list_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_question_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_screen.dart';
+import 'package:edutainment_app/presentation/screens/spelling_puzzle_screen.dart';
 import 'package:edutainment_app/presentation/screens/story_reading_screen.dart';
 import 'package:edutainment_app/presentation/screens/your_score_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -56,8 +58,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => UserData()),
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => QuizProvider()),
-        ChangeNotifierProvider(create: (_)=>gameData()),
-        ChangeNotifierProvider(create: (_)=>LeaderBoardProvider()),
+        ChangeNotifierProvider(create: (_) => gameData()),
+        ChangeNotifierProvider(create: (_) => LeaderBoardProvider()),
+        ChangeNotifierProvider(create: (_) => SpellingProvider()),
         // Flutter Provider
         // Add other ChangeNotifierProviders here
       ],
@@ -66,7 +69,7 @@ void main() async {
           BlocProvider(create: (_) => ThemeCubit()), // Bloc
           // Add other BlocProviders here
         ],
-        child: MyApp(seenOnboard:seenOnboard,),
+        child: MyApp(seenOnboard: seenOnboard),
       ),
     ),
   );
@@ -75,7 +78,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final seenOnboard;
 
-  const MyApp({super.key,this.seenOnboard});
+  const MyApp({super.key, this.seenOnboard});
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +91,18 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: mode,
-              home: seenOnboard?InitScreen():OnboardingScreen(),//InitScreen()
+              home:
+                  seenOnboard
+                      ? InitScreen()
+                      : OnboardingScreen(), //InitScreen()
               routes: {
                 HomeScreen.routeName: (context) => HomeScreen(),
                 LoginSignup.routName: (context) => LoginSignup(),
                 // StoryReadingScreen.routeName: (context) => StoryReadingScreen(),
                 QuizScreen.routeName: (context) => QuizScreen(),
                 PuzzleScreen.routeName: (context) => PuzzleScreen(),
+                SpellingPuzzleScreen.routeName:
+                    (context) => SpellingPuzzleScreen(),
                 PicAnswerScreen.routeName: (context) => PicAnswerScreen(),
                 YourScoreScreen.routeName: (context) => YourScoreScreen(),
                 ParentControlScreen.routeName:

@@ -3,6 +3,7 @@ import 'package:edutainment_app/core/dio_config.dart';
 import 'package:edutainment_app/core/endpoint.dart';
 import 'package:edutainment_app/models/question_model.dart';
 import 'package:edutainment_app/models/quiz_model.dart';
+import 'package:edutainment_app/models/spelling_puzzle_model.dart';
 import 'package:edutainment_app/models/word_puzzle_model.dart';
 
 class QuizRepository {
@@ -47,6 +48,21 @@ class QuizRepository {
         List<dynamic> data = res.data['data']['puzzles'];
         List<WordPuzzleModel> puzzles =
             data.map((e) => WordPuzzleModel.fromJson(e)).toList();
+        return Right(puzzles);
+      }
+      return Left('Someting went wrong');
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, List<SpellingPuzzleModel>>> getSpellingPuzzle() async {
+    try {
+      var res = await _dioClient.get('${apiEndPoint}getSpelingPuzzle');
+      if (res.statusCode == 200) {
+        List<dynamic> data = res.data['data']['puzzles'];
+        List<SpellingPuzzleModel> puzzles =
+            data.map((e) => SpellingPuzzleModel.fromJson(e)).toList();
         return Right(puzzles);
       }
       return Left('Someting went wrong');

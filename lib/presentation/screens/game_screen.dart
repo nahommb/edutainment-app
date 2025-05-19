@@ -2,6 +2,7 @@ import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_list_screen.dart';
+import 'package:edutainment_app/presentation/screens/spelling_puzzle_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/presentation/screens/color_match_game_screen.dart';
@@ -21,14 +22,14 @@ class GameScreen extends StatelessWidget {
       'imagePath': 'assets/images/puzzle_image.png',
       'onTap': (context) {
         Navigator.pushNamed(context, PuzzleScreen.routeName);
-      }
+      },
     },
     {
       'name': 'Pic Answer',
       'imagePath': 'assets/images/pic_answer_image.png',
       'onTap': (context) {
         Navigator.pushNamed(context, PicAnswerScreen.routeName);
-      }
+      },
     },
   ];
 
@@ -41,7 +42,7 @@ class GameScreen extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: screenHeight-50,
+              height: screenHeight - 50,
               width: double.infinity,
               child: Image.asset(
                 'assets/images/games_screen_image.png',
@@ -59,17 +60,18 @@ class GameScreen extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: context.isDarkMode
-                        ? [
-                      Colors.transparent,
-                      Colors.black,
-                      AppColors.darkBackground,
-                    ]
-                        : [
-                      Colors.transparent,
-                      Colors.white,
-                      AppColors.lightBackground,
-                    ],
+                    colors:
+                        context.isDarkMode
+                            ? [
+                              Colors.transparent,
+                              Colors.black,
+                              AppColors.darkBackground,
+                            ]
+                            : [
+                              Colors.transparent,
+                              Colors.white,
+                              AppColors.lightBackground,
+                            ],
                   ),
                 ),
                 child: SizedBox(
@@ -81,7 +83,10 @@ class GameScreen extends StatelessWidget {
                         padding: EdgeInsets.all(12),
                         margin: EdgeInsets.only(bottom: 16),
                         decoration: BoxDecoration(
-                          color: context.isDarkMode?AppColors.darkBackground:AppColors.lightBackground,
+                          color:
+                              context.isDarkMode
+                                  ? AppColors.darkBackground
+                                  : AppColors.lightBackground,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Column(
@@ -99,10 +104,14 @@ class GameScreen extends StatelessWidget {
                                 // ),
                                 gameChoose(
                                   context: context,
-                                  imagepath: 'assets/images/color_match_image.png',
+                                  imagepath:
+                                      'assets/images/color_match_image.png',
                                   gameName: 'Color Match',
                                   onTap: () {
-                                    Navigator.pushNamed(context, ColorMatchGameScreen.routeName);
+                                    Navigator.pushNamed(
+                                      context,
+                                      ColorMatchGameScreen.routeName,
+                                    );
                                   },
                                 ),
                               ],
@@ -115,14 +124,22 @@ class GameScreen extends StatelessWidget {
                                   imagepath: 'assets/images/geez_image.png',
                                   gameName: 'Geez',
                                   onTap: () {
-                                    Navigator.pushNamed(context, GeezToArabicGameScreen.routeName);
+                                    Navigator.pushNamed(
+                                      context,
+                                      GeezToArabicGameScreen.routeName,
+                                    );
                                   },
                                 ),
-                                gameChoose(context: context, imagepath: 'assets/images/quizzer_image.png', gameName: 'Answer me', onTap: (){
-                                  QuizListScreen().launch(context);
-                                })
+                                gameChoose(
+                                  context: context,
+                                  imagepath: 'assets/images/quizzer_image.png',
+                                  gameName: 'Answer me',
+                                  onTap: () {
+                                    QuizListScreen().launch(context);
+                                  },
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -131,27 +148,36 @@ class GameScreen extends StatelessWidget {
                       Expanded(
                         child: ListView.builder(
                           itemCount: 2,
-                          itemBuilder: (context, index) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              gameChoose(
-                                context: context,
-                                imagepath: 'assets/images/puzzle_image.png',
-                                gameName: 'Puzzle 4',
-                                onTap: () {
-                                  Navigator.pushNamed(context, PuzzleScreen.routeName);
-                                },
+                          itemBuilder:
+                              (context, index) => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  gameChoose(
+                                    context: context,
+                                    imagepath: 'assets/images/puzzle_image.png',
+                                    gameName: 'Puzzle 4',
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        PuzzleScreen.routeName,
+                                      );
+                                    },
+                                  ),
+                                  gameChoose(
+                                    context: context,
+                                    imagepath:
+                                        'assets/images/pic_answer_image.png',
+                                    gameName: 'Spelling puzzle',
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        SpellingPuzzleScreen.routeName,
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
-                              gameChoose(
-                                context: context,
-                                imagepath: 'assets/images/pic_answer_image.png',
-                                gameName: 'Pic Answer 9',
-                                onTap: () {
-                                  Navigator.pushNamed(context, PicAnswerScreen.routeName);
-                                },
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ],
@@ -178,16 +204,17 @@ Widget gameChoose({
       height: 120,
       width: 120,
       margin: EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-
-        borderRadius: BorderRadius.circular(10),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
-          Image.asset(imagepath, fit: BoxFit.fitWidth,height:70,),
+          Image.asset(imagepath, fit: BoxFit.fitWidth, height: 70),
           Text(
             gameName,
-            style: TextStyle(fontSize: 15, color: AppColors.primary,fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 15,
+              color: AppColors.primary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
