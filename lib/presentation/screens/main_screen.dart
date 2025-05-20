@@ -47,9 +47,10 @@ class _MainScreenState extends State<MainScreen> {
     double imageHeight = screenHeight * 0.4;
     double containerHeight = screenHeight * 0.8;
     final userData = Provider.of<UserData>(context);
+   // userData.getUserData();
     final leaderBoard = Provider.of<LeaderBoardProvider>(context);
 
-    QuizProvider quizData = Provider.of<QuizProvider>(context,listen: false);
+    QuizProvider quizData = Provider.of<QuizProvider>(context);
      // print(quizData.getQuiz);
 
     List<dynamic> topCategory = [];

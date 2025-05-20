@@ -199,9 +199,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () => Navigator.pushNamed(context, ParentControlScreen.routeName),
                       child: userData.user?.type==0?Row(
                         children: [
-                          Text('Parent Control', style: TextStyle(fontSize: 15, color: AppColors.primary)),
+                          Text('Control', style: TextStyle(fontSize: 15, color: AppColors.primary)),
                           Spacer(),
-                          Icon(Icons.arrow_forward_ios_outlined)
+                          Icon(Icons.arrow_forward_ios_outlined,size: 15,)
                         ],
                       ):Container(),
                     ),
@@ -371,8 +371,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     TextButton(
                       onPressed: () {
                         showDialog(context: context, builder: (_)=>AlertDialog(
-                          title: Text('Logout Request'),
-                          content: Text('Are You Sure Want Logout'),
+                          title: Text('Logout Request',style: TextStyle(fontSize: 14),),
+                          content: Text('Are You Sure Want Logout',style: TextStyle(fontSize: 12),),
                           actions: [
                             TextButton(onPressed: (){
                               DioClient().deltetAuthToken();

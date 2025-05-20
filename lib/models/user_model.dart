@@ -13,7 +13,7 @@ class UserModel {
       this.image,
       required this.name,
         this.status,
-      this.type});
+     this.type});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

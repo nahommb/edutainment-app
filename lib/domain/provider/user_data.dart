@@ -12,21 +12,33 @@ class UserData with ChangeNotifier{
   bool isSignedUp = false;
 
   UserModel? _user ;
+  List<UserModel> _myChildList = [];
 
   UserModel? get user =>_user;
+  List<UserModel> get myChildList => _myChildList;
+
   bool get isLoggedIn => _isLoggedIn;
 
   String loginErrorMessage ='';
 
 
-  Future<void> saveUserData(String name, String email,String? image, int? type) async {
+  Future<void> saveUserData(String name, String email, String? image, int? type) async {
     final prefs = await SharedPreferences.getInstance();
+
     await prefs.setString('name', name);
     await prefs.setString('email', email);
-    await prefs.setString('image', image!);
-    await prefs.setInt('type', type!);
 
+    if (image != null) {
+      await prefs.setString('image', image);
+    }
+
+    if (type != null) {
+      await prefs.setInt('type', type);
+    }
+
+    print('Saved user type: $type');
   }
+
 
   Future<void> getUserData() async {
     final prefs = await SharedPreferences.getInstance();
@@ -36,8 +48,9 @@ class UserData with ChangeNotifier{
     final email = prefs.getString('email');
     final image = prefs.getString('image');
     final type = prefs.getInt('type');
-
-    if (name != null && email != null) {
+    print('retrieved type $type');
+    print('shared prefreance test');
+    if (name != null && email != null ) {
       _user = UserModel(name: name, email: email,image: image,type: type); // ✅ proper conversion
       _isLoggedIn = true;
       print('leeeeeeeee $type');
@@ -59,12 +72,12 @@ class UserData with ChangeNotifier{
         _isLoggedIn = false;
         isLoading = true;
       },
-          (user) {
-            _user = user;
+          (r) {
+            _user = r;
             _isLoggedIn = true;
              isLoading = true;
-              print('user type ${user.type}');
-             saveUserData(user.name, user.email,user.image,user.type);
+              print('user type ${r.type.runtimeType}');
+             saveUserData(r.name, r.email,r.image,r.type);
       },
     );
 
@@ -130,5 +143,44 @@ class UserData with ChangeNotifier{
     _user = null;
     _isLoggedIn = false;
     notifyListeners(); // if using Provider or similar state management
+  }
+
+  Future<bool> addStudent({name,email,password}) async {
+    final result = await AuthRepository().addStudents(name: name, email: email, password: password);
+    bool isCreated = false;
+    result.fold((l){
+      print(l);
+    }, (r){
+      print(r);
+      isCreated = true;
+      return isCreated;
+    });
+    notifyListeners();
+    return isCreated;
+  }
+
+  Future<void> getStudent() async {
+    final result = await AuthRepository().getStudent();
+    result.fold((l){
+      print(l);
+    }, (r){
+      _myChildList = r;
+      print(_myChildList[0].name);
+    });
+    notifyListeners();
+  }
+
+  Future<bool> removeStudent(id) async {
+    final result = await AuthRepository().removeStudent(id: id);
+    bool isremoved = false;
+    result.fold((l){
+      print(l);
+    }, (r){
+      print(r);
+      isremoved = true;
+      return isremoved;
+    });
+    notifyListeners();
+    return isremoved;
   }
 }

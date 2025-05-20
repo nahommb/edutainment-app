@@ -1,4 +1,5 @@
 import 'package:edutainment_app/core/endpoint.dart';
+import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/domain/provider/spelling_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -27,13 +28,16 @@ class _SpellingPuzzleScreenState extends State<SpellingPuzzleScreen> {
     SpellingProvider spellingProvider = Provider.of<SpellingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spelling puzzle'),
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new_rounded,color: AppColors.primary,)),
+        title: Text('Spelling puzzle',style: TextStyle(color: AppColors.primary,fontSize: 18),),
         actions: [
           spellingProvider.spellingPuzzleModelList.isNotEmpty
               ? Container(
                 padding: EdgeInsets.only(right: 5),
                 width: 150,
                 child: LinearProgressIndicator(
+                  color: AppColors.primary,
+                  // backgroundColor: AppColors.gray,
                   value:
                       spellingProvider.currentIndex +
                       1 / spellingProvider.spellingPuzzleModelList.length,
@@ -71,7 +75,7 @@ class _SpellingPuzzleScreenState extends State<SpellingPuzzleScreen> {
                           image: NetworkImage(
                             assetUrl + spellingProvider.currentModel!.image,
                           ),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
@@ -99,9 +103,9 @@ class _SpellingPuzzleScreenState extends State<SpellingPuzzleScreen> {
                                 decoration: BoxDecoration(
                                   color:
                                       isHovering
-                                          ? Colors.blue.shade100
-                                          : Colors.grey.shade300,
-                                  border: Border.all(color: Colors.black),
+                                          ? AppColors.primary
+                                          : AppColors.lightBackground,
+                                  // border: Border.all(color: AppColors.primary),
                                 ),
                                 child: _buildItem(
                                   spellingProvider
@@ -124,8 +128,8 @@ class _SpellingPuzzleScreenState extends State<SpellingPuzzleScreen> {
                       itemCount: spellingProvider.currentSpelling.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
-                        childAspectRatio: 1.5,
-                        crossAxisSpacing: 3,
+                        childAspectRatio: 1.8,
+                        crossAxisSpacing: 4,
                       ),
                       itemBuilder: (context, index) {
                         // final item = spellingProvider.getSpelling();
@@ -175,73 +179,74 @@ class _SpellingPuzzleScreenState extends State<SpellingPuzzleScreen> {
       bottomSheet:
           spellingProvider.isSubmitAll
               ? Row(
+               mainAxisAlignment: spellingProvider.isSubmited?MainAxisAlignment.spaceBetween:MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
+                  Container(
+                    height: 30,
+                    width: 100,
+                    margin: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: greenColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: AppColors.lightBackground
+                      ),
+                    ),
+                  ).onTap(() {
+                    if (!spellingProvider.isSubmited) {
+                      spellingProvider.setIsSubmited = true;
+                    }
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) {
+                        return CheckResultDialog();
+                      },
+                    );
+                  }),
+                  if (spellingProvider.isSubmited)
+                    Container(
+                      height: 30,
+                      width: 100,
                       margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: greenColor,
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        'Submit',
+                        spellingProvider.getCurrentIndex + 1 ==
+                                spellingProvider
+                                    .spellingPuzzleModelList
+                                    .length
+                            ? "Finish"
+                            : 'Next',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 12,
+                          color: AppColors.lightBackground
                         ),
                       ),
                     ).onTap(() {
-                      if (!spellingProvider.isSubmited) {
-                        spellingProvider.setIsSubmited = true;
+                      if (spellingProvider.getCurrentIndex + 1 ==
+                          spellingProvider.spellingPuzzleModelList.length) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            return FinishPuzzleltDialog();
+                          },
+                        );
+                      } else {
+                        spellingProvider.setCurrentSpelling();
                       }
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) {
-                          return CheckResultDialog();
-                        },
-                      );
                     }),
-                  ),
-                  if (spellingProvider.isSubmited)
-                    Expanded(
-                      child: Container(
-                        height: 50,
-                        margin: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: greenColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          spellingProvider.getCurrentIndex + 1 ==
-                                  spellingProvider
-                                      .spellingPuzzleModelList
-                                      .length
-                              ? "Finish"
-                              : 'Next',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ).onTap(() {
-                        if (spellingProvider.getCurrentIndex + 1 ==
-                            spellingProvider.spellingPuzzleModelList.length) {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) {
-                              return FinishPuzzleltDialog();
-                            },
-                          );
-                        } else {
-                          spellingProvider.setCurrentSpelling();
-                        }
-                      }),
-                    ),
                 ],
               )
               : null,
@@ -255,17 +260,18 @@ class _SpellingPuzzleScreenState extends State<SpellingPuzzleScreen> {
     bool isHovering,
   ) {
     return Container(
+
       margin: const EdgeInsets.all(2),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: isHovering ? greenColor : gray,
+        color: isHovering ? AppColors.primary : AppColors.lightBackground,
         borderRadius: BorderRadius.circular(5),
-        border: Border.all(width: 1, color: blueColor),
+        border: Border.all(width: 1, color: AppColors.gray),
       ),
       alignment: Alignment.center,
       child: Text(
         label,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: isHovering?AppColors.lightBackground:AppColors.primary),
       ),
     );
   }
@@ -301,15 +307,16 @@ class _CheckResultDialogState extends State<CheckResultDialog> {
             spellingProvider.checkAnswer()
                 ? Icons.check_circle
                 : Icons.cancel_outlined,
-            size: 48,
-            color: colorScheme.primary,
+            size: 38,
+            color: spellingProvider.checkAnswer()? AppColors.primary:Colors.red,
           ),
           const SizedBox(height: 16),
           Text(
             spellingProvider.checkAnswer() ? 'Awesome job!' : "Wrong answer",
             style: theme.textTheme.headlineSmall?.copyWith(
-              color: colorScheme.primary,
+              color: spellingProvider.checkAnswer()? AppColors.primary:Colors.red,
               fontWeight: FontWeight.bold,
+              fontSize: 16
             ),
             textAlign: TextAlign.center,
           ),
@@ -318,9 +325,10 @@ class _CheckResultDialogState extends State<CheckResultDialog> {
       content: Text(
         spellingProvider.checkAnswer()
             ? "🎉 Congratulations! you are submit correct answer"
-            : "you are submit wrong answer correct answer is ${spellingProvider.currentModel!.answer}",
+            : "You are submit wrong answer correct answer is ${spellingProvider.currentModel!.answer}",
         style: theme.textTheme.bodyLarge?.copyWith(
-          color: colorScheme.onSurface,
+          color: AppColors.primary,
+          fontSize: 12
         ),
         textAlign: TextAlign.center,
       ),
@@ -357,7 +365,7 @@ class _FinishPuzzleltDialogState extends State<FinishPuzzleltDialog> {
           Icon(Icons.check_circle, size: 48, color: colorScheme.primary),
           const SizedBox(height: 16),
           Text(
-            'Finishd puzzle!',
+            'Finished puzzle!',
             style: theme.textTheme.headlineSmall?.copyWith(
               color: colorScheme.primary,
               fontWeight: FontWeight.bold,
