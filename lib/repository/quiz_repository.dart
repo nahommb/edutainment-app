@@ -44,7 +44,7 @@ class QuizRepository {
     try {
       var res = await _dioClient.get('${apiEndPoint}getWordPuzzle');
       if (res.statusCode == 200) {
-        List<dynamic> data = res.data['puzzles'];
+        List<dynamic> data = res.data['data']['puzzles'];
         List<WordPuzzleModel> puzzles =
             data.map((e) => WordPuzzleModel.fromJson(e)).toList();
         return Right(puzzles);

@@ -195,17 +195,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     SizedBox(height: 8),
-                    // GestureDetector(
-                    //   onTap: () => Navigator.pushNamed(context, ParentControlScreen.routeName),
-                    //   child: Row(
-                    //     children: [
-                    //       Text('Parent Control', style: TextStyle(fontSize: 20, color: AppColors.primary)),
-                    //       Spacer(),
-                    //       Icon(Icons.arrow_forward_ios_outlined)
-                    //     ],
-                    //   ),
-                    // ),
-                    SizedBox(height: 20),
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, ParentControlScreen.routeName),
+                      child: userData.user?.type==0?Row(
+                        children: [
+                          Text('Parent Control', style: TextStyle(fontSize: 15, color: AppColors.primary)),
+                          Spacer(),
+                          Icon(Icons.arrow_forward_ios_outlined)
+                        ],
+                      ):Container(),
+                    ),
+                    SizedBox(height: 10),
                     Text("Setting", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: AppColors.primary)),
                     SizedBox(height: 10),
                     Row(

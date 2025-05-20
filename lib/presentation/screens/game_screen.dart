@@ -1,3 +1,4 @@
+import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_list_screen.dart';
@@ -7,6 +8,7 @@ import 'package:edutainment_app/presentation/screens/color_match_game_screen.dar
 import 'package:edutainment_app/presentation/screens/pic_answer_screen.dart';
 import 'package:edutainment_app/presentation/screens/puzzle_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/theme/colors_data.dart';
 
@@ -33,7 +35,6 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

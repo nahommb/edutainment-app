@@ -19,11 +19,13 @@ class UserData with ChangeNotifier{
   String loginErrorMessage ='';
 
 
-  Future<void> saveUserData(String name, String email,String? image) async {
+  Future<void> saveUserData(String name, String email,String? image, int? type) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('email', email);
     await prefs.setString('image', image!);
+    await prefs.setInt('type', type!);
+
   }
 
   Future<void> getUserData() async {
@@ -33,11 +35,12 @@ class UserData with ChangeNotifier{
     final name = prefs.getString('name');
     final email = prefs.getString('email');
     final image = prefs.getString('image');
+    final type = prefs.getInt('type');
 
     if (name != null && email != null) {
-      _user = UserModel(name: name, email: email,image: image); // ✅ proper conversion
+      _user = UserModel(name: name, email: email,image: image,type: type); // ✅ proper conversion
       _isLoggedIn = true;
-      print('leeeeeeeee $name');
+      print('leeeeeeeee $type');
     }
  //  print('leeee${_user?.email}');
 
@@ -60,8 +63,8 @@ class UserData with ChangeNotifier{
             _user = user;
             _isLoggedIn = true;
              isLoading = true;
-              print(user.image);
-             saveUserData(user.name, user.email,user.image);
+              print('user type ${user.type}');
+             saveUserData(user.name, user.email,user.image,user.type);
       },
     );
 
@@ -80,7 +83,7 @@ class UserData with ChangeNotifier{
               isLoading = false;
               isSignedUp = true;
               _user = user;
-              saveUserData(user.name, user.email,user.image);
+              saveUserData(user.name, user.email,user.image,user.type);
             }
     );
     notifyListeners();
@@ -109,7 +112,7 @@ class UserData with ChangeNotifier{
       print(l);
     }, (user){
       print('test image${user.image}');
-      saveUserData(user.name, user.email,user.image);
+      saveUserData(user.name, user.email,user.image,user.type);
       isSuccess = true;
     });
 
@@ -122,6 +125,7 @@ class UserData with ChangeNotifier{
     await prefs.remove('name');
     await prefs.remove('email');
     await prefs.remove('image');
+    await  prefs.remove('type');
 
     _user = null;
     _isLoggedIn = false;

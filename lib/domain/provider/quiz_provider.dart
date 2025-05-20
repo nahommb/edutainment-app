@@ -1,5 +1,6 @@
 import 'package:edutainment_app/models/question_model.dart';
 import 'package:edutainment_app/models/quiz_model.dart';
+import 'package:edutainment_app/models/word_puzzle_model.dart';
 import 'package:edutainment_app/repository/quiz_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class QuizProvider extends ChangeNotifier {
   List<QuestionModel> questionList = [];
   List<QuestionModel> get getQuestion => questionList;
   bool isLoading = true;
+  List<WordPuzzleModel> _wordPuzzleList = [];
+  List<WordPuzzleModel> get wordPuzzleList =>_wordPuzzleList;
 
   set setQuizList(List<QuizModel> value) {
     quizList = value;
@@ -57,5 +60,17 @@ class QuizProvider extends ChangeNotifier {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future fetchWordPuzzle() async{
+    final result = await _repository.getWordPuzzle();
+    result.fold((l){
+      print(l);
+    }, (r){
+      // print(r);
+      _wordPuzzleList = r;
+      print(_wordPuzzleList[0].question);
+    });
+    notifyListeners();
   }
 }
