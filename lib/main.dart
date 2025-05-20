@@ -10,7 +10,6 @@ import 'package:edutainment_app/presentation/screens/color_match_game_screen.dar
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/home_screen.dart';
 import 'package:edutainment_app/presentation/screens/init_screen.dart';
-import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
 import 'package:edutainment_app/presentation/screens/onboarding_screen.dart';
@@ -83,11 +82,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
+
       providers: [BlocProvider(create: (_) => ThemeCubit())],
 
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder:
             (context, mode) => MaterialApp(
+              debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: mode,
@@ -109,7 +110,6 @@ class MyApp extends StatelessWidget {
                     (context) => ParentControlScreen(),
                 ColorMatchGameScreen.routeName:
                     (context) => ColorMatchGameScreen(),
-                KeberoGame.routeName: (context) => KeberoGame(),
                 GeezToArabicGameScreen.routeName:
                     (context) => GeezToArabicGameScreen(),
                 QuizListScreen.routeName: (context) => QuizListScreen(),

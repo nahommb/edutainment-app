@@ -22,11 +22,15 @@ class UserData with ChangeNotifier{
   String loginErrorMessage ='';
 
 
-  Future<void> saveUserData(String name, String email, String? image, int? type) async {
+  Future<void> saveUserData(String name, String email, String? image, int? type,int? id) async {
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('name', name);
     await prefs.setString('email', email);
+
+    if (id != null) {
+      await prefs.setInt('id', id);
+    }
 
     if (image != null) {
       await prefs.setString('image', image);
@@ -48,10 +52,13 @@ class UserData with ChangeNotifier{
     final email = prefs.getString('email');
     final image = prefs.getString('image');
     final type = prefs.getInt('type');
+    final id = prefs.getInt('id');
+
     print('retrieved type $type');
+    print('retrieved id $id');
     print('shared prefreance test');
     if (name != null && email != null ) {
-      _user = UserModel(name: name, email: email,image: image,type: type); // ✅ proper conversion
+      _user = UserModel(name: name, email: email,image: image,type: type,id: id); // ✅ proper conversion
       _isLoggedIn = true;
       print('leeeeeeeee $type');
     }
@@ -76,8 +83,8 @@ class UserData with ChangeNotifier{
             _user = r;
             _isLoggedIn = true;
              isLoading = true;
-              print('user type ${r.type.runtimeType}');
-             saveUserData(r.name, r.email,r.image,r.type);
+              print('user type ${r.id}');
+             saveUserData(r.name, r.email,r.image,r.type,r.id);
       },
     );
 
@@ -96,7 +103,7 @@ class UserData with ChangeNotifier{
               isLoading = false;
               isSignedUp = true;
               _user = user;
-              saveUserData(user.name, user.email,user.image,user.type);
+              saveUserData(user.name, user.email,user.image,user.type,user.id);
             }
     );
     notifyListeners();
@@ -125,7 +132,7 @@ class UserData with ChangeNotifier{
       print(l);
     }, (user){
       print('test image${user.image}');
-      saveUserData(user.name, user.email,user.image,user.type);
+      saveUserData(user.name, user.email,user.image,user.type,user.id);
       isSuccess = true;
     });
 

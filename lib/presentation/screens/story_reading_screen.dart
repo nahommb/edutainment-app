@@ -3,7 +3,7 @@ import 'package:edutainment_app/helper/is_darkmode.dart';
 import 'package:edutainment_app/models/story_model.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-// import 'package:flutter_tts/flutter_tts.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class StoryReadingScreen extends StatefulWidget {
@@ -19,18 +19,18 @@ class StoryReadingScreen extends StatefulWidget {
 
 class _StoryReadingScreen extends State<StoryReadingScreen> {
   final PageController _controller = PageController();
-  // FlutterTts flutterTts = FlutterTts();
+  FlutterTts flutterTts = FlutterTts();
   bool textToSpeech = false;
   //
-  // Future<void> speak(String text) async {
-  //   await flutterTts.setLanguage("am-ET");
-  //   await flutterTts.setPitch(1.0);
-  //   await flutterTts.speak(text);
-  // }
+  Future<void> speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
 
   @override
   void dispose() {
-    // flutterTts.stop();
+    flutterTts.stop();
     super.dispose();
   }
 
@@ -78,9 +78,9 @@ class _StoryReadingScreen extends State<StoryReadingScreen> {
                             setState(() {
                               textToSpeech = !textToSpeech;
                               if (textToSpeech) {
-                                // speak(widget.storyModel.contents[index]!.story);
+                                speak(widget.storyModel.contents[index]!.story);
                               } else {
-                                // flutterTts.stop();
+                                flutterTts.stop();
                               }
                             });
                           },

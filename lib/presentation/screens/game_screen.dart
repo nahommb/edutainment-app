@@ -1,6 +1,5 @@
 import 'package:edutainment_app/domain/provider/quiz_provider.dart';
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
-import 'package:edutainment_app/presentation/screens/kebero_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/quiz_list_screen.dart';
 import 'package:edutainment_app/presentation/screens/spelling_puzzle_screen.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +146,7 @@ class GameScreen extends StatelessWidget {
                       // ListView inside Expanded
                       Expanded(
                         child: ListView.builder(
-                          itemCount: 2,
+                          itemCount: 1,
                           itemBuilder:
                               (context, index) => Row(
                                 mainAxisAlignment:
@@ -167,7 +166,7 @@ class GameScreen extends StatelessWidget {
                                   gameChoose(
                                     context: context,
                                     imagepath:
-                                        'assets/images/pic_answer_image.png',
+                                        'assets/images/puzzle_image.png',
                                     gameName: 'Spelling puzzle',
                                     onTap: () {
                                       Navigator.pushNamed(

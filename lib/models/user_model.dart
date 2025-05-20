@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class UserModel {
+  final int? id;
   final String name;
   final String email;
   String? image;
@@ -9,6 +10,7 @@ class UserModel {
 
   UserModel(
       {
+         required this.id,
         required this.email,
       this.image,
       required this.name,
@@ -17,6 +19,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
+        id: int.parse(json['id'].toString()),
         email: json['email'],
         image: json['image'],
         name: json['name'],
