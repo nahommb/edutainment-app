@@ -62,6 +62,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                quizProvider.getQuestion[questionIndex].image==null?Container():
                 SizedBox(
                   height: 200,
                   width: double.infinity,

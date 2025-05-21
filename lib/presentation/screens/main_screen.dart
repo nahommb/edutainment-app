@@ -36,8 +36,6 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -182,7 +180,7 @@ class _MainScreenState extends State<MainScreen> {
                             height: 140,
                             width: double.infinity,
                             // color: Colors.black,
-                            child: quizData.isLoading || quizData.getQuiz.length<2 ?Center(
+                            child: quizData.isLoading || quizData.getQuiz.length<2?Center(
                               child: CircularProgressIndicator(
                                 color: AppColors.primary,
                               ),
