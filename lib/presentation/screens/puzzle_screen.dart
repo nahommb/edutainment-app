@@ -1,9 +1,11 @@
+import 'package:edutainment_app/domain/provider/leader_board_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
 import 'package:edutainment_app/core/theme/colors_data.dart';
 import 'package:edutainment_app/presentation/widgets/custom_app_bar.dart';
+import '../../data/game_data.dart';
 import '../../domain/provider/quiz_provider.dart';
 
 class PuzzleScreen extends StatefulWidget {
@@ -43,7 +45,10 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
     userAnswerMap.clear();
   }
 
-  void checkAnswer(List<String> correctAnswer) {
+
+
+  bool checkAnswer(List<String> correctAnswer) {
+
     bool isCorrect = true;
 
     for (int i = 0; i < correctAnswer.length; i++) {
@@ -59,8 +64,12 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
     if (isCorrect) {
       setState(() {
         score++;
+        // leaderBoard.setLeaderBoared(quizId: wordPuzzle.wordPuzzleList[questionIndex].id,correctAnswer: 1,wrongAnswer: 0);
+
       });
+      return true;
     }
+    return isCorrect;
   }
 
   @override
@@ -74,6 +83,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   @override
   Widget build(BuildContext context) {
     final wordPuzzle = Provider.of<QuizProvider>(context);
+    final leaderBoard = Provider.of<LeaderBoardProvider>(context);
 
     if (wordPuzzle.wordPuzzleList.isEmpty || questionIndex >= wordPuzzle.wordPuzzleList.length) {
       return const Scaffold(
@@ -91,12 +101,17 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
     }
 
     // Pre-fill readonly letters in the answer range:
-    for (int i = currentQuestion.startIndex; i <= currentQuestion.endIndex; i++) {
+    final answerLength = currentQuestion.answer.length;
+    final safeStart = currentQuestion.startIndex.clamp(0, answerLength - 1);
+    final safeEnd = currentQuestion.endIndex.clamp(0, answerLength - 1);
+
+    for (int i = safeStart; i <= safeEnd; i++) {
       if (puzzleControllers[i].text != currentQuestion.answer[i]) {
         puzzleControllers[i].text = currentQuestion.answer[i];
         userAnswerMap[i] = currentQuestion.answer[i];
       }
     }
+
 
     return Scaffold(
       appBar: CustomAppBar(),
@@ -166,8 +181,11 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: TextButton(
-                      onPressed: () {
-                        checkAnswer(currentQuestion.answer.split(''));
+                      onPressed: () async {
+                       final isCorrect = await checkAnswer(currentQuestion.answer.split(''));
+                       print(isCorrect);
+                       print(wordPuzzle.wordPuzzleList[questionIndex].id);
+                        // leaderBoard.setLeaderBoared(quizId: wordPuzzle.wordPuzzleList[questionIndex].id,correctAnswer: isCorrect?1:0,wrongAnswer: isCorrect?0:1);
 
                         for (var controller in puzzleControllers) {
                           controller.clear();
@@ -179,6 +197,11 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                             initializeControllers(wordPuzzle.wordPuzzleList[questionIndex].answer.length);
                           });
                         } else {
+                          final result = gameData().loadGameData('Word Puzzle');
+                          print(result['score']);
+                          if(result['score'] < score ||result['score']==null){
+                            gameData().saveGameData('Word Puzzle', score, 1);
+                          }else{}
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(

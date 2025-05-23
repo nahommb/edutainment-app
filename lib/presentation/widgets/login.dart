@@ -55,7 +55,7 @@ class _loginState extends State<login> {
                       controller: emailController,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
-                          hintText: 'Email or Phone Number',
+                          hintText: 'Email',
                           hintStyle: TextStyle(color: AppColors.primary,fontSize: 13),
                           border: OutlineInputBorder()
 

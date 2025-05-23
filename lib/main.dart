@@ -10,7 +10,7 @@ import 'package:edutainment_app/presentation/screens/color_match_game_screen.dar
 import 'package:edutainment_app/presentation/screens/geez_to_arabic_game_screen.dart';
 import 'package:edutainment_app/presentation/screens/home_screen.dart';
 import 'package:edutainment_app/presentation/screens/init_screen.dart';
-
+import 'package:flutter/services.dart';
 import 'package:edutainment_app/presentation/screens/login_signup.dart';
 import 'package:edutainment_app/presentation/screens/onboarding_screen.dart';
 import 'package:edutainment_app/presentation/screens/parent_control_screen.dart';
@@ -50,6 +50,15 @@ void main() async {
             ? HydratedStorage.webStorageDirectory
             : await getApplicationDocumentsDirectory(),
   );
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.green, // Change this to any color
+    statusBarIconBrightness: Brightness.light, // or Brightness.light
+
+
+    systemNavigationBarColor: Colors.white, // Bottom bar color
+    systemNavigationBarIconBrightness: Brightness.dark, // Icon color on the nav bar
+  ));
 
   runApp(
     MultiProvider(

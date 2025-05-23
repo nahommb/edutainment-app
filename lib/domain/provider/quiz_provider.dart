@@ -67,9 +67,9 @@ class QuizProvider extends ChangeNotifier {
     result.fold((l){
       print(l);
     }, (r){
-      // print(r);
+       print(r[0].id);
       _wordPuzzleList = r;
-      print(_wordPuzzleList[0].question);
+      print(_wordPuzzleList[0].id);
     });
     notifyListeners();
   }

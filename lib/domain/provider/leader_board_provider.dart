@@ -25,11 +25,11 @@ Future<void> getLeaderBoard({email}) async{
 
   result.fold((l){
     print(l);
-  }, (r){
+  }, (r) async {
 
     _globalLeader = r.globalLeaderboard;
     print('check leader ${_globalLeader[0].totalCorrect}');
-     int index = _globalLeader.indexWhere((leader) => leader.email == email);
+     int index = await _globalLeader.indexWhere((leader) => leader.email == email);
     _your_rank = index + 1;
     _your_score = int.parse(_globalLeader[index].totalCorrect);
     print('your rank is $_your_rank');
@@ -41,7 +41,7 @@ Future<void> getLeaderBoard({email}) async{
 Future<void> setLeaderBoared({correctAnswer,wrongAnswer,quizId}) async{
   final result = await LeaderboardRepository().setLeaderboard(correctAnswer: correctAnswer, wrongAnswer: wrongAnswer, quizId: quizId);
   result.fold((l){}, (r){
-
+    print(correctAnswer);
   });
 
 }

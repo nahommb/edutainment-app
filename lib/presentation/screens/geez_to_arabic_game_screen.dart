@@ -20,27 +20,27 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
   String _currentGeez = '';
   int _currentArabic = 0;
 
-  final List<Map<String, dynamic>> _numbers = [
-    {'geez': '፩', 'arabic': 1},
-    {'geez': '፪', 'arabic': 2},
-    {'geez': '፫', 'arabic': 3},
-    {'geez': '፬', 'arabic': 4},
-    {'geez': '፭', 'arabic': 5},
-    {'geez': '፮', 'arabic': 6},
-    {'geez': '፯', 'arabic': 7},
-    {'geez': '፰', 'arabic': 8},
-    {'geez': '፱', 'arabic': 9},
-    {'geez': '፲', 'arabic': 10},
-    {'geez': '፲፩', 'arabic': 11},
-    {'geez': '፲፪', 'arabic': 12},
-    {'geez': '፲፫', 'arabic': 13},
-    {'geez': '፲፬', 'arabic': 14},
-    {'geez': '፲፭', 'arabic': 15},
-    {'geez': '፳', 'arabic': 20},
-    {'geez': '፴', 'arabic': 30},
-    {'geez': '፻', 'arabic': 100},
-    // Add more if you want
-  ];
+  // final List<Map<String, dynamic>> _numbers = [
+  //   {'geez': '፩', 'arabic': 1},
+  //   {'geez': '፪', 'arabic': 2},
+  //   {'geez': '፫', 'arabic': 3},
+  //   {'geez': '፬', 'arabic': 4},
+  //   {'geez': '፭', 'arabic': 5},
+  //   {'geez': '፮', 'arabic': 6},
+  //   {'geez': '፯', 'arabic': 7},
+  //   {'geez': '፰', 'arabic': 8},
+  //   {'geez': '፱', 'arabic': 9},
+  //   {'geez': '፲', 'arabic': 10},
+  //   {'geez': '፲፩', 'arabic': 11},
+  //   {'geez': '፲፪', 'arabic': 12},
+  //   {'geez': '፲፫', 'arabic': 13},
+  //   {'geez': '፲፬', 'arabic': 14},
+  //   {'geez': '፲፭', 'arabic': 15},
+  //   {'geez': '፳', 'arabic': 20},
+  //   {'geez': '፴', 'arabic': 30},
+  //   {'geez': '፻', 'arabic': 100},
+  //   // Add more if you want
+  // ];
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _GeezToArabicGameState extends State<GeezToArabicGameScreen> {
 
   void _loadNewNumber() {
     final random = Random();
-    final gussedNum = random.nextInt(10)+1;
+    final gussedNum = random.nextInt(500)+1;
     // gussedNum.toGeez();
     // final item = _numbers[random.nextInt(_numbers.length)];
     _currentGeez = gussedNum.toGeez();

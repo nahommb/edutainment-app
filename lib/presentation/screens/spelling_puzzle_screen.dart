@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/game_data.dart';
+
 class SpellingPuzzleScreen extends StatefulWidget {
   const SpellingPuzzleScreen({super.key});
   static final routeName = 'spelling_puzzle';
@@ -358,6 +360,11 @@ class _FinishPuzzleltDialogState extends State<FinishPuzzleltDialog> {
             alignment: Alignment.topRight,
             child: Icon(Icons.cancel, size: 30, color: colorScheme.error).onTap(
               () {
+                final result = gameData().loadGameData('Spelling Puzzle');
+
+                if(result['score'] < spellingProvider.correctAnswer ||result['score']==null){
+                  gameData().saveGameData('Spelling Puzzle', spellingProvider.correctAnswer, 1);
+                }else{}
                 return Navigator.pop(context);
               },
             ),
@@ -393,6 +400,11 @@ class _FinishPuzzleltDialogState extends State<FinishPuzzleltDialog> {
               ),
             ),
             onPressed: () async {
+              final result = gameData().loadGameData('Spelling Puzzle');
+
+              if(result['score'] < spellingProvider.correctAnswer ||result['score']==null){
+                gameData().saveGameData('Spelling Puzzle', spellingProvider.correctAnswer, 1);
+              }else{}
               return Navigator.pop(context);
             },
             child: Text('Finish'),

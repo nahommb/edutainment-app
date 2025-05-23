@@ -84,7 +84,7 @@ class UserData with ChangeNotifier{
             _isLoggedIn = true;
              isLoading = true;
               print('user type ${r.id}');
-             saveUserData(r.name, r.email,r.image,r.type,r.id);
+             saveUserData(r.name, r.email,r.image,r.type,r.id,);
       },
     );
 

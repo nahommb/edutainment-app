@@ -47,20 +47,20 @@ class _YourScoreScreenState extends State<YourScoreScreen> {
     appBar: CustomAppBar(),
       body: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            height: screenHeight*0.4,
-            child:ListView.builder(itemBuilder: (context, index) => ListTile(
-              title: Text('${quizProvider.getQuiz[index].title}',style: TextStyle(color: AppColors.primary,fontSize: 12),),
-              trailing: Text('65',style: TextStyle(color: AppColors.primary,fontSize: 12),),
-            ),
-            itemCount: quizProvider.getQuiz.length,),
-          ),
+          // Container(
+          //   margin: EdgeInsets.only(top: 30),
+          //   height: screenHeight*0.4,
+          //   child:ListView.builder(itemBuilder: (context, index) => ListTile(
+          //     title: Text('${quizProvider.getQuiz[index].title}',style: TextStyle(color: AppColors.primary,fontSize: 12),),
+          //     trailing: Text('65',style: TextStyle(color: AppColors.primary,fontSize: 12),),
+          //   ),
+          //   itemCount: quizProvider.getQuiz.length,),
+          // ),
           Expanded(child: Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.all(30),
             decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors:context.isDarkMode? [Colors.black, Colors.green.shade100]:[Colors.white, Colors.green.shade100],
+                    colors:context.isDarkMode? [Colors.black, Colors.black12]:[Colors.white, Colors.green.shade100],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -68,7 +68,7 @@ class _YourScoreScreenState extends State<YourScoreScreen> {
               borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))
             ),
 
-            child: ListView.builder(itemBuilder: (context,index)=>ListTile(
+            child:scoreData.gameList.isEmpty?Text('Play some more games to see your score'):ListView.builder(itemBuilder: (context,index)=>ListTile(
                 title: Text('${scoreData.gameList[index]['game']}',style: TextStyle(color: AppColors.primary,fontSize: 13),),
               trailing: Text('${scoreData.gameList[index]['data']['score']}',style: TextStyle(color: AppColors.primary,fontSize: 13)),
             ),itemCount: scoreData.gameList.length,),

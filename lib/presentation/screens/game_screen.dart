@@ -167,7 +167,7 @@ class GameScreen extends StatelessWidget {
                                     context: context,
                                     imagepath:
                                         'assets/images/puzzle_image.png',
-                                    gameName: 'Spelling puzzle',
+                                    gameName: 'Spelling Puzzle',
                                     onTap: () {
                                       Navigator.pushNamed(
                                         context,

@@ -55,31 +55,31 @@ class _SignupState extends State<signup> {
                 children: [
                   buildTextField(nameController, 'Full Name'),
                   const SizedBox(height: 20),
-                  buildTextField(emailController, 'Email or Phone Number', keyboardType: TextInputType.emailAddress),
+                  buildTextField(emailController, 'Email', keyboardType: TextInputType.emailAddress),
                   const SizedBox(height: 20),
                   buildTextField(passwordController, 'Password', obscureText: true),
                   const SizedBox(height: 20),
                   buildTextField(confirmPasswordController, 'Confirm Password', obscureText: true),
                   const SizedBox(height: 15),
-                  buildRoleSelector(),
-                  const SizedBox(height: 15),
+                  // buildRoleSelector(),
+                  // const SizedBox(height: 15),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(minimumSize: const Size(250, 40)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        if (selectedVal == -1) {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: const Text('Select Role'),
-                              content: const Text('Please select either Child or Parent.'),
-                              actions: [
-                                TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
-                              ],
-                            ),
-                          );
-                          return;
-                        }
+                        // if (selectedVal == -1) {
+                        //   showDialog(
+                        //     context: context,
+                        //     builder: (_) => AlertDialog(
+                        //       title: const Text('Select Role'),
+                        //       content: const Text('Please select either Child or Parent.'),
+                        //       actions: [
+                        //         TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+                        //       ],
+                        //     ),
+                        //   );
+                        //   return;
+                        // }
                         if (passwordController.text != confirmPasswordController.text) {
 
                           showDialog(
