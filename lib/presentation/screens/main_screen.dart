@@ -147,7 +147,7 @@ class _MainScreenState extends State<MainScreen> {
                                     Text("Top Players & score",style: TextStyle(fontWeight: FontWeight.bold)),
                                     Container(
                                       height: 81,
-                                      width: 100,
+                                      width: 155,
                                       child: ListView.builder(itemBuilder: (context,index)=>
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -166,6 +166,7 @@ class _MainScreenState extends State<MainScreen> {
 
                                   ],
                                 ),
+                                SizedBox(width: 10,),
                                 Column(
                                   children: [
                                     Text('Your Rank',style: TextStyle(fontWeight: FontWeight.bold),),
